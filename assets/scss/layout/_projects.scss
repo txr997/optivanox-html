@@ -1,0 +1,526 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    projects-1-start
+*/
+.on-projects-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+
+    }
+
+    /*
+        top
+    */
+    &-top {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 40px;
+        margin-bottom: 56px;
+
+        @media #{$md} {
+            margin-bottom: 44px;
+        }
+
+        @media #{$xs} {
+            display: block;
+            margin-bottom: 34px;
+        }
+    }
+
+    &-sec-title {
+        max-width: 708px;
+
+        .on-sec-title-1 {
+            margin-bottom: 16px;
+        }
+
+        .text-elm {
+            margin-bottom: 0;
+        }
+
+        @media #{$xs} {
+            max-width: 100%;
+        }
+    }
+
+    /* the badge sits off the headline baseline, not the top of the band */
+    &-author {
+        flex: 0 0 auto;
+        max-width: 275px;
+
+        .img-elm {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+
+            img,
+            .count-elm {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                border: 2px solid #f0f7f3;
+                object-fit: cover;
+
+                & + * {
+                    margin-left: -16px;
+                }
+            }
+
+            .count-elm {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--on-clr-h-1);
+                font-family: var(--on-font-2);
+                font-size: 18px;
+                font-weight: 500;
+                color: #fff;
+
+                span {
+                    color: var(--on-clr-pr-1);
+                }
+            }
+        }
+
+        .title-elm {
+            font-size: 20px;
+            line-height: 28px;
+            margin-bottom: 4px;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 28px;
+            color: #525d5d;
+            margin-bottom: 0;
+
+            span {
+                color: #016c6e;
+            }
+        }
+
+        @media #{$lg,$md} {
+            margin-top: 40px;
+        }
+
+        @media #{$xs} {
+            width: 100%;
+            margin-top: 28px;
+        }
+    }
+
+    /*
+        main — the wrap holds still while the runway under it scrolls past,
+        which is what lets each card climb over the one before it
+    */
+    /* one viewport of scroll per card — the count is read off the markup in js */
+    &-runway {
+        height: calc(var(--on-projects-1-count, 5) * 100vh);
+        position: relative;
+        z-index: 1;
+
+        /* the effect is off down here, so the runway must not reserve height */
+        @media #{$xl,$lg,$md,$xs} {
+            height: auto;
+        }
+    }
+
+    &-pin {
+        position: sticky;
+        top: 100px;
+        overflow: hidden;
+
+        /* the runway has collapsed, so there is nothing left to hold against */
+        @media #{$xl,$lg,$md,$xs} {
+            position: static;
+            overflow: visible;
+        }
+    }
+
+    &-wrap {
+        display: flex;
+        align-items: stretch;
+        gap: 53px;
+        overflow: hidden;
+
+        @media #{$xxl} {
+            gap: 40px;
+        }
+
+        @media #{$xl,$lg} {
+            gap: 32px;
+        }
+
+        /* no runway left to travel, so it goes back to ordinary flow */
+        @media #{$xl,$lg,$md,$xs} {
+            position: static;
+            display: block;
+        }
+    }
+
+    &-left {
+        flex: 0 0 250px;
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 40px;
+        align-items: start;
+        
+        @media #{$xxl} {
+            flex-basis: 220px;
+            width: 220px;
+        }
+
+        @media #{$xl,$lg} {
+            flex-basis: 200px;
+            width: 200px;
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            width: 100%;
+            margin-bottom: 32px;
+        }
+    }
+
+    /* one rail with a lime run marking whichever case study is open */
+    &-tab-wrap {
+        display: flex;
+        gap: 20px;
+
+        .line-elm {
+            position: relative;
+            flex: 0 0 auto;
+            width: 3px;
+            border-radius: 3px;
+            background-color: #dbe6e2;
+        }
+
+        .thumb-elm {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 28px;
+            border-radius: 3px;
+            background-color: var(--on-clr-pr-1);
+            transition: top .35s ease;
+        }
+
+        /* the rail follows the open tab without any script of its own */
+        &:has(.on-projects-1-tab-item:nth-child(1).active) .thumb-elm { top: 0; }
+        &:has(.on-projects-1-tab-item:nth-child(2).active) .thumb-elm { top: 48px; }
+        &:has(.on-projects-1-tab-item:nth-child(3).active) .thumb-elm { top: 96px; }
+        &:has(.on-projects-1-tab-item:nth-child(4).active) .thumb-elm { top: 144px; }
+        &:has(.on-projects-1-tab-item:nth-child(5).active) .thumb-elm { top: 192px; }
+
+        @media #{$xl,$lg,$md,$xs} {
+            .line-elm {
+                display: none;
+            }
+        }
+    }
+
+    &-tab {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+
+        @media #{$xl,$lg,$md,$xs} {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+        }
+    }
+
+    &-tab-item {
+        padding: 0;
+        background: transparent;
+        text-align: left;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 28px;
+        opacity: .55;
+        transition: var(--on-cube-1);
+
+        &:is(.active) {
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+
+        @media #{$xl,$lg} {
+            font-size: 18px;
+        }
+
+        @media #{$md,$xs} {
+            font-size: 17px;
+        }
+    }
+
+    /*
+        card — every card shares one box, stacked back to front; the script
+        lifts each one into it in turn
+    */
+    &-stack {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+        height: 644px;
+
+        @media #{$xxl} {
+            height: 580px;
+        }
+
+        @media #{$xl,$lg} {
+            height: 520px;
+        }
+
+        /* unstacked into a plain list once the effect is off */
+        @media #{$xl,$lg,$md,$xs} {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+    }
+
+    &-card-item {
+        position: absolute;
+        inset: 0;
+
+        @media #{$xl,$lg,$md,$xs} {
+            position: relative;
+            inset: auto;
+        }
+    }
+
+    &-card {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        height: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+        background-color: var(--on-clr-h-1);
+
+        /* the faint mark the design floats behind the panel */
+        .shape-elm {
+            position: absolute;
+            left: 48%;
+            top: 36.5%;
+            z-index: -1;
+            width: 186px;
+            pointer-events: none;
+        }
+
+        .img-elm {
+            flex: 0 0 59.35%;
+            border-radius: 16px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .body-elm {
+            flex: 1;
+            min-width: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        @media #{$xxl} {
+
+            .body-elm {
+                padding: 32px;
+            }
+        }
+
+        @media #{$xl,$lg} {
+
+            .img-elm {
+                flex-basis: 52%;
+            }
+
+            .body-elm {
+                padding: 26px;
+                gap: 22px;
+            }
+        }
+
+        /* the panel needs the full width once the columns give out */
+        @media #{$xl,$lg,$md,$xs} {
+            display: block;
+            height: auto;
+
+            .img-elm {
+                width: 100%;
+                height: 320px;
+            }
+
+            .body-elm {
+                padding: 28px;
+                gap: 26px;
+            }
+        }
+
+        @media #{$xs} {
+            .img-elm {
+                height: 240px;
+            }
+
+            .body-elm {
+                padding: 22px 20px;
+                gap: 22px;
+            }
+        }
+    }
+
+    &-card-head {
+        .title-elm {
+            font-size: 30px;
+            line-height: 36px;
+            color: #fff;
+            margin-bottom: 12px;
+
+            &:hover {
+                color: var(--on-clr-pr-1);
+            }
+        }
+
+        .text-elm {
+            font-size: 16px;
+            line-height: 24px;
+            color: rgb(255 255 255 / 80%);
+            margin-bottom: 24px;
+        }
+
+        @media #{$xl,$lg} {
+            .title-elm {
+                font-size: 24px;
+                line-height: 32px;
+            }
+
+            .text-elm {
+                margin-bottom: 18px;
+            }
+        }
+
+        @media #{$xs} {
+            .title-elm {
+                font-size: 22px;
+                line-height: 30px;
+            }
+
+            .text-elm {
+                font-size: 15px;
+                margin-bottom: 16px;
+            }
+        }
+    }
+
+    &-tag {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+
+        li {
+            font-family: var(--on-font-2);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 22px;
+            color: #fff;
+            padding: 5px 16px;
+            border-radius: 4px;
+            background-color: rgb(255 255 255 / 12%);
+        }
+    }
+
+    &-meta {
+        margin-bottom: 24px;
+
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 16px;
+            color: #fff;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgb(255 255 255 / 28%);
+
+            & + li {
+                margin-top: 16px;
+            }
+
+            .label-elm {
+                opacity: .8;
+            }
+        }
+
+        @media #{$xl,$lg} {
+            margin-bottom: 18px;
+
+            li {
+                font-size: 15px;
+                padding-bottom: 10px;
+
+                & + li {
+                    margin-top: 12px;
+                }
+            }
+        }
+
+        @media #{$xs} {
+            li {
+                font-size: 15px;
+                gap: 10px;
+            }
+        }
+    }
+
+    &-card-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-family: var(--on-font-2);
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        color: #fff;
+        padding: 14px 20px;
+        border-radius: 8px;
+        background-color: #016c6e;
+        transition: var(--on-cube-1);
+
+        &:hover {
+            background-color: var(--on-clr-pr-1);
+            color: var(--on-clr-h-1);
+        }
+    }
+}
+
+/*
+    projects-1-end
+*/

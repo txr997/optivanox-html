@@ -1,0 +1,537 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    contact-1-start
+*/
+.on-contact-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: var(--on-clr-h-1);
+        padding-top: 100px;
+
+        @media #{$xl} {
+            padding-top: 90px;
+        }
+
+        @media #{$lg} {
+            padding-top: 85px;
+        }
+
+        @media #{$md} {
+            padding-top: 75px;
+        }
+
+        @media #{$xs} {
+            padding-top: 60px;
+        }
+    }
+
+    /*
+        bg — the photo is dropped behind a 64% wash, then both ends are pulled
+        back to solid so the band reads as one plate
+    */
+    &-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgb(2 61 63 / 64%);
+        }
+    }
+
+    &-overlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        height: 201px;
+        pointer-events: none;
+
+        &:is(.has-top) {
+            top: 0;
+            background: linear-gradient(180deg,
+                    var(--on-clr-h-1) 0%,
+                    rgb(2 61 63 / 0%) 100%);
+        }
+
+        &:is(.has-bottom) {
+            bottom: 0;
+            background: linear-gradient(0deg,
+                    var(--on-clr-h-1) 0%,
+                    rgb(2 61 63 / 0%) 100%);
+        }
+    }
+
+    /* one very soft lime pool sitting under the middle of the band */
+    &-glow {
+        position: absolute;
+        left: 32.5%;
+        top: 42%;
+        z-index: -1;
+        width: 669px;
+        max-width: 40%;
+        height: 141px;
+        border-radius: 50%;
+        background-color: var(--on-clr-pr-1);
+        filter: blur(190px);
+        pointer-events: none;
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-wrap {
+        display: flex;
+        align-items: flex-start;
+        gap: 42px;
+
+        @media #{$xl} {
+            gap: 36px;
+        }
+
+        @media #{$lg} {
+            gap: 30px;
+        }
+
+        @media #{$md,$xs} {
+            display: block;
+        }
+    }
+
+    /*
+        left
+    */
+    &-left {
+        flex: 0 0 650px;
+        width: 650px;
+        /* the copy starts lower than the panel beside it */
+        margin-top: 44px;
+
+        @media #{$xl} {
+            flex-basis: 520px;
+            width: 520px;
+        }
+
+        @media #{$lg} {
+            flex-basis: 430px;
+            width: 430px;
+        }
+
+        @media #{$md,$xs} {
+            width: 100%;
+            margin-top: 0;
+            margin-bottom: 48px;
+        }
+    }
+
+    &-sec-title {
+        max-width: 516px;
+        margin-bottom: 60px;
+
+        .on-sec-title-1 {
+            font-size: 64px;
+            line-height: 68px;
+            letter-spacing: -.01em;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .text-elm {
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        @media #{$xl} {
+            margin-bottom: 48px;
+
+            .on-sec-title-1 {
+                font-size: 52px;
+                line-height: 58px;
+            }
+        }
+
+        @media #{$lg} {
+            margin-bottom: 44px;
+
+            .on-sec-title-1 {
+                font-size: 44px;
+                line-height: 50px;
+            }
+        }
+
+        @media #{$md} {
+            max-width: 100%;
+            margin-bottom: 40px;
+
+            .on-sec-title-1 {
+                font-size: 40px;
+                line-height: 46px;
+            }
+        }
+
+        @media #{$xs} {
+            max-width: 100%;
+            margin-bottom: 34px;
+
+            .on-sec-title-1 {
+                font-size: 32px;
+                line-height: 38px;
+            }
+        }
+    }
+
+    &-info {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 30px;
+
+        @media #{$xs} {
+            display: block;
+        }
+    }
+
+    &-list {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+
+        .label-elm {
+            display: block;
+            font-family: var(--on-font-1);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1;
+            color: var(--on-clr-pr-1);
+            margin-bottom: 10px;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 28px;
+            letter-spacing: -.01em;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        @media #{$lg,$md} {
+            gap: 28px;
+        }
+
+        @media #{$xs} {
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+    }
+
+    /* the plate, the figure and the sign-off are one exported piece */
+    &-ceo {
+        position: relative;
+        flex: 0 0 auto;
+        width: 338px;
+
+        .img-elm {
+            display: block;
+            width: 292px;
+        }
+
+        .sign-elm {
+            display: block;
+            width: 137px;
+            margin-left: auto;
+            margin-top: -46px;
+        }
+
+        .name-elm {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            font-family: var(--on-font-1);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--on-clr-pr-1);
+            margin: 8px 0 0;
+
+            &::before {
+                content: "";
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: var(--on-clr-pr-1);
+            }
+        }
+
+        @media #{$xl,$lg} {
+            width: 270px;
+
+            .img-elm {
+                width: 240px;
+            }
+        }
+
+        @media #{$md} {
+            width: 300px;
+
+            .img-elm {
+                width: 260px;
+            }
+        }
+
+        @media #{$xs} {
+            width: 100%;
+
+            .img-elm {
+                width: 220px;
+            }
+
+            .sign-elm {
+                margin-top: -36px;
+            }
+        }
+    }
+
+    /*
+        form panel
+    */
+    &-form {
+        flex: 0 0 708px;
+        width: 708px;
+        padding: 48px 44px;
+        border: 1px solid rgb(255 255 255 / 10%);
+        border-radius: 24px;
+        background-color: rgb(255 255 255 / 12%);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+
+        .title-elm {
+            font-family: var(--on-font-2);
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 32px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        @media #{$xl} {
+            flex-basis: 560px;
+            width: 560px;
+            padding: 36px 32px;
+
+            .title-elm {
+                font-size: 24px;
+                line-height: 30px;
+            }
+        }
+
+        @media #{$lg} {
+            flex-basis: 476px;
+            width: 476px;
+            padding: 32px 28px;
+
+            .title-elm {
+                font-size: 22px;
+                line-height: 28px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            width: 100%;
+            padding: 32px 28px;
+
+            .title-elm {
+                font-size: 22px;
+                line-height: 28px;
+            }
+        }
+
+        @media #{$xs} {
+            padding: 24px 20px;
+            border-radius: 18px;
+        }
+    }
+
+    /* the service chips wrap into as many rows as they need */
+    &-tag {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 48px;
+
+        li {
+            font-family: var(--on-font-1);
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 16px;
+            color: rgba(255, 255, 255, 0.72);
+            padding: 10px 12px;
+            border-radius: 80px;
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: var(--on-cube-1);
+            text-transform: uppercase;
+
+            &:hover,
+            &:is(.active) {
+                background-color: var(--on-clr-pr-1);
+                color: var(--on-clr-h-1);
+            }
+        }
+
+        @media #{$xs} {
+            margin-bottom: 32px;
+
+            li {
+                font-size: 14px;
+                padding: 9px 11px;
+            }
+        }
+    }
+
+    &-field-row {
+        display: flex;
+        gap: 20px;
+
+        > * {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media #{$lg,$md,$xs} {
+            display: block;
+        }
+    }
+
+    &-field {
+        margin-bottom: 32px;
+
+        .label-elm {
+            display: block;
+            font-family: var(--on-font-2);
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: .04em;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        input,
+        textarea {
+            display: block;
+            width: 100%;
+            font-family: var(--on-font-2);
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 1.4;
+            color: #fff;
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid rgb(255 255 255 / 35%);
+            padding: 0 0 16px;
+            transition: var(--on-cube-1);
+
+            &::placeholder {
+                color: rgb(255 255 255 / 72%);
+            }
+
+            &:focus {
+                border-bottom-color: var(--on-clr-pr-1);
+            }
+        }
+
+        textarea {
+            height: 74px;
+            resize: none;
+        }
+
+        @media #{$xs} {
+            margin-bottom: 24px;
+
+            .label-elm {
+                margin-bottom: 16px;
+            }
+
+            input,
+            textarea {
+                font-size: 16px;
+            }
+        }
+    }
+
+    /*
+        marquee — sits on the floor of the band as a watermark
+    */
+    &-marquee {
+        margin-top: 8px;
+        overflow: hidden;
+        margin-bottom: -12px;
+
+        .text-elm {
+            display: inline-block;
+            font-family: var(--on-font-2);
+            font-size: 126px;
+            font-weight: 600;
+            line-height: 92px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            color: rgb(255 255 255 / 12%);
+            white-space: nowrap;
+            padding-right: 60px;
+            margin-bottom: 0;
+        }
+
+        @media #{$xl} {
+            .text-elm {
+                font-size: 100px;
+                line-height: 76px;
+            }
+        }
+
+        @media #{$lg} {
+            .text-elm {
+                font-size: 84px;
+                line-height: 64px;
+            }
+        }
+
+        @media #{$md} {
+            .text-elm {
+                font-size: 68px;
+                line-height: 54px;
+            }
+        }
+
+        @media #{$xs} {
+            margin-top: 30px;
+
+            .text-elm {
+                font-size: 46px;
+                line-height: 40px;
+                padding-right: 30px;
+            }
+        }
+    }
+}
+
+/*
+    contact-1-end
+*/

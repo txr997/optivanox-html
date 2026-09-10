@@ -1,0 +1,18 @@
+/* 
+    custom-container-start
+*/
+
+@media (min-width: 1600px) {
+    .container{
+        &.on-container-1 {
+            max-width: 1424px;
+        }
+
+    }
+}
+
+
+
+/* 
+    custom-container-end
+*/

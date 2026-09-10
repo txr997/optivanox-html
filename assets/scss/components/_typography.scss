@@ -1,0 +1,167 @@
+@use '../abstracts/variables' as *;
+
+/* 
+    typography-start
+*/
+
+.on-p-1 {
+    font-family: var(--on-font-1);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--on-clr-p-1);
+    line-height: 1.555;
+    margin-bottom: 0;
+}
+
+
+.on-h-1 {
+    font-family: var(--on-font-2);
+    font-weight: 600;
+    color: var(--on-clr-h-1);
+    line-height: 1.083;
+    margin-bottom: 0;
+}
+
+.on-subtitle-1 {
+    font-family: var(--on-font-2);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px;
+    color: var(--on-clr-h-1);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 12px;
+    border: 1px solid rgb(2 61 63 / 20%);
+    border-radius: 100px;
+    margin-bottom: 14px;
+
+    /* the lime pip that brackets the label on either side */
+    &::before,
+    &::after {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: var(--on-clr-pr-1);
+    }
+
+    /* on the deep green bands the frame and the label go white */
+    &:is(.has-v2) {
+        color: #fff;
+        border-color: rgb(255 255 255 / 24%);
+    }
+
+    @media #{$xs} {
+        font-size: 14px;
+        padding: 7px 10px;
+    }
+}
+
+
+.on-sec-title-1 {
+    font-family: var(--on-font-2);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.083;
+    color: var(--on-clr-h-1);
+    margin-bottom: 0;
+
+    @media #{$xl} {
+        font-size: 44px;
+    }
+
+    @media #{$lg} {
+        font-size: 40px;
+    }
+
+    @media #{$md} {
+        font-size: 36px;
+    }
+
+    @media #{$xs} {
+        font-size: 28px;
+    }
+
+    @media #{$sm} {
+        font-size: 32px;
+    }
+}
+
+
+.ot-subtitle-1 {
+    font-family: var(--ot-font-1);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: normal;
+    color: var(--ot-clr-pr-1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 11px;
+    border: 1px solid rgb(13 38 101 / 12%);
+    border-radius: 4px;
+    margin-bottom: 12px;
+
+    /* the two dots that bracket the label */
+    &::before,
+    &::after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: currentColor;
+    }
+
+    /* on dark sections the frame goes white */
+    &:is(.has-v2) {
+        border-color: rgb(255 255 255 / 12%);
+    }
+
+    /* solid mint chip, used on the deep navy bands */
+    &:is(.has-v3) {
+        padding: 3px 10px;
+        border-color: transparent;
+        background-color: var(--ot-clr-sd-1);
+        color: var(--ot-clr-h-1);
+    }
+}
+
+
+.ot-sec-title-1 {
+    font-family: var(--ot-font-2);
+    font-weight: 500;
+    color: var(--ot-clr-h-1);
+    font-size: 48px;
+    line-height: 1.083;
+    margin-bottom: 0;
+    letter-spacing: -2%;
+
+
+    @media #{$xl} {
+        font-size: 44px;
+    }
+
+    @media #{$lg} {
+        font-size: 40px;
+    }
+
+    @media #{$md} {
+        font-size: 36px;
+    }
+
+    @media #{$xs} {
+        font-size: 28px;
+    }
+
+    @media #{$sm} {
+        font-size: 32px;
+    }
+}
+
+
+
+/*
+    typography-end
+*/
+

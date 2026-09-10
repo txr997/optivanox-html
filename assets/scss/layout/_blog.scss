@@ -1,0 +1,380 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    blog-1-start
+*/
+.on-blog-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        padding: 100px 0;
+
+        @media #{$xl} {
+            padding: 90px 0;
+        }
+
+        @media #{$lg} {
+            padding: 85px 0;
+        }
+
+        @media #{$md} {
+            padding: 75px 0;
+        }
+
+        @media #{$xs} {
+            padding: 60px 0;
+        }
+    }
+
+    &-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        filter: grayscale(1);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-sec-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        margin-bottom: 40px;
+
+        .title-wrap {
+            max-width: 643px;
+        }
+
+        @media #{$md} {
+            margin-bottom: 34px;
+        }
+
+        @media #{$xs} {
+            display: block;
+            margin-bottom: 28px;
+
+            .on-pr-btn-1 {
+                margin-top: 24px;
+            }
+        }
+    }
+
+    /*
+        the wide slot belongs to whichever card is live, so the tracks follow
+        the active class rather than the markup order — both sides are the same
+        three-track list, which is what lets it tween
+    */
+    &-grid {
+        display: grid;
+        grid-template-columns: 612fr 370fr 370fr;
+        gap: 24px;
+        align-items: start;
+        transition: grid-template-columns .45s ease;
+
+        &:has(.on-blog-1-card:nth-child(2).active) {
+            grid-template-columns: 370fr 612fr 370fr;
+        }
+
+        &:has(.on-blog-1-card:nth-child(3).active) {
+            grid-template-columns: 370fr 370fr 612fr;
+        }
+
+        @media #{$xl} {
+            gap: 20px;
+        }
+
+        /* three across leaves nothing usable, so the lead takes its own row */
+        @media #{$lg,$md} {
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+
+            .on-blog-1-card:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+            gap: 28px;
+        }
+    }
+
+    &-card {
+        /*
+            the row is as tall as its tallest card, and mid-swap both the old
+            and the new one are part-grown — without a floor the section would
+            dip and spring back on every hover. This is the open card's height.
+        */
+        min-height: 528px;
+
+        .img-elm {
+            position: relative;
+            z-index: 1;
+            height: 297px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            /* the frame grows with the slot it sits in */
+            transition: height .45s ease, margin-bottom .45s ease;
+
+            > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform .5s ease;
+            }
+        }
+
+        /* the date plate rides the top-left corner of the frame */
+        .date-elm {
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            z-index: 2;
+            width: 80px;
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: rgb(255 255 255 / 72%);
+            text-align: center;
+            backdrop-filter: blur(4px);
+            border-bottom: 2px solid #fff;
+        }
+
+        .day-elm {
+            display: block;
+            height: 52px;
+            border-bottom: 2px solid #07a0a4;
+            border-radius: 6px;
+            background-color: #016c6e;
+            font-family: var(--on-font-1);
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 50px;
+            color: #fff;
+        }
+
+        .month-elm {
+            display: block;
+            padding: 5px 0;
+            font-family: var(--on-font-1);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 18px;
+            color: var(--on-clr-h-1);
+        }
+
+        .meta-elm {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+
+            li {
+                font-family: var(--on-font-1);
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 28px;
+                letter-spacing: .04em;
+                color: #525d5d;
+            }
+
+            .sep-elm {
+                width: 16px;
+                height: 16px;
+                line-height: 0;
+                color: var(--on-clr-h-1);
+
+                svg {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        .title-elm {
+            font-family: var(--on-font-2);
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 28px;
+            color: var(--on-clr-h-1);
+            margin-bottom: 0;
+            transition: font-size .45s ease, line-height .45s ease;
+
+            a {
+                transition: var(--on-cube-1);
+
+                &:hover {
+                    color: #016c6e;
+                }
+            }
+        }
+
+        &:hover .img-elm > img {
+            transform: scale(1.06);
+        }
+
+        /* lead card */
+        &:is(.active) {
+            .img-elm {
+                height: 412px;
+                margin-bottom: 16px;
+            }
+
+            .title-elm {
+                font-size: 25px;
+                line-height: 32px;
+            }
+        }
+
+        @media #{$xxl} {
+            min-height: 496px;
+
+            .img-elm {
+                height: 275px;
+            }
+
+            &:is(.active) .img-elm {
+                height: 380px;
+            }
+        }
+
+        @media #{$xl} {
+            min-height: 452px;
+
+            .img-elm {
+                height: 250px;
+            }
+
+            &:is(.active) .img-elm {
+                height: 340px;
+            }
+
+            .meta-elm li {
+                font-size: 16px;
+            }
+
+            .title-elm {
+                font-size: 20px;
+                line-height: 26px;
+            }
+
+            &:is(.active) .title-elm {
+                font-size: 22px;
+                line-height: 30px;
+            }
+        }
+
+        /*
+            the wide slot is pinned to the first card at these widths, so the
+            size goes with it — the live state must not resize anything, or the
+            two cards sharing the second row would bounce it again
+        */
+        @media #{$lg} {
+            min-height: 0;
+
+            .img-elm,
+            &:is(.active) .img-elm {
+                height: 260px;
+            }
+
+            &:first-child .img-elm {
+                height: 380px;
+            }
+
+            .meta-elm li {
+                font-size: 16px;
+            }
+
+            .title-elm,
+            &:is(.active) .title-elm {
+                font-size: 20px;
+                line-height: 26px;
+            }
+
+            &:first-child .title-elm {
+                font-size: 24px;
+                line-height: 32px;
+            }
+        }
+
+        @media #{$md} {
+            min-height: 0;
+
+            .img-elm,
+            &:is(.active) .img-elm {
+                height: 230px;
+            }
+
+            &:first-child .img-elm {
+                height: 320px;
+            }
+
+            .meta-elm li {
+                font-size: 16px;
+            }
+
+            .title-elm,
+            &:is(.active) .title-elm {
+                font-size: 19px;
+                line-height: 26px;
+            }
+
+            &:first-child .title-elm {
+                font-size: 22px;
+                line-height: 30px;
+            }
+        }
+
+        @media #{$xs} {
+            min-height: 0;
+
+            .img-elm,
+            &:is(.active) .img-elm {
+                height: 240px;
+                margin-bottom: 16px;
+            }
+
+            .date-elm {
+                left: 16px;
+                top: 16px;
+                width: 68px;
+            }
+
+            .day-elm {
+                height: 44px;
+                font-size: 26px;
+                line-height: 42px;
+            }
+
+            .month-elm {
+                font-size: 13px;
+                padding: 4px 0;
+            }
+
+            .meta-elm {
+                gap: 10px;
+
+                li {
+                    font-size: 15px;
+                }
+            }
+
+            .title-elm,
+            &:is(.active) .title-elm {
+                font-size: 19px;
+                line-height: 26px;
+            }
+        }
+    }
+}
+
+/*
+    blog-1-end
+*/

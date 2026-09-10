@@ -1,0 +1,36 @@
+
+@use './abstracts/common';
+@use './abstracts/utility';
+/* 
+    components
+*/
+@use './components/container';
+@use './components/typography';
+@use './components/button';
+@use './components/offcanvas';
+@use './components/search';
+@use './components/preloader';
+@use './components/wow-plus';
+@use './components/elements';
+@use './components/back-to-top';
+/* 
+    layout
+*/
+@use './layout/header';
+@use './layout/hero';
+@use './layout/about';
+@use './layout/services';
+@use './layout/features';
+@use './layout/price';
+@use './layout/faqs';
+@use './layout/industry';
+@use './layout/choose';
+@use './layout/projects';
+@use './layout/testimonial';
+@use './layout/blog';
+@use './layout/contact';
+@use './layout/footer';
+/* 
+    pages
+*/
+@use './pages/home-page';

@@ -1,0 +1,494 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    testimonial-1-start
+*/
+.on-testimonial-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #EBF0F0;
+        padding: 100px 0 38px;
+        border-radius: 28px;
+
+        @media #{$xl} {
+            padding: 90px 0 38px;
+        }
+
+        @media #{$lg} {
+            padding: 85px 0 34px;
+        }
+
+        @media #{$md} {
+            padding: 75px 0 30px;
+        }
+
+        @media #{$xs} {
+            padding: 60px 0 30px;
+        }
+    }
+
+    /* the photo carries a cut-out where the first card lands over it */
+    &-left-img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        width: 856px;
+        max-width: 45%;
+        height: 100%;
+        -webkit-mask: url(../img/testimonial/t1-bg-left-img-mask.png) no-repeat left top / 100% 100%;
+        mask: url(../img/testimonial/t1-bg-left-img-mask.png) no-repeat left top / 100% 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-right-img {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: -1;
+        width: 652px;
+        max-width: 34%;
+        height: 100%;
+        mix-blend-mode: luminosity;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: left top;
+        }
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-sec-title {
+        max-width: 643px;
+        margin-left: auto;
+        margin-bottom: 89px;
+
+        .on-sec-title-1 {
+            margin-bottom: 16px;
+        }
+
+        .text-elm {
+            margin-bottom: 0;
+        }
+
+        @media #{$xl} {
+            margin-bottom: 70px;
+        }
+
+        @media #{$lg} {
+            margin-bottom: 60px;
+        }
+
+        @media #{$md,$xs} {
+            max-width: 100%;
+            margin-left: 0;
+            margin-bottom: 44px;
+        }
+    }
+
+    /*
+        the track starts over the photo and runs off the right edge, so it is
+        offset by hand rather than held in the container
+    */
+    &-slider {
+        margin-left: 20.83%;
+        overflow: hidden;
+
+
+        .swiper-slide {
+            width: 508px;
+            height: auto;
+        }
+
+        @media #{$xl} {
+            .swiper-slide {
+                width: 460px;
+            }
+        }
+
+        @media #{$lg} {
+            .swiper-slide {
+                width: 420px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            margin-left: 0;
+
+            .swiper-slide {
+                width: 380px;
+            }
+        }
+
+        @media #{$xs} {
+            .swiper-slide {
+                width: 300px;
+            }
+        }
+    }
+
+    /*
+        card — a 10px plate around an inset panel; hovering swaps both grounds
+    */
+    &-card {
+        padding: 10px;
+        border-radius: 20px;
+        background-color: #fff;
+        transition: var(--on-cube-1);
+
+        .inner-elm {
+            position: relative;
+            z-index: 1;
+            height: 320px;
+            padding: 48px 30px 30px;
+            border-radius: 18px;
+            overflow: hidden;
+            background-color: #ebf0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--on-cube-1);
+        }
+
+        /* the mark sits under the opening line, not beside it */
+        .quote-elm {
+            position: absolute;
+            left: 21px;
+            top: 26px;
+            z-index: 0;
+            width: 68px;
+            line-height: 0;
+            color: #fff;
+            transition: var(--on-cube-1);
+
+            svg {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .text-elm {
+            position: relative;
+            z-index: 1;
+            font-family: var(--on-font-1);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 30px;
+            color: var(--on-clr-h-1);
+            margin-bottom: 0;
+            transition: var(--on-cube-1);
+
+            .mark-elm {
+                color: var(--on-clr-pr-1);
+            }
+        }
+
+        .author-elm {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            > img {
+                flex: 0 0 auto;
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .content-elm {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .top-elm {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .name-elm {
+            font-family: var(--on-font-2);
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 30px;
+            color: var(--on-clr-h-1);
+            margin-bottom: 0;
+            transition: var(--on-cube-1);
+        }
+
+        .line-elm {
+            flex: 1;
+            min-width: 20px;
+            height: 1px;
+            background-color: #d9d9d9;
+            transition: var(--on-cube-1);
+        }
+
+        .rating-elm {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--on-clr-h-1);
+            transition: var(--on-cube-1);
+
+            i {
+                font-size: 16px;
+                color: #ffbc16;
+            }
+        }
+
+        .role-elm {
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            color: var(--on-clr-h-1);
+            opacity: .72;
+            margin: 4px 0 0;
+            transition: var(--on-cube-1);
+        }
+
+        &:hover {
+            background-color: var(--on-clr-h-1);
+
+            .inner-elm {
+                background-color: #024748;
+            }
+
+            .quote-elm {
+                color: rgb(255 255 255 / 12%);
+            }
+
+            .text-elm,
+            .name-elm,
+            .rating-elm,
+            .role-elm {
+                color: #fff;
+            }
+
+            .line-elm {
+                background-color: rgb(255 255 255 / 20%);
+            }
+        }
+
+        @media #{$xl,$lg} {
+            .inner-elm {
+                height: 300px;
+                padding: 42px 24px 24px;
+            }
+
+            .text-elm {
+                font-size: 18px;
+                line-height: 28px;
+            }
+
+            .name-elm {
+                font-size: 20px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            .inner-elm {
+                height: auto;
+                min-height: 300px;
+                padding: 42px 24px 24px;
+            }
+
+            .text-elm {
+                font-size: 17px;
+                line-height: 27px;
+            }
+
+            .name-elm {
+                font-size: 19px;
+            }
+
+            .author-elm {
+                gap: 12px;
+
+                > img {
+                    width: 56px;
+                    height: 56px;
+                }
+            }
+        }
+
+        @media #{$xs} {
+            .inner-elm {
+                padding: 38px 20px 20px;
+            }
+
+            .quote-elm {
+                width: 54px;
+                left: 16px;
+                top: 20px;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+            }
+
+            .rating-elm {
+                font-size: 16px;
+            }
+        }
+    }
+
+    /*
+        bottom — the button sits over the photo, the controller runs to the
+        right edge, so this row is offset by hand too
+    */
+    &-bottom {
+        display: flex;
+        align-items: flex-start;
+        gap: 60px;
+        margin: 32px 4.48% 0 31%;
+
+        .on-pr-btn-1 {
+            /* already a dark pill, so the flood comes back the other way */
+            --on-btn-flood: var(--on-clr-pr-1);
+            --on-btn-hover-clr: var(--on-clr-h-1);
+            --on-btn-disc: var(--on-clr-h-1);
+            --on-btn-disc-clr: var(--on-clr-pr-1);
+
+            flex: 0 0 auto;
+            margin-top: 24px;
+            background-color: #016c6e;
+            color: #fff;
+
+            .icon {
+                color: var(--on-clr-h-1);
+            }
+        }
+
+        @media #{$lg} {
+            gap: 40px;
+        }
+
+        @media #{$md,$xs} {
+            display: block;
+            margin: 32px 0 0;
+
+            .on-pr-btn-1 {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &-controller {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        /* the two rules that bracket the dots */
+        .line-elm {
+            flex: 1;
+            min-width: 0;
+            height: 1px;
+            background-color: rgb(2 71 72 / 12%);
+        }
+
+        .nav-elm {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid rgb(2 71 72 / 10%);
+            border-radius: 8px;
+            background-color: rgb(2 71 72 / 4%);
+            color: #024748;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--on-cube-1);
+
+            &:hover {
+                background-color: #024748;
+                color: #fff;
+            }
+
+            /* swiper adds this once the track runs out at either end */
+            &:is(.swiper-button-disabled) {
+                opacity: .4;
+                cursor: default;
+            }
+        }
+
+        .dots-elm {
+            flex: 0 0 auto;
+            width: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+
+            .swiper-pagination-bullet {
+                width: 6px;
+                height: 6px;
+                margin: 0;
+                border-radius: 50%;
+                background-color: #024748;
+                opacity: .2;
+                transition: var(--on-cube-1);
+            }
+
+            /* the live one opens into a ring around its dot */
+            .swiper-pagination-bullet-active {
+                position: relative;
+                width: 24px;
+                height: 24px;
+                background-color: transparent;
+                border: 1px solid #024748;
+                opacity: 1;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    margin: auto;
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background-color: #024748;
+                }
+            }
+        }
+
+        @media #{$md,$xs} {
+            margin-top: 28px;
+        }
+    }
+}
+
+/*
+    testimonial-1-end
+*/

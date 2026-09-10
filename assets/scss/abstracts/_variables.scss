@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+
+:root {
+  scroll-behavior: smooth;
+
+  --on-font-1:  "Inter", sans-serif;
+  --on-font-2:  "Mona Sans", sans-serif;
+
+  --on-clr-pr-1: #BEFF6B;
+  
+  --on-clr-h-1: #023D3F;
+  --on-clr-p-1: #525D5D;
+
+  --on-cube-1: .3s ;
+
+}
+
+$over: "(min-width: 1800px)";
+$xxxl: "only screen and (min-width: 1600px) and (max-width: 1799px)";
+$xxl: "only screen and (min-width: 1400px) and (max-width: 1599px)";
+$xl: "only screen and (min-width: 1200px) and (max-width: 1399px)";
+$lg: "only screen and (min-width: 992px) and (max-width: 1199px)";
+$md: "only screen and (min-width: 768px) and (max-width: 991px)";
+$sm: "only screen and (min-width: 576px) and (max-width: 767px)";
+$xs: "(max-width: 767px)";

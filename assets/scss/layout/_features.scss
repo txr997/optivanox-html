@@ -1,0 +1,356 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    features-1-start
+*/
+.on-features-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: var(--on-clr-h-1);
+        padding: 100px 0;
+
+        @media #{$xl} {
+            padding: 90px 0;
+        }
+
+        @media #{$lg} {
+            padding: 85px 0;
+        }
+
+        @media #{$md} {
+            padding: 75px 0;
+        }
+
+        @media #{$xs} {
+            padding: 60px 0;
+        }
+    }
+
+    &-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    /*
+        the photo is left bright through the middle band and pulled back to the
+        brand green at both ends, which is what carries the white copy
+    */
+    &-overlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        pointer-events: none;
+
+        &:is(.has-top) {
+            top: 0;
+            height: 264px;
+            background: linear-gradient(180deg,
+                    rgb(2 61 63 / 85%) 0%,
+                    rgb(2 61 63 / 0%) 100%);
+        }
+
+        &:is(.has-bottom) {
+            bottom: 0;
+            height: 588px;
+            background: linear-gradient(0deg,
+                    rgb(2 61 63 / 92%) 0%,
+                    rgb(2 61 63 / 0%) 100%);
+        }
+
+        @media #{$md,$xs} {
+            &:is(.has-top) {
+                height: 45%;
+            }
+
+            &:is(.has-bottom) {
+                height: 70%;
+            }
+        }
+    }
+
+    /* the long drop is deliberate — it is the band where the photo reads clean */
+    &-sec-title {
+        max-width: 838px;
+        margin: 0 auto 330px;
+        text-align: center;
+
+        .on-sec-title-1 {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        @media #{$xl} {
+            margin-bottom: 280px;
+        }
+
+        @media #{$lg} {
+            margin-bottom: 240px;
+        }
+
+        @media #{$md} {
+            margin-bottom: 180px;
+        }
+
+        @media #{$xs} {
+            margin-bottom: 120px;
+        }
+    }
+
+    &-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 110px;
+
+        @media #{$xxl} {
+            gap: 80px;
+        }
+
+        @media #{$xl} {
+            gap: 60px;
+        }
+
+        @media #{$lg} {
+            gap: 40px;
+        }
+
+        @media #{$md} {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+            gap: 36px;
+        }
+    }
+
+    /*
+        icon-box — a 64px plate with two smaller squares stepping away from its
+        bottom-left corner
+    */
+    &-icon {
+        position: relative;
+        width: 94px;
+        height: 94px;
+
+        .plate-elm {
+            position: absolute;
+            left: 30px;
+            top: 0;
+            width: 64px;
+            height: 64px;
+            background-color: #016c6e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color .4s ease;
+        }
+
+        /* the mark is masked, so its colour is set here rather than in the file */
+        .icon-elm {
+            width: 36px;
+            height: 36px;
+            background-color: #fff;
+            transition: background-color .4s ease, transform .55s cubic-bezier(.62, .05, .01, .99);
+
+            &:is(.has-v1) {
+                -webkit-mask: url(../img/features/f1-icon-1.svg) no-repeat center / contain;
+                mask: url(../img/features/f1-icon-1.svg) no-repeat center / contain;
+            }
+
+            &:is(.has-v2) {
+                -webkit-mask: url(../img/features/f1-icon-2.svg) no-repeat center / contain;
+                mask: url(../img/features/f1-icon-2.svg) no-repeat center / contain;
+            }
+
+            &:is(.has-v3) {
+                -webkit-mask: url(../img/features/f1-icon-3.svg) no-repeat center / contain;
+                mask: url(../img/features/f1-icon-3.svg) no-repeat center / contain;
+            }
+        }
+
+        /* the two steps trailing down to the left */
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            background-color: #016c6e;
+            transition: transform .55s cubic-bezier(.62, .05, .01, .99), background-color .4s ease, opacity .4s ease;
+        }
+
+        &::before {
+            left: 10px;
+            top: 64px;
+            width: 20px;
+            height: 20px;
+            opacity: .32;
+        }
+
+        &::after {
+            left: 0;
+            top: 84px;
+            width: 10px;
+            height: 10px;
+        }
+
+        /*
+            the staircase climbs into the plate — each step travels one step's
+            worth up and to the right, the smallest one leaving last, and the
+            whole set turns lime as the plate hands its colour over to the mark
+        */
+        .on-features-1-item:hover & {
+            .plate-elm {
+                background-color: var(--on-clr-pr-1);
+            }
+
+            .icon-elm {
+                background-color: var(--on-clr-h-1);
+                transform: rotate(-8deg) scale(1.06);
+            }
+
+            &::before {
+                transform: translate(10px, -10px);
+                background-color: var(--on-clr-pr-1);
+                opacity: .5;
+                transition-delay: .06s;
+            }
+
+            &::after {
+                transform: translate(20px, -20px);
+                background-color: var(--on-clr-pr-1);
+                transition-delay: .12s;
+            }
+        }
+
+        @media #{$lg} {
+            width: 84px;
+            height: 84px;
+            margin-bottom: 28px;
+
+            .plate-elm {
+                left: 26px;
+                width: 58px;
+                height: 58px;
+            }
+
+            .icon-elm {
+                width: 32px;
+                height: 32px;
+            }
+
+            &::before {
+                left: 9px;
+                top: 58px;
+                width: 17px;
+                height: 17px;
+            }
+
+            &::after {
+                top: 75px;
+                width: 9px;
+                height: 9px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+
+            .plate-elm {
+                left: 24px;
+                width: 56px;
+                height: 56px;
+            }
+
+            .icon-elm {
+                width: 30px;
+                height: 30px;
+            }
+
+            &::before {
+                left: 8px;
+                top: 56px;
+                width: 16px;
+                height: 16px;
+            }
+
+            &::after {
+                top: 72px;
+                width: 8px;
+                height: 8px;
+            }
+        }
+    }
+
+    &-item {
+        .line-elm {
+            display: block;
+            height: 1px;
+            background-color: rgb(255 255 255 / 16%);
+            margin-bottom: 23px;
+        }
+
+        .title-elm {
+            font-family: var(--on-font-1);
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 30px;
+            letter-spacing: -.03em;
+            color: #fff;
+            margin-bottom: 18px;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            color: rgb(255 255 255 / 70%);
+            margin-bottom: 0;
+        }
+
+        @media #{$lg} {
+            .line-elm {
+                margin-bottom: 28px;
+            }
+
+            .title-elm {
+                font-size: 20px;
+                line-height: 28px;
+                margin-bottom: 22px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            .line-elm {
+                margin-bottom: 24px;
+            }
+
+            .title-elm {
+                font-size: 20px;
+                line-height: 28px;
+                margin-bottom: 18px;
+            }
+
+            .text-elm {
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+/*
+    features-1-end
+*/

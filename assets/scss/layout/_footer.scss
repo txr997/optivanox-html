@@ -1,0 +1,488 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    footer-1-start
+*/
+.on-footer-1 {
+    /* the band opens with 100px of clear ground — that gap is what lets the
+       lime mark read at full strength before the veil starts */
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #ecf8f1;
+        padding-top: 100px;
+
+        @media #{$md} {
+            padding-top: 80px;
+        }
+
+        @media #{$xs} {
+            padding-top: 60px;
+        }
+    }
+
+    /* the mark is oversized and cropped by the top edge of the band */
+    &-shape {
+        position: absolute;
+        left: 41.8%;
+        top: -38px;
+        z-index: -2;
+        width: 315px;
+        pointer-events: none;
+
+        @media #{$md,$xs} {
+            width: 240px;
+        }
+    }
+
+    /*
+        a 6% white veil over everything below the social row — this is what
+        knocks the mark back once it passes behind the columns
+    */
+    &-front {
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(30px);
+    }
+
+    /*
+        social row
+    */
+    /*
+        the two rules run the full width of the viewport while the cells and
+        their dividers stay inside the container — one strip, two owners
+    */
+    &-social {
+        border-top: 1px solid rgb(2 61 63 / 12%);
+        border-bottom: 1px solid rgb(2 61 63 / 12%);
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        li {
+            flex: 1;
+            min-width: 0;
+            border-left: 1px solid rgb(2 61 63 / 12%);
+
+            &:last-child {
+                border-right: 1px solid rgb(2 61 63 / 12%);
+            }
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 80px;
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            color: rgb(2 61 63 / 72%);
+            transition: var(--on-cube-1);
+
+            i {
+                font-size: 18px;
+                color: var(--on-clr-h-1);
+                transition: var(--on-cube-1);
+            }
+        }
+
+        /* the live cell fills, and its mark goes lime against the dark */
+        li:hover a,
+        li.active a {
+            background-color: var(--on-clr-h-1);
+            color: #fff;
+
+            i {
+                color: var(--on-clr-pr-1);
+            }
+        }
+
+        @media #{$md} {
+            flex-wrap: wrap;
+
+            li {
+                flex: 0 0 33.333%;
+            }
+
+            a {
+                height: 68px;
+                font-size: 15px;
+            }
+        }
+
+        @media #{$xs} {
+            flex-wrap: wrap;
+
+            li {
+                flex: 0 0 50%;
+                border-left: 1px solid rgb(2 61 63 / 12%);
+            }
+
+            a {
+                height: 58px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    /*
+        widgets
+    */
+    &-wrap {
+        display: flex;
+        gap: 100px;
+        padding: 80px 0;
+
+        @media #{$xxl} {
+            gap: 50px;
+            padding: 70px 0;
+        }
+
+        @media #{$xl} {
+            gap: 50px;
+            padding: 70px 0;
+        }
+
+        @media #{$lg} {
+            gap: 40px;
+            padding: 60px 0;
+        }
+
+        @media #{$md,$xs} {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 44px 40px;
+            padding: 54px 0;
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+            gap: 36px;
+            padding: 44px 0;
+        }
+    }
+
+    &-about {
+        flex: 0 0 402px;
+        width: 402px;
+
+        .logo-elm {
+            display: block;
+            width: 236px;
+            margin-bottom: 32px;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            color: rgb(2 61 63 / 80%);
+            margin-bottom: 0;
+        }
+
+        @media #{$xl} {
+            flex-basis: 340px;
+            width: 340px;
+        }
+
+        @media #{$lg} {
+            flex-basis: 300px;
+            width: 300px;
+
+            .logo-elm {
+                width: 200px;
+                margin-bottom: 24px;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            width: 100%;
+            grid-column: 1 / -1;
+
+            .logo-elm {
+                width: 200px;
+                margin-bottom: 20px;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+            }
+        }
+    }
+
+    &-nav-wrap {
+        display: flex;
+        gap: 100px;
+
+        @media #{$xxl,$xl,$lg,$md,$xs} {
+            gap: 50px
+        }
+
+        @media #{$xs} {
+            display: block;
+        }
+    }
+
+    &-nav {
+        min-width: 0;
+
+        /*
+            a faint rule the width of the column, with a 28px lime tick sitting
+            on its left end — not one solid lime underline
+        */
+        .title-elm {
+            position: relative;
+            display: block;
+            font-family: var(--on-font-1);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--on-clr-h-1);
+            padding-bottom: 8px;
+            margin-bottom: 32px;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 1px;
+                background-color: rgb(2 61 63 / 20%);
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 28px;
+                height: 2px;
+                background-color: var(--on-clr-pr-1);
+            }
+        }
+
+        li + li {
+            margin-top: 12px;
+        }
+
+        a {
+            position: relative;
+            display: inline-block;
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 28px;
+            color: rgb(2 61 63 / 80%);
+            transition: var(--on-cube-1);
+
+            /*
+                the rule wipes in from the left — scaleX rather than width so
+                it composites, and the row never reflows on hover
+            */
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 4px;
+                height: 1px;
+                background-color: currentColor;
+                transform: scaleX(0);
+                transform-origin: left center;
+                transition: transform .35s ease;
+            }
+
+            &:hover {
+                color: var(--on-clr-h-1);
+
+                &::after {
+                    transform: scaleX(1);
+                }
+            }
+        }
+
+        @media #{$xs} {
+            & + & {
+                margin-top: 34px;
+            }
+        }
+    }
+
+    &-newsletter {
+        flex: 0 0 394px;
+        width: 394px;
+
+        .title-elm {
+            font-family: var(--on-font-2);
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 30px;
+            color: var(--on-clr-h-1);
+            margin-bottom: 12px;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            color: rgb(2 61 63 / 80%);
+            margin-bottom: 24px;
+        }
+
+        /* one pill holding the field, with the send disc sitting inside it */
+        .form-elm {
+            position: relative;
+            height: 56px;
+            border-radius: 100px;
+            background-color: #fff;
+        }
+
+        input {
+            width: 100%;
+            height: 100%;
+            font-family: var(--on-font-1);
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--on-clr-h-1);
+            background: transparent;
+            border: 0;
+            padding: 0 60px 0 24px;
+
+            &::placeholder {
+                color: rgb(2 61 63 / 60%);
+            }
+        }
+
+        button {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--on-clr-pr-1);
+            color: var(--on-clr-h-1);
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--on-cube-1);
+
+            &:hover {
+                background-color: var(--on-clr-h-1);
+                color: var(--on-clr-pr-1);
+            }
+        }
+
+        @media #{$xl} {
+            flex-basis: 340px;
+            width: 340px;
+        }
+
+        @media #{$lg} {
+            flex-basis: 300px;
+            width: 300px;
+
+            .title-elm {
+                font-size: 20px;
+                line-height: 26px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            width: 100%;
+            grid-column: 1 / -1;
+
+            .title-elm {
+                font-size: 20px;
+                line-height: 26px;
+            }
+        }
+    }
+
+    /*
+        bottom
+    */
+    &-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 24px 0;
+        border-top: 1px solid rgb(2 61 63 / 24%);
+
+        .copy-elm {
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1;
+            color: rgb(2 61 63 / 72%);
+            margin-bottom: 0;
+
+            a {
+                color: var(--on-clr-h-1);
+                font-weight: 500;
+                transition: var(--on-cube-1);
+
+                &:hover {
+                    color: #016c6e;
+                }
+            }
+        }
+
+        .link-elm {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+
+            a {
+                font-family: var(--on-font-1);
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1;
+                color: rgb(2 61 63 / 72%);
+                transition: var(--on-cube-1);
+
+                &:hover {
+                    color: var(--on-clr-h-1);
+                }
+            }
+        }
+
+        @media #{$xs} {
+            display: block;
+            text-align: center;
+            padding: 24px 0;
+
+            .link-elm {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 16px;
+                margin-top: 14px;
+            }
+        }
+    }
+}
+
+/*
+    footer-1-end
+*/

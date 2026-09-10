@@ -1,0 +1,888 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    about-1-start
+*/
+.on-about-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #e7f5ed;
+
+    }
+
+    &-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    /* the photo column runs past the container on the right, as in the design */
+    &-wrap {
+        display: flex;
+        align-items: flex-start;
+        gap: 58px;
+
+        @media #{$xxl} {
+            gap: 48px;
+        }
+
+        @media #{$xl} {
+            gap: 40px;
+        }
+
+        @media #{$lg,$md,$xs} {
+            display: block;
+        }
+    }
+
+    &-left {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &-sec-title {
+        max-width: 660px;
+        margin-bottom: 63px;
+
+
+        @media #{$xxl} {
+            max-width: 600px;
+            margin-bottom: 55px;
+        }
+
+        @media #{$xl} {
+            margin-bottom: 48px;
+        }
+
+        @media #{$lg} {
+            margin-bottom: 42px;
+        }
+
+        @media #{$md} {
+            max-width: 100%;
+            margin-bottom: 38px;
+        }
+
+        @media #{$xs} {
+            max-width: 100%;
+            margin-bottom: 32px;
+
+            .on-subtitle-1 {
+                margin-bottom: 12px;
+            }
+        }
+    }
+
+    /* the framed photo sits on the same baseline as the copy beside it */
+    &-left-inner {
+        display: flex;
+        align-items: flex-end;
+        gap: 48px;
+
+        @media #{$xxl} {
+            align-items: start;
+            flex-direction: column;
+        }
+        @media #{$xl} {
+            gap: 32px;
+            align-items: start;
+            flex-direction: column;
+        }
+
+        @media #{$lg} {
+            gap: 32px;
+            align-items: start;
+            flex-direction: column;
+        }
+
+        @media #{$md,$xs} {
+            align-items: start;
+            flex-direction: column;
+        }
+    }
+
+    /*
+        author-box
+    */
+    &-author-box {
+        position: relative;
+        z-index: 1;
+        flex: 0 0 331px;
+        width: 331px;
+        height: 426px;
+        border-radius: 20px;
+        overflow: hidden;
+
+        > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &-content {
+            position: absolute;
+            left: 13px;
+            right: 13px;
+            bottom: 13px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: rgb(255 255 255 / 50%);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+
+            .counter-row {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 14px;
+            }
+
+            .number-elm {
+                font-family: var(--on-font-1);
+                font-size: 36px;
+                font-weight: 600;
+                line-height: 24px;
+                letter-spacing: -2px;
+                color: #024748;
+                margin-bottom: 0;
+            }
+
+            .author-img {
+                display: flex;
+                align-items: center;
+
+                img {
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 8px;
+                    border: 2.5px solid #fff;
+                    object-fit: cover;
+
+                    & + img {
+                        margin-left: -12px;
+                    }
+                }
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 24px;
+                letter-spacing: -1px;
+                color: var(--on-clr-h-1);
+            }
+        }
+
+        @media #{$xxl} {
+            flex: 0 0 300px;
+            width: 300px;
+            height: 400px;
+        }
+
+        @media #{$xl} {
+            flex: 0 0 260px;
+            width: 260px;
+            height: 370px;
+
+            &-content {
+                padding: 16px;
+
+                .number-elm {
+                    font-size: 30px;
+                }
+
+                .author-img img {
+                    width: 38px;
+                    height: 38px;
+
+                    & + img {
+                        margin-left: -10px;
+                    }
+                }
+
+                .text-elm {
+                    font-size: 15px;
+                }
+            }
+        }
+
+        @media #{$lg} {
+            flex: 0 0 331px;
+            width: 331px;
+            height: 426px;
+        }
+
+        @media #{$md} {
+            width: 100%;
+            max-width: 400px;
+            height: 380px;
+        }
+
+        @media #{$xs} {
+            width: 100%;
+            height: 340px;
+
+            &-content {
+                padding: 16px;
+
+                .number-elm {
+                    font-size: 30px;
+                }
+
+                .author-img img {
+                    width: 38px;
+                    height: 38px;
+
+                    & + img {
+                        margin-left: -10px;
+                    }
+                }
+
+                .text-elm {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+    &-left-inner-right {
+        flex: 1;
+        min-width: 0;
+
+        @media #{$md,$xs} {
+            margin-top: 40px;
+        }
+
+        @media #{$xs} {
+            margin-top: 32px;
+        }
+    }
+
+    &-text {
+        margin-bottom: 32px;
+
+        @media #{$xs} {
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+    }
+
+    /*
+        feature-accordion — each pane laps 18px under the one before it, so the
+        9px radius reads as a corner tucked behind its neighbour rather than a
+        seam. Closed panes show a 60px sliver; the open one takes the rest.
+    */
+    &-feature {
+        display: flex;
+        height: 272px;
+        margin-top: 60px;
+
+        &-item {
+            position: relative;
+            flex: 0 0 78px;
+            margin-left: -18px;
+            /* stretch, so the closed panes match whichever one is open */
+            align-self: stretch;
+            border-radius: 9px;
+            overflow: hidden;
+            cursor: pointer;
+
+            /*
+                the plate color belongs to the state, not the topic — any of
+                the three can end up closed, and a closed pane has to carry the
+                white mark and label on a dark ground
+            */
+            background-color: var(--on-clr-h-1);
+
+            /*
+                grow is a plain number, so it tweens — a basis going to `auto`
+                is what made the old version jump
+            */
+            flex-grow: 0;
+            transition: flex-grow .45s cubic-bezier(.4, 0, .2, 1),
+                        background-color .35s ease;
+
+            &:first-child {
+                flex-basis: 60px;
+                margin-left: 0;
+            }
+
+            /* front-to-back, so every pane laps the next one */
+            &:nth-child(1) {
+                z-index: 3;
+            }
+
+            /* the middle plate lifts a shade, as the design has it */
+            &:nth-child(2) {
+                z-index: 2;
+                background-color: #599ea1;
+            }
+
+            &:nth-child(3) {
+                z-index: 1;
+            }
+
+            /* closed pane — pinned to the visible sliver on the right */
+            .head-elm {
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 60px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                padding: 26px 0;
+                opacity: .72;
+                color: #fff;
+                transition: opacity .25s ease .2s;
+            }
+
+            .icon-elm {
+                width: 28px;
+                height: 28px;
+                background-color: currentColor;
+            }
+
+            .label-elm {
+                writing-mode: vertical-rl;
+                transform: rotate(180deg);
+                font-family: var(--on-font-2);
+                font-size: 15px;
+                font-weight: 600;
+                line-height: 28px;
+                letter-spacing: .08em;
+                text-transform: uppercase;
+                margin-bottom: 0;
+            }
+
+            /*
+                the lapped 18px is dead space, so the copy is inset past it.
+                A closed pane is taken out of flow: left in it, its paragraph
+                would stack up inside a 50px sliver and push the whole row
+                taller than the open panel
+            */
+            .body-elm {
+                position: absolute;
+                inset: 0;
+                padding: 32px 32px 40px 50px;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity .2s ease, visibility 0s .2s;
+            }
+
+            &:first-child .body-elm {
+                padding-left: 32px;
+            }
+
+            /* open pane — the copy is held back until the width has settled, so
+               the paragraph never re-wraps in front of the reader */
+            &:is(.active) {
+                flex-grow: 1;
+                background-color: #fff;
+
+                .head-elm {
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity .18s ease, visibility 0s .18s;
+                }
+
+                /* back into flow — the open panel is what sets the row height */
+                .body-elm {
+                    position: relative;
+                    inset: auto;
+                    opacity: 1;
+                    visibility: visible;
+                    transition: opacity .3s ease .4s, visibility 0s 0s;
+                }
+            }
+        }
+
+        /* panel head: label + rule on the left, the outline mark on the right */
+        &-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        &-head-left {
+            flex: 1;
+            min-width: 0;
+            max-width: 220px;
+        }
+
+        &-title {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 28px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        &-line {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 17px;
+
+            /* the hairline the mark sits on */
+            &::after {
+                content: "";
+                position: absolute;
+                left: 4px;
+                right: 0;
+                top: 8px;
+                height: 1px;
+                border-radius: 30px;
+                background-color: rgb(5 5 25 / 16%);
+            }
+
+            svg {
+                position: relative;
+                z-index: 1;
+                display: block;
+                width: 14px;
+                height: 17px;
+            }
+        }
+
+        &-icon {
+            flex: 0 0 auto;
+            width: 40px;
+            height: 40px;
+            background-color: var(--on-clr-h-1);
+            opacity: .68;
+        }
+
+        &-text {
+            font-size: 16px;
+            line-height: 28px;
+            margin-bottom: 0;
+        }
+
+        /* one file per mark, tinted through the mask so the same art serves the
+           white sliver and the dark panel */
+        .has-commitment {
+            .icon-elm,
+            .on-about-1-feature-icon {
+                -webkit-mask: url(../img/about/a1-icon-commitment.svg) no-repeat center / contain;
+                mask: url(../img/about/a1-icon-commitment.svg) no-repeat center / contain;
+            }
+        }
+
+        .has-vision {
+            .icon-elm,
+            .on-about-1-feature-icon {
+                -webkit-mask: url(../img/about/a1-icon-vision.svg) no-repeat center / contain;
+                mask: url(../img/about/a1-icon-vision.svg) no-repeat center / contain;
+            }
+        }
+
+        .has-mission {
+            .icon-elm,
+            .on-about-1-feature-icon {
+                -webkit-mask: url(../img/about/a1-icon-mission.svg) no-repeat center / contain;
+                mask: url(../img/about/a1-icon-mission.svg) no-repeat center / contain;
+            }
+        }
+
+        @media #{$xxl} {
+            height: 260px;
+            margin-top: 50px;
+        }
+
+        @media #{$xl} {
+            height: 250px;
+            margin-top: 44px;
+
+            .on-about-1-feature-item {
+                flex-basis: 74px;
+
+                &:first-child {
+                    flex-basis: 56px;
+                }
+
+                .head-elm {
+                    width: 56px;
+                }
+
+                .body-elm {
+                    padding: 32px 24px 32px 42px;
+                }
+
+                &:first-child .body-elm {
+                    padding-left: 24px;
+                }
+            }
+
+            .on-about-1-feature-icon {
+                width: 34px;
+                height: 34px;
+            }
+        }
+
+        @media #{$lg} {
+            height: 260px;
+            margin-top: 40px;
+
+            .on-about-1-feature-item {
+                flex-basis: 70px;
+
+                &:first-child {
+                    flex-basis: 52px;
+                }
+
+                .head-elm {
+                    width: 52px;
+                }
+
+                .body-elm {
+                    padding: 30px 24px 30px 42px;
+                }
+
+                &:first-child .body-elm {
+                    padding-left: 24px;
+                }
+            }
+
+            .on-about-1-feature-icon {
+                width: 34px;
+                height: 34px;
+            }
+        }
+
+        /* the copy no longer fits a fixed pane — let it set its own height */
+        @media #{$md,$xs} {
+            height: auto;
+            min-height: 320px;
+            margin-top: 36px;
+
+            .on-about-1-feature-item {
+                flex-basis: 70px;
+
+                &:first-child {
+                    flex-basis: 52px;
+                }
+
+                .head-elm {
+                    width: 52px;
+                }
+
+                .body-elm {
+                    padding: 28px 24px 28px 42px;
+                }
+
+                &:first-child .body-elm {
+                    padding-left: 24px;
+                }
+            }
+
+            .on-about-1-feature-icon {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        @media #{$xs} {
+            min-height: 300px;
+            margin-top: 30px;
+
+            .on-about-1-feature-item {
+                flex-basis: 62px;
+
+                &:first-child {
+                    flex-basis: 44px;
+                }
+
+                .head-elm {
+                    width: 44px;
+                    padding: 18px 0;
+                }
+
+                .icon-elm {
+                    width: 22px;
+                    height: 22px;
+                }
+
+                .label-elm {
+                    font-size: 13px;
+                    letter-spacing: .05em;
+                }
+
+                .body-elm {
+                    padding: 24px 20px 24px 38px;
+                }
+
+                &:first-child .body-elm {
+                    padding-left: 20px;
+                }
+            }
+
+            .on-about-1-feature-title {
+                font-size: 16px;
+                letter-spacing: .05em;
+            }
+
+            .on-about-1-feature-icon {
+                width: 28px;
+                height: 28px;
+            }
+
+            .on-about-1-feature-text {
+                font-size: 15px;
+                line-height: 26px;
+            }
+        }
+    }
+    /*
+        right
+    */
+    &-right {
+        position: relative;
+        z-index: 1;
+        max-width: 592px;
+        width: 100%;
+        margin-right: -151px;
+
+        @media #{$xxl} {
+            max-width: 520px;
+            margin-right: 0px;
+        }
+
+        @media #{$xl} {
+            max-width: 450px;
+            margin-right: 0px;
+        }
+
+        @media #{$lg,$md,$xs} {
+            width: 100%;
+            margin-top: 50px;
+            margin-right: 0px;
+        }
+
+        @media #{$xs} {
+            margin-top: 40px;
+            margin-right: 0px;
+        }
+    }
+
+    &-right-img {
+        position: relative;
+        z-index: 1;
+        height: 746px;
+        border-radius: 24px;
+        overflow: hidden;
+
+        > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* the pale petal tucked into the bottom corner of the frame */
+        .shape-elm {
+            position: absolute;
+            right: 2%;
+            bottom: 6%;
+            width: 40%;
+            line-height: 0;
+            transform: rotate(-30deg);
+            transform-origin: top right;
+
+            svg {
+                width: 100%;
+                height: auto;
+            }
+
+            /* wow hands this the reveal as the frame scrolls into view */
+            &:is(.rotateIn2) {
+                animation-name: on-about-1-shape-in;
+                animation-duration: 1200ms;
+                animation-timing-function: cubic-bezier(.62, .05, .01, .99);
+                animation-fill-mode: both;
+            }
+        }
+
+        @media #{$xxl} {
+            height: 660px;
+        }
+
+        @media #{$xl} {
+            height: 570px;
+        }
+
+        @media #{$lg} {
+            height: 500px;
+        }
+
+        @media #{$md} {
+            height: 420px;
+        }
+
+        @media #{$xs} {
+            height: 340px;
+            border-radius: 16px;
+        }
+    }
+
+    /*
+        experience-badge
+    */
+    &-experience {
+        position: absolute;
+        left: -102px;
+        top: 40px;
+        z-index: 2;
+        width: 204px;
+        height: 204px;
+        border-radius: 50%;
+        background-color: #024748;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* the ring of set type turns behind the plate */
+        .circle-text {
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            width: calc(100% - 36px);
+            height: calc(100% - 36px);
+            animation: on-about-1-spin 20s linear infinite;
+        }
+
+        .number-elm {
+            position: relative;
+            z-index: 1;
+            width: 108px;
+            height: 108px;
+            border-radius: 50%;
+            background-color: #edf4f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--on-font-2);
+            font-size: 44px;
+            font-weight: 600;
+            line-height: 1;
+            color: var(--on-clr-h-1);
+        }
+
+        @media #{$xxl} {
+            left: -90px;
+            top: 34px;
+            width: 180px;
+            height: 180px;
+
+            .number-elm {
+                width: 96px;
+                height: 96px;
+                font-size: 38px;
+            }
+        }
+
+        @media #{$xl} {
+            left: -80px;
+            top: 30px;
+            width: 160px;
+            height: 160px;
+
+            .circle-text {
+                left: 14px;
+                top: 14px;
+                width: calc(100% - 28px);
+                height: calc(100% - 28px);
+            }
+
+            .number-elm {
+                width: 86px;
+                height: 86px;
+                font-size: 34px;
+            }
+        }
+
+        /* full-width photo below the copy — the badge moves inside the frame */
+        @media #{$lg,$md} {
+            left: 40px;
+            top: 40px;
+            width: 150px;
+            height: 150px;
+
+            .circle-text {
+                left: 13px;
+                top: 13px;
+                width: calc(100% - 26px);
+                height: calc(100% - 26px);
+            }
+
+            .number-elm {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+        }
+
+        @media #{$xs} {
+            left: 20px;
+            top: 20px;
+            width: 120px;
+            height: 120px;
+
+            .circle-text {
+                left: 10px;
+                top: 10px;
+                width: calc(100% - 20px);
+                height: calc(100% - 20px);
+            }
+
+            .number-elm {
+                width: 64px;
+                height: 64px;
+                font-size: 26px;
+            }
+        }
+    }
+}
+
+
+@keyframes on-about-1-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*
+    the petal swings in from behind the corner of the frame and settles at the
+    tilt it rests on — the end value has to be that -30deg, not 0
+*/
+@keyframes on-about-1-shape-in {
+    0% {
+        opacity: 0;
+        transform: rotate(-125deg);
+    }
+
+    45% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(-30deg);
+    }
+}
+
+/*
+    about-1-end
+*/

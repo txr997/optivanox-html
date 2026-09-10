@@ -1,0 +1,1133 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    choose-1-start
+*/
+.on-choose-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    /* the bento runs almost edge to edge — 16px of air either side at 1920 */
+    &-container {
+        max-width: 1918px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &-sec-title {
+        max-width: 762px;
+        margin: 0 auto 40px;
+        text-align: center;
+
+        @media #{$md} {
+            margin-bottom: 34px;
+        }
+
+        @media #{$xs} {
+            margin-bottom: 28px;
+        }
+    }
+
+    /*
+        two bands rather than one grid — the row boundaries in the design do not
+        line up, so a shared column track would fight both
+    */
+    &-row {
+        display: grid;
+        gap: 8px;
+
+        &:is(.has-v1) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        &:is(.has-v2) {
+            grid-template-columns: 700fr 472fr 700fr;
+        }
+
+        & + & {
+            margin-top: 8px;
+        }
+
+        @media #{$lg} {
+            &:is(.has-v2) {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media #{$md} {
+            &:is(.has-v1) {
+                grid-template-columns: 1fr;
+            }
+
+            &:is(.has-v2) {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media #{$xs} {
+            &:is(.has-v1),
+            &:is(.has-v2) {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+
+    /*
+        card-01 — figure behind, gradient sweep over it, pills stepped in front
+    */
+    &-card-1 {
+        position: relative;
+        z-index: 1;
+        height: 620px;
+        border-radius: 20px;
+        overflow: hidden;
+        background-color: #024748;
+
+        .bg-img {
+            position: absolute;
+            left: 150px;
+            top: 0;
+            z-index: -2;
+            width: 790px;
+            height: 100%;
+            mix-blend-mode: luminosity;
+            opacity: 72%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        /* washes the photo back into the plate so the pills stay readable */
+        .overlay-elm {
+            position: absolute;
+            left: 150px;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+            width: 540px;
+            background: linear-gradient(to right,
+                    #024748 0%,
+                    #024748 40%,
+                    rgb(2 71 72 / 0%) 100%);
+        }
+
+        .circle-elm {
+            position: absolute;
+            left: 368px;
+            top: -174px;
+            z-index: -1;
+            width: 974px;
+            opacity: .72;
+            pointer-events: none;
+
+            /*
+                wow turns it into place on scroll. It rests at 72%, so that is
+                where the last keyframe has to land — fill-mode holds it there
+            */
+            &:is(.rotateIn3) {
+                animation-name: on-choose-1-circle-in;
+                animation-duration: 1200ms;
+                animation-timing-function: cubic-bezier(.62, .05, .01, .99);
+                animation-fill-mode: both;
+            }
+        }
+
+        @media #{$xxxl} {
+            height: 560px;
+        }
+
+        @media #{$xxl} {
+            height: 520px;
+        }
+
+        @media #{$xl} {
+            height: 470px;
+        }
+
+        @media #{$lg} {
+            height: 520px;
+        }
+
+        @media #{$md} {
+            height: 480px;
+        }
+
+        @media #{$xs} {
+            height: auto;
+            padding: 40px 0;
+
+            .bg-img,
+            .overlay-elm {
+                left: 40%;
+            }
+        }
+    }
+
+    &-feature {
+        position: absolute;
+        left: 48px;
+        top: 85px;
+        z-index: 2;
+        width: 522px;
+        max-width: calc(100% - 60px);
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 447px;
+            max-width: 100%;
+            padding: 22px;
+            border-radius: 150px;
+            background-color: #016c6e;
+
+            /* the outer two step in, the middle one sits proud */
+            &:is(.has-offset) {
+                margin-left: 75px;
+            }
+
+            .icon-elm {
+                flex: 0 0 auto;
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                background-color: #024748;
+                color: var(--on-clr-pr-1);
+                font-size: 42px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .title-elm {
+                font-family: var(--on-font-2);
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 26px;
+                color: #fff;
+                margin-bottom: 8px;
+            }
+
+            .text-elm {
+                font-family: var(--on-font-1);
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                color: #fff;
+                margin-bottom: 0;
+                opacity: 80%;
+            }
+        }
+
+        @media #{$xxl} {
+            top: 60px;
+            gap: 18px;
+        }
+
+        @media #{$xl} {
+            left: 30px;
+            top: 44px;
+            gap: 14px;
+
+            &-item {
+                gap: 14px;
+                padding: 16px;
+
+                &:is(.has-offset) {
+                    margin-left: 46px;
+                }
+
+                .icon-elm {
+                    width: 70px;
+                    height: 70px;
+                    font-size: 32px;
+                }
+
+                .title-elm {
+                    font-size: 18px;
+                    margin-bottom: 4px;
+                }
+
+                .text-elm {
+                    font-size: 15px;
+                    line-height: 22px;
+                }
+            }
+        }
+
+        @media #{$lg,$md} {
+            left: 30px;
+            top: 50px;
+            gap: 16px;
+
+            &-item {
+                gap: 14px;
+                padding: 16px;
+
+                &:is(.has-offset) {
+                    margin-left: 40px;
+                }
+
+                .icon-elm {
+                    width: 70px;
+                    height: 70px;
+                    font-size: 32px;
+                }
+
+                .title-elm {
+                    font-size: 18px;
+                    margin-bottom: 4px;
+                }
+
+                .text-elm {
+                    font-size: 15px;
+                    line-height: 22px;
+                }
+            }
+        }
+
+        @media #{$xs} {
+            position: relative;
+            left: auto;
+            top: auto;
+            width: 100%;
+            max-width: 100%;
+            padding: 0 20px;
+            gap: 14px;
+
+            &-item {
+                width: 100%;
+                gap: 12px;
+                padding: 14px;
+
+                &:is(.has-offset) {
+                    margin-left: 0;
+                }
+
+                .icon-elm {
+                    width: 60px;
+                    height: 60px;
+                    font-size: 28px;
+                }
+
+                .title-elm {
+                    font-size: 17px;
+                    margin-bottom: 4px;
+                }
+
+                .text-elm {
+                    font-size: 14px;
+                    line-height: 21px;
+                }
+            }
+        }
+    }
+
+    /*
+        card-02 — the chart is one exported plate, labels and tooltip included
+    */
+    &-card-2 {
+        height: 620px;
+        border-radius: 20px;
+        background-color: #ebf0f0;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+
+        .title-elm {
+            font-family: var(--on-font-2);
+            font-size: 40px;
+            font-weight: 500;
+            line-height: 44px;
+            color: var(--on-clr-h-1);
+            margin-bottom: 20px;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            color: #525d5d;
+            max-width: 736px;
+            margin-bottom: 31px;
+        }
+
+        .graph-elm {
+            flex: 1;
+            min-height: 0;
+            border-radius: 12px;
+            background-color: #fff;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: left top;
+            }
+        }
+
+        @media #{$xxxl} {
+            height: 560px;
+        }
+
+        @media #{$xxl} {
+            height: 520px;
+            padding: 32px;
+
+            .title-elm {
+                font-size: 34px;
+                line-height: 40px;
+            }
+
+            .text-elm {
+                margin-bottom: 24px;
+            }
+        }
+
+        @media #{$xl} {
+            height: 470px;
+            padding: 28px;
+
+            .title-elm {
+                font-size: 28px;
+                line-height: 36px;
+                margin-bottom: 14px;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media #{$lg} {
+            height: 520px;
+            padding: 28px;
+
+            .title-elm {
+                font-size: 28px;
+                line-height: 36px;
+                margin-bottom: 14px;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media #{$md} {
+            height: auto;
+            padding: 28px;
+
+            .title-elm {
+                font-size: 28px;
+                line-height: 36px;
+                margin-bottom: 14px;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+                margin-bottom: 20px;
+            }
+
+            .graph-elm {
+                flex: none;
+            }
+        }
+
+        @media #{$xs} {
+            height: auto;
+            padding: 24px 20px;
+            border-radius: 16px;
+
+            .title-elm {
+                font-size: 24px;
+                line-height: 32px;
+                margin-bottom: 12px;
+            }
+
+            .text-elm {
+                font-size: 15px;
+                line-height: 24px;
+                margin-bottom: 18px;
+            }
+
+            .graph-elm {
+                flex: none;
+            }
+        }
+    }
+
+    /*
+        card-03 — the dotted map is flat art, so the markers are placed over it
+    */
+    &-card-3 {
+        position: relative;
+        z-index: 1;
+        height: 428px;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #e8ecc8;
+        padding: 50px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .map-elm {
+            position: absolute;
+            left: 248px;
+            top: 52px;
+            z-index: -1;
+            width: 452px;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            /*
+                the pins keep dropping onto the map. Each runs the same cycle on
+                its own clock — the durations share no common factor, so the five
+                never fall back into step and the pattern reads as random
+            */
+            i {
+                position: absolute;
+                font-size: 32px;
+                line-height: 1;
+                color: var(--on-clr-h-1);
+
+                /* the tip is what sits on the map, so it scales from there */
+                transform-origin: bottom center;
+                animation: on-choose-1-pin-drop 4.6s ease-in-out infinite;
+
+                &:nth-of-type(1) { left: 15%;   top: 11.3%; animation-duration: 4.3s; animation-delay: 0s; }
+                &:nth-of-type(2) { left: 37.2%; top: 27.6%; animation-duration: 5.1s; animation-delay: .9s; }
+                &:nth-of-type(3) { left: 92.9%; top: 8.7%;  animation-duration: 3.7s; animation-delay: 1.8s; }
+                &:nth-of-type(4) { left: 66.2%; top: 0;     animation-duration: 4.9s; animation-delay: 2.5s; }
+                &:nth-of-type(5) { left: 56.4%; top: 63.7%; animation-duration: 5.8s; animation-delay: .4s; }
+            }
+        }
+
+        .label-elm {
+            font-family: var(--on-font-1);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 26px;
+            color: var(--on-clr-h-1);
+            margin: 18px 0 0;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            color: #525d5d;
+            max-width: 392px;
+            margin-bottom: 0;
+        }
+
+        @media #{$xxl} {
+            height: 400px;
+            padding: 40px 32px;
+        }
+
+        @media #{$xl} {
+            height: 380px;
+            padding: 32px 28px;
+
+            .map-elm {
+                left: 45%;
+                width: 60%;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+            }
+        }
+
+        @media #{$lg,$md} {
+            height: 400px;
+            padding: 32px 28px;
+
+            .map-elm {
+                left: 45%;
+                width: 60%;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+            }
+        }
+
+        @media #{$xs} {
+            height: auto;
+            padding: 24px 20px;
+
+            .map-elm {
+                left: 40%;
+                top: 30px;
+                width: 65%;
+
+                i {
+                    font-size: 22px;
+                }
+            }
+
+            .label-elm {
+                font-size: 18px;
+                margin-top: 12px;
+            }
+
+            .text-elm {
+                font-size: 15px;
+                line-height: 24px;
+                margin-top: 90px;
+            }
+        }
+    }
+
+    /*
+        card-04
+    */
+    &-card-4 {
+        position: relative;
+        z-index: 1;
+        height: 428px;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #024748;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        /* drained to luminosity so the plate colour still governs */
+        .bg-img {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            opacity: .5;
+            mix-blend-mode: luminosity;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .head-elm {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .title-elm {
+            font-family: var(--on-font-2);
+            font-size: 26px;
+            font-weight: 500;
+            line-height: 32px;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        .rating-elm {
+            flex: 0 0 auto;
+            text-align: right;
+        }
+
+        .star-elm {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 10px;
+            border-radius: 22px;
+            background-color: var(--on-clr-pr-1);
+            color: var(--on-clr-h-1);
+            font-size: 12px;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        /* the pip-and-rule that opens the closing line */
+        .line-elm {
+            position: relative;
+            display: block;
+            height: 11px;
+            margin-bottom: 12px;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 11px;
+                height: 11px;
+                border-radius: 50%;
+                background-color: #45fc91;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 6px;
+                top: 5px;
+                width: 281px;
+                max-width: calc(100% - 6px);
+                height: 1px;
+                background: linear-gradient(to right,
+                        #45fc91 0%,
+                        rgb(69 252 145 / 0%) 100%);
+            }
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            letter-spacing: -.01em;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        @media #{$xxl} {
+            height: 400px;
+            padding: 32px;
+        }
+
+        @media #{$xl} {
+            height: 380px;
+            padding: 28px;
+
+            .title-elm {
+                font-size: 22px;
+                line-height: 28px;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+            }
+        }
+
+        @media #{$lg,$md} {
+            height: 400px;
+            padding: 28px;
+
+            .title-elm {
+                font-size: 22px;
+                line-height: 28px;
+            }
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+            }
+        }
+
+        @media #{$xs} {
+            height: auto;
+            padding: 24px 20px;
+            gap: 40px;
+
+            .title-elm {
+                font-size: 20px;
+                line-height: 26px;
+            }
+
+            .text-elm {
+                font-size: 15px;
+                line-height: 24px;
+            }
+        }
+    }
+
+    /*
+        card-05 — two plates stacked inside one bento cell
+    */
+    &-card-5 {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 8px;
+        height: 428px;
+
+        @media #{$xxl} {
+            height: 400px;
+        }
+
+        @media #{$xl} {
+            height: 380px;
+        }
+
+        @media #{$lg,$md} {
+            height: 400px;
+            grid-column: 1 / -1;
+        }
+
+        @media #{$xs} {
+            height: auto;
+            grid-template-rows: auto auto;
+        }
+    }
+
+    &-count-card {
+        border: 3px solid #ccd8d8;
+        border-radius: 12px;
+        background-color: #fff;
+        padding: 33px 37px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            letter-spacing: -.01em;
+            color: #525d5d;
+            margin: 39px 0 0;
+        }
+
+        @media #{$xl,$lg,$md} {
+            padding: 24px 26px;
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 26px;
+                margin-top: 22px;
+            }
+        }
+
+        @media #{$xs} {
+            padding: 20px;
+
+            .text-elm {
+                font-size: 15px;
+                line-height: 24px;
+                margin-top: 16px;
+            }
+        }
+    }
+
+    /* the office frame is flush to the plate edge and drained of colour */
+    &-team-card {
+        position: relative;
+        z-index: 1;
+        border: 3px solid #ccd8d8;
+        border-radius: 12px;
+        background-color: #fff;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+
+        .img-elm {
+            width: 234px;
+            border-radius: 9px 0 0 9px;
+            overflow: hidden;
+            mix-blend-mode: luminosity;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            z-index: -1;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .wrap-elm {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding-right: 37px;
+            padding-left: 98px;
+
+            @media #{$xxxl,$xxl,$xl,$lg,$md,$xs} {
+                padding-right: 20px;
+                padding-left: 20px;
+            }
+        }
+
+        .author-elm {
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                border: 3px solid #fff;
+                object-fit: cover;
+
+                & + img {
+                    margin-left: -25px;
+                }
+            }
+        }
+
+        .count-wrap {
+            flex: 0 0 auto;
+            text-align: right;
+        }
+
+        .label-elm {
+            font-family: var(--on-font-1);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 26px;
+            color: var(--on-clr-h-1);
+            margin: 28px 0 0;
+        }
+
+        @media #{$xxl} {
+            gap: 16px;
+
+            .img-elm {
+                width: 190px;
+            }
+
+            .author-elm img {
+                width: 64px;
+                height: 64px;
+
+                & + img {
+                    margin-left: -20px;
+                }
+            }
+
+            .wrap-elm {
+                padding-right: 26px;
+            }
+        }
+
+        @media #{$xl,$lg,$md} {
+            gap: 14px;
+
+            .img-elm {
+                width: 150px;
+            }
+
+            .author-elm img {
+                width: 52px;
+                height: 52px;
+                border-width: 2px;
+
+                & + img {
+                    margin-left: -16px;
+                }
+            }
+
+            .wrap-elm {
+                padding-right: 22px;
+            }
+
+            .label-elm {
+                font-size: 17px;
+                line-height: 22px;
+                margin-top: 16px;
+            }
+        }
+
+        @media #{$xs} {
+            display: block;
+
+            .img-elm {
+                width: 100%;
+                height: 160px;
+                border-radius: 9px 9px 0 0;
+            }
+
+            .wrap-elm {
+                padding: 20px;
+            }
+
+            .author-elm img {
+                width: 46px;
+                height: 46px;
+                border-width: 2px;
+
+                & + img {
+                    margin-left: -14px;
+                }
+            }
+
+            .label-elm {
+                font-size: 16px;
+                line-height: 22px;
+                margin-top: 12px;
+            }
+        }
+    }
+
+    /*
+        the big figures — the trailing unit is set smaller and raised, and on
+        most of them it drops to the pale grey the design uses
+    */
+    &-count {
+        font-family: var(--on-font-2);
+        font-size: 80px;
+        font-weight: 500;
+        line-height: 52px;
+        letter-spacing: -.01em;
+        color: var(--on-clr-h-1);
+        margin-bottom: 0;
+        display: block;
+
+        .unit-elm {
+            color: #ccd8d8;
+        }
+
+        /* card-03 keeps its unit in the same ink as the figure */
+        .unit-elm:is(.has-v2) {
+            color: inherit;
+        }
+
+        &:is(.has-v2) {
+            font-size: 48px;
+            line-height: 52px;
+            color: #fff;
+
+            .unit-elm {
+                color: rgb(255 255 255 / 50%);
+            }
+        }
+
+        @media #{$xxl} {
+            font-size: 68px;
+            line-height: 46px;
+
+            &:is(.has-v2) {
+                font-size: 44px;
+                line-height: 46px;
+            }
+        }
+
+        @media #{$xl,$lg,$md} {
+            font-size: 54px;
+            line-height: 40px;
+
+            &:is(.has-v2) {
+                font-size: 38px;
+                line-height: 40px;
+            }
+        }
+
+        @media #{$xs} {
+            font-size: 46px;
+            line-height: 36px;
+
+            &:is(.has-v2) {
+                font-size: 34px;
+                line-height: 36px;
+            }
+        }
+    }
+
+    /* the 32+ plate sets its figure beside the label rather than above it */
+    &-count-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 18px;
+
+        .label-elm {
+            font-family: var(--on-font-1);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 26px;
+            color: var(--on-clr-h-1);
+            margin-bottom: 0;
+        }
+
+        @media #{$xl,$lg,$md} {
+            gap: 12px;
+
+            .label-elm {
+                font-size: 17px;
+                line-height: 22px;
+            }
+        }
+
+        @media #{$xs} {
+            gap: 10px;
+
+            .label-elm {
+                font-size: 16px;
+                line-height: 21px;
+            }
+        }
+    }
+}
+
+@keyframes on-choose-1-circle-in {
+    0% {
+        opacity: 0;
+        transform: rotate(-135deg) scale(.92);
+    }
+
+    100% {
+        opacity: .72;
+        transform: rotate(0) scale(1);
+    }
+}
+
+/* drops in, holds while it is read, then lifts back off the map */
+@keyframes on-choose-1-pin-drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px) scale(.4);
+    }
+
+    12% {
+        opacity: 1;
+        transform: translateY(0) scale(1.12);
+    }
+
+    20% {
+        transform: translateY(0) scale(1);
+    }
+
+    68% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    82%,
+    100% {
+        opacity: 0;
+        transform: translateY(-8px) scale(.5);
+    }
+}
+
+/*
+    choose-1-end
+*/

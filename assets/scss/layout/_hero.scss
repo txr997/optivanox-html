@@ -1,0 +1,956 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    hero-1-start
+*/
+
+/* the ring the feature icons throw off while they are hovered */
+@keyframes on-hero-1-icon-ripple {
+    0% {
+        opacity: .5;
+        transform: scale(1);
+    }
+
+    70% {
+        opacity: 0;
+        transform: scale(1.85);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.85);
+    }
+}
+.on-hero-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #013031;
+        padding-bottom: 24px;
+
+        @media #{$xs} {
+            padding-bottom: 15px;
+        }
+    }
+
+    &-container {
+        max-width: 1900px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+    }
+
+    /* the photo only reads as a texture — the deep green underneath does the work */
+    &-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: .15;
+        }
+    }
+
+    /* fades the lower third back to solid so the feature cards stay readable */
+    &-fade {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 536px;
+        z-index: 5;
+        pointer-events: none;
+        background: linear-gradient(to top, #013031 0%, #013031 44%, rgba(1, 48, 49, 0.8) 70%, rgba(1, 48, 49, 0) 100%);
+
+        @media #{$xxxl} {
+            height: 480px;
+        }
+
+        @media #{$xxl} {
+            height: 440px;
+        }
+
+        @media #{$xl} {
+            height: 400px;
+        }
+
+        @media #{$lg} {
+            height: 420px;
+        }
+
+        @media #{$md} {
+            height: 320px;
+        }
+
+        @media #{$xs} {
+            height: 260px;
+        }
+    }
+
+    /* two quarter-discs cut out of a 500px square — the curve is a full-size corner radius */
+    &-shape-img {
+        position: absolute;
+        z-index: 2;
+        width: 480px;
+        height: 480px;
+        overflow: hidden;
+
+        &:is(.has-v1) {
+            left: 18%;
+            top: 635px;
+            border-radius: 0 0 0 100%;
+            opacity: 80%;
+        }
+
+        &:is(.has-v2) {
+            left: 55.68%;
+            top: 154px;
+            border-radius: 0 100% 0 0;
+        }
+
+        @media #{$xxxl} {
+            width: 440px;
+            height: 440px;
+
+            &:is(.has-v1) {
+                top: 560px;
+            }
+
+            &:is(.has-v2) {
+                top: 110px;
+            }
+        }
+
+        @media #{$xxl} {
+            width: 380px;
+            height: 380px;
+
+            &:is(.has-v1) {
+                top: 480px;
+            }
+
+            &:is(.has-v2) {
+                top: 100px;
+            }
+        }
+
+        @media #{$xl} {
+            width: 320px;
+            height: 320px;
+
+            &:is(.has-v1) {
+                left: 15%;
+                top: 400px;
+            }
+
+            &:is(.has-v2) {
+                left: 57%;
+                top: 90px;
+            }
+        }
+
+        @media #{$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-main-img {
+        position: absolute;
+        left: 34.68%;
+        top: 165px;
+        z-index: 4;
+        width: 663px;
+
+        @media #{$xxxl} {
+            width: 580px;
+            top: 150px;
+        }
+
+        @media #{$xxl} {
+            width: 510px;
+            top: 150px;
+        }
+
+        @media #{$xl} {
+            width: 440px;
+            top: 150px;
+        }
+
+        /* no room left beside the text — park it on the right edge */
+        @media #{$lg} {
+            left: auto;
+            right: 0;
+            top: 190px;
+            width: 340px;
+        }
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+
+    /*
+        content
+    */
+    &-content {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 30px;
+        padding: 310px 12.57% 95px;
+
+        @media #{$xxxl} {
+            padding: 280px 12.57% 85px;
+        }
+
+        @media #{$xxl} {
+            padding: 250px 12.57% 75px;
+        }
+
+        @media #{$xl} {
+            padding: 210px 8% 65px;
+        }
+
+        @media #{$lg} {
+            display: block;
+            padding: 180px 0 60px;
+        }
+
+        @media #{$md} {
+            display: block;
+            padding: 140px 0 50px;
+        }
+
+        @media #{$xs} {
+            display: block;
+            padding: 140px 0 50px;
+        }
+    }
+
+    &-title {
+        font-family: var(--on-font-2);
+        color: #fff;
+        margin-bottom: 0;
+
+        .pre-elm,
+        .lg-elm,
+        .sm-elm {
+            display: block;
+            position: relative;
+        }
+
+        /* sits behind the cut-out figure, same as the lime line under it */
+        .pre-elm,
+        .lg-elm {
+            z-index: 3;
+        }
+
+        .pre-elm {
+            font-size: 34px;
+            font-weight: 500;
+            line-height: 40px;
+            letter-spacing: .16em;
+            margin-bottom: -4px;
+        }
+
+        .lg-elm {
+            font-size: 160px;
+            font-weight: 700;
+            line-height: 164px;
+            letter-spacing: -3px;
+            color: var(--on-clr-pr-1);
+        }
+
+        /* the only headline line that crosses in front of the figure */
+        .sm-elm {
+            z-index: 6;
+            font-size: 134px;
+            font-weight: 600;
+            line-height: 140px;
+            letter-spacing: -1px;
+            margin-top: -15px;
+            margin-left: 106px;
+        }
+
+        @media #{$xxxl} {
+            .pre-elm {
+                font-size: 30px;
+                line-height: 36px;
+                letter-spacing: 12px;
+                margin-bottom: 20px;
+            }
+
+            .lg-elm {
+                font-size: 140px;
+                line-height: 144px;
+                letter-spacing: -2px;
+            }
+
+            .sm-elm {
+                font-size: 118px;
+                line-height: 124px;
+                margin-top: -13px;
+                margin-left: 92px;
+            }
+        }
+
+        @media #{$xxl} {
+            .pre-elm {
+                font-size: 26px;
+                line-height: 32px;
+                letter-spacing: 10px;
+                margin-bottom: 18px;
+            }
+
+            .lg-elm {
+                font-size: 122px;
+                line-height: 126px;
+                letter-spacing: -2px;
+            }
+
+            .sm-elm {
+                font-size: 102px;
+                line-height: 108px;
+                margin-top: -11px;
+                margin-left: 80px;
+            }
+        }
+
+        @media #{$xl} {
+            .pre-elm {
+                font-size: 22px;
+                line-height: 28px;
+                letter-spacing: 8px;
+                margin-bottom: 16px;
+            }
+
+            .lg-elm {
+                font-size: 104px;
+                line-height: 108px;
+                letter-spacing: -2px;
+            }
+
+            .sm-elm {
+                font-size: 88px;
+                line-height: 92px;
+                margin-top: -9px;
+                margin-left: 66px;
+            }
+        }
+
+        @media #{$lg} {
+            .pre-elm {
+                font-size: 20px;
+                line-height: 26px;
+                letter-spacing: 6px;
+                margin-bottom: 14px;
+            }
+
+            .lg-elm {
+                font-size: 96px;
+                line-height: 100px;
+                letter-spacing: -2px;
+            }
+
+            .sm-elm {
+                font-size: 82px;
+                line-height: 86px;
+                margin-top: -8px;
+                margin-left: 0;
+            }
+        }
+
+        @media #{$md} {
+            .pre-elm {
+                font-size: 18px;
+                line-height: 24px;
+                letter-spacing: 5px;
+                margin-bottom: 12px;
+            }
+
+            .lg-elm {
+                font-size: 76px;
+                line-height: 80px;
+                letter-spacing: -2px;
+            }
+
+            .sm-elm {
+                font-size: 64px;
+                line-height: 68px;
+                margin-top: -6px;
+                margin-left: 0;
+            }
+        }
+
+        @media #{$xs} {
+            .pre-elm {
+                font-size: 15px;
+                line-height: 22px;
+                letter-spacing: 3px;
+                margin-bottom: 10px;
+            }
+
+            .lg-elm {
+                font-size: 48px;
+                line-height: 52px;
+                letter-spacing: -1px;
+            }
+
+            .sm-elm {
+                font-size: 40px;
+                line-height: 44px;
+                margin-top: -4px;
+                margin-left: 0;
+            }
+        }
+
+        @media #{$sm} {
+            .lg-elm {
+                font-size: 60px;
+                line-height: 64px;
+            }
+
+            .sm-elm {
+                font-size: 50px;
+                line-height: 54px;
+            }
+        }
+    }
+
+    &-content-right {
+        position: relative;
+        z-index: 6;
+        flex: 0 0 auto;
+        width: 428px;
+        margin-top: 369px;
+
+        .text-elm {
+            color: #fff;
+            margin-bottom: 32px;
+        }
+
+        .on-pr-btn-1 {
+            color: var(--on-clr-h-1);
+            
+            &::after {
+                transform: translateY(-50%)  translateX(0%) scale(0);
+            }
+            &:hover {
+                &::after {
+                    transform: translateY(-50%) translateX(75%) scale(11);
+                }
+            }
+        }
+
+        @media #{$xxxl} {
+            width: 400px;
+            margin-top: 320px;
+        }
+
+        @media #{$xxl} {
+            width: 370px;
+            margin-top: 275px;
+        }
+
+        @media #{$xl} {
+            width: 330px;
+            margin-top: 235px;
+        }
+
+        @media #{$lg} {
+            width: 100%;
+            max-width: 520px;
+            margin-top: 32px;
+        }
+
+        @media #{$md} {
+            width: 100%;
+            max-width: 560px;
+            margin-top: 28px;
+        }
+
+        @media #{$xs} {
+            width: 100%;
+            margin-top: 24px;
+
+            .text-elm {
+                font-size: 16px;
+                margin-bottom: 24px;
+            }
+        }
+    }
+
+    /*
+        features
+    */
+    &-features {
+        position: relative;
+        z-index: 7;
+        display: flex;
+        align-items: flex-start;
+
+        @media #{$lg,$md,$xs} {
+            display: block;
+        }
+
+        &-video {
+            flex: 0 0 auto;
+            width: 393px;
+            height: 319px;
+            border-radius: 16px;
+
+            @media #{$xxxl} {
+                width: 360px;
+                height: 300px;
+            }
+
+            @media #{$xxl} {
+                width: 330px;
+                height: 280px;
+            }
+
+            @media #{$xl} {
+                width: 300px;
+                height: 250px;
+            }
+
+            @media #{$lg} {
+                width: 100%;
+                height: 240px;
+                margin-bottom: -1px;
+            }
+
+            @media #{$md} {
+                width: 100%;
+                height: 200px;
+                margin-bottom: -1px;
+            }
+
+            @media #{$xs} {
+                width: 100%;
+                height: 180px;
+                border-radius: 12px;
+                margin-bottom: -1px;
+            }
+        }
+
+        /* the card borders are shared, so every neighbour pulls back a pixel */
+        &-right {
+            flex: 1;
+            min-width: 0;
+            margin-left: -1px;
+
+            @media #{$lg,$md,$xs} {
+                margin-left: 0;
+            }
+        }
+
+        &-grid {
+            display: flex;
+
+            @media #{$md,$xs} {
+                display: block;
+            }
+        }
+
+        &-item {
+            flex: 1 1 0;
+            min-width: 0;
+            height: 240px;
+            padding: 35px 40px;
+            border: 1px solid #486a6a;
+            border-radius: 16px;
+
+            & + .on-hero-1-features-item {
+                margin-left: -1px;
+            }
+
+            .icon-elm {
+                position: relative;
+                display: block;
+                width: 56px;
+                height: 56px;
+                margin-bottom: 28px;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 46px;
+                    height: 46px;
+                    border-radius: 50%;
+                    background-color: rgb(255 255 255 / 14%);
+                    transition: transform .5s cubic-bezier(.62, .05, .01, .99), background-color .4s ease;
+                }
+
+                /* the ring only exists while the card is hovered */
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 46px;
+                    height: 46px;
+                    border-radius: 50%;
+                    border: 1px solid var(--on-clr-pr-1);
+                    opacity: 0;
+                }
+
+                i {
+                    position: absolute;
+                    left: 12px;
+                    top: 12px;
+                    font-size: 44px;
+                    line-height: 1;
+                    color: var(--on-clr-pr-1);
+                    transition: transform .5s cubic-bezier(.62, .05, .01, .99), color .4s ease;
+                }
+            }
+
+            /* the disc opens, the mark tips into it, and a ring keeps pulsing out */
+            &:hover {
+                .icon-elm {
+                    &::before {
+                        transform: scale(1.22);
+                        background-color: rgb(190 255 107 / 22%);
+                    }
+
+                    &::after {
+                        animation: on-hero-1-icon-ripple 1.8s cubic-bezier(.62, .05, .01, .99) infinite;
+                    }
+
+                    i {
+                        transform: translateY(-6px) rotate(-6deg);
+                    }
+                }
+            }
+
+            .title-elm {
+                font-family: var(--on-font-1);
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 28px;
+                color: #fff;
+                margin-bottom: 10px;
+            }
+
+            .text-elm {
+                font-family: var(--on-font-1);
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                color: #fff;
+                margin-bottom: 0;
+            }
+
+            @media #{$xxxl} {
+                height: 230px;
+                padding: 30px 32px;
+            }
+
+            @media #{$xxl} {
+                height: 225px;
+                padding: 28px;
+            }
+
+            @media #{$xl} {
+                height: 220px;
+                padding: 24px;
+
+                .title-elm {
+                    font-size: 18px;
+                }
+
+                .text-elm {
+                    font-size: 15px;
+                    line-height: 22px;
+                }
+            }
+
+            @media #{$lg} {
+                height: auto;
+                min-height: 210px;
+                padding: 26px 24px;
+
+                .icon-elm {
+                    margin-bottom: 22px;
+                }
+
+                .title-elm {
+                    font-size: 18px;
+                }
+
+                .text-elm {
+                    font-size: 15px;
+                    line-height: 22px;
+                }
+            }
+
+            @media #{$md,$xs} {
+                height: auto;
+                padding: 24px;
+
+                & + .on-hero-1-features-item {
+                    margin-left: 0;
+                    margin-top: -1px;
+                }
+
+                .icon-elm {
+                    margin-bottom: 20px;
+                }
+
+                .title-elm {
+                    font-size: 18px;
+                }
+
+                .text-elm {
+                    font-size: 15px;
+                    line-height: 22px;
+                }
+            }
+
+            @media #{$xs} {
+                padding: 20px;
+
+                .icon-elm {
+                    width: 48px;
+                    height: 48px;
+
+                    &::before {
+                        width: 40px;
+                        height: 40px;
+                    }
+
+                    i {
+                        left: 8px;
+                        top: 8px;
+                        font-size: 36px;
+                    }
+                }
+
+                .title-elm {
+                    font-size: 17px;
+                }
+
+                .text-elm {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    /*
+        brand-marquee-x-author
+    */
+    &-brand {
+        display: flex;
+        align-items: center;
+        gap: 23px;
+        height: 80px;
+        padding: 16px 28px;
+        border: 1px solid #486a6a;
+        border-radius: 16px;
+        margin-top: -1px;
+
+        &-marquee {
+            flex: 1;
+            min-width: 0;
+
+            /* the loop dissolves into the panel instead of ending on a hard edge */
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 31%, #000 65%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 31%, #000 65%, transparent 100%);
+        }
+
+        &-logo {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 80px;
+
+            img {
+                opacity: .45;
+            }
+        }
+
+        &-author {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            .text-elm {
+                font-family: var(--on-font-2);
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                color: #fff;
+                text-align: right;
+                width: 142px;
+                margin-bottom: 0;
+            }
+
+            .author-img {
+                display: flex;
+                align-items: center;
+
+                > * {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                    border: 2px solid #003030;
+                    object-fit: cover;
+                    position: relative;
+                    z-index: 1;
+
+                    & + * {
+                        margin-left: -14px;
+                    }
+                }
+
+                .add-elm {
+                    position: relative;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #024748;
+                    color: #fff;
+                    font-size: 20px;
+                }
+            }
+        }
+
+        @media #{$xxxl} {
+            padding: 16px 24px;
+            gap: 20px;
+
+            .on-hero-1-brand-logo {
+                margin-right: 70px;
+            }
+        }
+
+        @media #{$xxl} {
+            padding: 14px 20px;
+            gap: 16px;
+
+            .on-hero-1-brand-logo {
+                margin-right: 60px;
+            }
+        }
+
+        @media #{$xl} {
+            padding: 14px 18px;
+            gap: 14px;
+
+            .on-hero-1-brand-logo {
+                margin-right: 50px;
+            }
+
+            .on-hero-1-brand-author {
+                gap: 12px;
+
+                .text-elm {
+                    width: 130px;
+                }
+
+                .author-img > * {
+                    width: 44px;
+                    height: 44px;
+
+                    & + * {
+                        margin-left: -12px;
+                    }
+                }
+            }
+        }
+
+        @media #{$lg} {
+            padding: 14px 20px;
+            gap: 14px;
+
+            .on-hero-1-brand-logo {
+                margin-right: 50px;
+            }
+
+            .on-hero-1-brand-author {
+                gap: 12px;
+
+                .text-elm {
+                    width: 120px;
+                }
+
+                .author-img > * {
+                    width: 44px;
+                    height: 44px;
+
+                    & + * {
+                        margin-left: -12px;
+                    }
+                }
+            }
+        }
+
+        /* the row can no longer hold both — the logos take their own line */
+        @media #{$md,$xs} {
+            flex-wrap: wrap;
+            justify-content: center;
+            height: auto;
+            padding: 16px;
+            gap: 14px;
+
+            .on-hero-1-brand-marquee {
+                order: 2;
+                flex: 0 0 100%;
+                width: 100%;
+            }
+
+            .on-hero-1-brand-logo {
+                margin-right: 40px;
+            }
+
+            .on-hero-1-brand-author {
+                order: 1;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media #{$xs} {
+            padding: 14px;
+
+            .on-hero-1-brand-author {
+                gap: 10px;
+
+                .text-elm {
+                    font-size: 14px;
+                    line-height: 20px;
+                    width: auto;
+                    max-width: 120px;
+                }
+
+                .author-img > * {
+                    width: 40px;
+                    height: 40px;
+
+                    & + * {
+                        margin-left: -12px;
+                    }
+                }
+
+                .add-elm {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+/*
+    hero-1-end
+*/

@@ -1,0 +1,174 @@
+/* 
+    button-start
+*/
+.ot-offcanvas-btn-1 {
+    background: transparent;
+    color: #FFE900;
+    padding: 0;
+    font-size: 30px;
+}
+
+.on-pr-btn-1 {
+    /*
+        hover palette — every place this pill is re-coloured can flip these four
+        rather than restate the whole animation
+    */
+    --on-btn-flood: var(--on-clr-h-1);
+    --on-btn-hover-clr: #fff;
+    --on-btn-disc: var(--on-clr-pr-1);
+    --on-btn-disc-clr: var(--on-clr-h-1);
+
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    font-family: var(--on-font-2);
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--on-clr-pr-1);
+    border-radius: 100px;
+    padding: 8px;
+    padding-right: 24px;
+    transition: color .4s ease;
+
+    /*
+        the flood grows out of the disc itself rather than wiping across, so the
+        mark reads as the origin of the colour
+    */
+    &::after {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        z-index: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--on-btn-flood);
+        transform: translateY(-50%) scale(0);
+        transition: transform .55s cubic-bezier(.62, .05, .01, .99);
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    .icon,
+    .text {
+        position: relative;
+        z-index: 1;
+    }
+
+    .icon {
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: 100%;
+        overflow: hidden;
+        transition: background-color .4s ease, color .4s ease;
+
+        i {
+            transition: transform .45s cubic-bezier(.62, .05, .01, .99);
+        }
+
+        /*
+            a second mark parked off to the left — the pair slide together so
+            the arrow leaves and arrives instead of snapping back. The box spans
+            the whole disc, so it has to centre its own glyph or the arrow lands
+            against the left edge instead of the middle
+        */
+        &::after {
+            content: "\f102";
+            font-family: flaticon_optivanox;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            line-height: 1;
+            text-align: center;
+            transform: translate(-120%, -50%);
+            transition: transform .45s cubic-bezier(.62, .05, .01, .99);
+        }
+    }
+
+    /*
+        doubled class on purpose. The sections that recolour this pill (header,
+        hero, price, testimonial) are single-class rules that land later in the
+        cascade, so a plain :hover ties with them on weight and loses — the
+        label and the disc would hold their resting colour through the whole
+        animation. This outranks them without touching each section.
+    */
+    &#{&}:hover {
+        color: var(--on-btn-hover-clr);
+        /* the flood starts at the disc, so the label is covered late — hold the
+           colour back until it actually arrives, or the text flashes */
+        transition: color .3s ease .18s;
+
+        &::after {
+            transform: translateY(-50%) scale(11);
+        }
+
+        .icon {
+            background: var(--on-btn-disc);
+            color: var(--on-btn-disc-clr);
+
+            i {
+                transform: translateX(220%);
+            }
+
+            &::after {
+                transform: translate(0, -50%);
+            }
+        }
+    }
+
+    /* deep green pill for use on light panels */
+    &:is(.has-v2) {
+        --on-btn-flood: var(--on-clr-pr-1);
+        --on-btn-hover-clr: var(--on-clr-h-1);
+        --on-btn-disc: var(--on-clr-h-1);
+        --on-btn-disc-clr: var(--on-clr-pr-1);
+
+        background-color: var(--on-clr-h-1);
+        color: #fff;
+
+        .icon {
+            background: #016c6e;
+            color: #fff;
+        }
+    }
+}
+
+/* same lime pill, but the mark trails the label in a dark disc */
+.on-pr-btn-2 {
+    font-family: var(--on-font-2);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--on-clr-h-1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--on-clr-pr-1);
+    border-radius: 100px;
+    padding: 8px;
+    padding-left: 20px;
+
+    .icon {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--on-clr-h-1);
+        color: var(--on-clr-pr-1);
+        border-radius: 100%;
+        font-size: 14px;
+    }
+}
+
+/*
+    button-end
+*/

@@ -1,0 +1,579 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    faqs-1-start
+*/
+.on-faqs-1 {
+    /*
+        the figure stands 137px proud of the band, so this one section is not
+        clipped — every other layer is pinned inside it instead
+    */
+    &-area {
+        position: relative;
+        z-index: 1;
+        padding: 113px 0 80px;
+
+
+        @media #{$over,$xxxl} {
+            margin-top: 120px;
+        }
+
+        @media #{$xl,$lg} {
+            padding: 90px 0 70px;
+        }
+
+        @media #{$md} {
+            padding: 80px 0 70px;
+        }
+
+        @media #{$xs} {
+            padding: 60px 0 50px;
+        }
+    }
+
+    &-container {
+        max-width: 1790px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    &-bg {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        z-index: -3;
+        bottom: 0;
+        height: 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-bg-right {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -2;
+        width: 917px;
+        max-width: 55%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-dot {
+        position: absolute;
+        left: 40.6%;
+        top: 69px;
+        z-index: -1;
+        width: 547px;
+
+        @media #{$xxl} {
+            width: 470px;
+        }
+
+        @media #{$xl} {
+            width: 400px;
+        }
+
+        @media #{$lg} {
+            width: 340px;
+        }
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-main-img {
+        position: absolute;
+        left: 39.9%;
+        bottom: 0;
+        z-index: 1;
+        max-width: 32%;
+
+
+        @media #{$xxxl} {
+            width: 540px;
+            top: -110px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+        }
+
+        @media #{$xxl} {
+            width: 470px;
+            top: -95px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+        }
+
+        @media #{$xl} {
+            left: 44%;
+            width: 400px;
+            top: -80px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+        }
+
+        @media #{$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-wrap {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 40px;
+
+        @media #{$md,$xs} {
+            display: block;
+        }
+    }
+
+    /*
+        left
+    */
+    &-left {
+        position: relative;
+        flex: 0 0 656px;
+        width: 656px;
+
+        @media #{$xxxl} {
+            flex-basis: 600px;
+            width: 600px;
+        }
+
+        @media #{$xxl} {
+            flex-basis: 540px;
+            width: 540px;
+        }
+
+        @media #{$xl} {
+            flex-basis: 480px;
+            width: 480px;
+        }
+
+        @media #{$lg} {
+            flex: 0 0 56%;
+            width: 56%;
+        }
+
+        @media #{$md,$xs} {
+            width: 100%;
+        }
+    }
+
+    /* the oversized word sits behind the stack as a watermark */
+    &-big-title {
+        position: absolute;
+        left: 0;
+        top: -80px;
+        z-index: -1;
+        font-family: var(--on-font-2);
+        font-size: 160px;
+        font-weight: 700;
+        line-height: 117px;
+        color: var(--on-clr-h-1);
+        opacity: .08;
+        margin-bottom: 0;
+        pointer-events: none;
+
+        /*
+            wow hands this the reveal on scroll. The word rests at 8%, so the
+            last keyframe has to land there — fill-mode holds whatever it ends on
+        */
+        &:is(.riseIn2) {
+            animation-name: on-faqs-1-title-in;
+            animation-duration: 1200ms;
+            animation-timing-function: cubic-bezier(.62, .05, .01, .99);
+            animation-fill-mode: both;
+        }
+
+        @media #{$xxl} {
+            font-size: 130px;
+            line-height: 96px;
+            top: -66px;
+        }
+
+        @media #{$xl} {
+            font-size: 110px;
+            line-height: 82px;
+            top: -56px;
+        }
+
+        @media #{$lg} {
+            font-size: 90px;
+            line-height: 68px;
+            top: -46px;
+        }
+
+        @media #{$md} {
+            font-size: 80px;
+            line-height: 60px;
+            top: -40px;
+        }
+
+        @media #{$xs} {
+            font-size: 56px;
+            line-height: 42px;
+            top: -28px;
+        }
+    }
+
+    /*
+        the stack is held at the height of "one pane open", so opening or
+        closing never resizes the section — the bg and the figure are pinned to
+        the section box, and they used to slide every time an answer moved
+    */
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-height: 516px;
+
+        @media #{$xl,$lg} {
+            min-height: 560px;
+        }
+
+        @media #{$md,$xs} {
+            min-height: 0;
+        }
+    }
+
+    &-item {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 0 30px;
+        transition: background-color .4s ease;
+
+        @media #{$xs} {
+            padding: 0 20px;
+        }
+
+        .head-elm {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 26px 0;
+            cursor: pointer;
+        }
+
+        .title-elm {
+            font-family: var(--on-font-2);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 28px;
+            color: var(--on-clr-h-1);
+            margin-bottom: 0;
+            transition: color .4s ease;
+
+            @media #{$xl,$lg} {
+                font-size: 18px;
+            }
+
+            @media #{$xs} {
+                font-size: 17px;
+                line-height: 26px;
+            }
+        }
+
+        /* the twin chevrons flip up once the answer is out */
+        .icon-elm {
+            flex: 0 0 auto;
+            width: 16px;
+            height: 16px;
+            color: var(--on-clr-h-1);
+            opacity: .32;
+            transition: var(--on-cube-1);
+
+            svg {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        /*
+            a 0fr/1fr row animates the real height. max-height had to guess a
+            ceiling, so the open ran out early and the close sat still before
+            dropping — that stutter is what the images were echoing
+        */
+        .body-elm {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows .4s ease;
+
+            > * {
+                overflow: hidden;
+            }
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            color: rgb(255 255 255 / 80%);
+            margin-bottom: 0;
+            /* sits inside the clipped row, so it grows with it */
+            padding-bottom: 16px;
+
+            @media #{$xl,$lg} {
+                font-size: 16px;
+                line-height: 26px;
+            }
+
+            @media #{$xs} {
+                font-size: 16px;
+                line-height: 26px;
+            }
+        }
+
+        &:is(.active) {
+            background-color: var(--on-clr-h-1);
+
+            .title-elm {
+                font-weight: 600;
+                color: #fff;
+            }
+
+            .icon-elm {
+                color: var(--on-clr-pr-1);
+                opacity: 1;
+                transform: rotate(180deg);
+            }
+
+            .body-elm {
+                grid-template-rows: 1fr;
+            }
+        }
+    }
+
+    /*
+        quote
+    */
+    &-quote {
+        flex: 0 0 404px;
+        width: 404px;
+        margin-top: 77px;
+        margin-right: 27px;
+
+        .icon-elm {
+            display: block;
+            width: 42px;
+            margin-bottom: 34px;
+
+            svg {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .text-elm {
+            font-family: var(--on-font-2);
+            font-size: 22px;
+            font-weight: 500;
+            font-style: italic;
+            line-height: 32px;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        /* the lime thread that drops from the quote to the byline */
+        .line-elm {
+            position: relative;
+            display: block;
+            width: 1.5px;
+            height: 66px;
+            margin-left: 50px;
+            background: linear-gradient(to bottom,
+                    rgb(190 255 107 / 0%),
+                    var(--on-clr-pr-1));
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                transform: translateX(-50%);
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 6px solid var(--on-clr-pr-1);
+            }
+
+            /*
+                drawn top down by a clip rather than scaled — scaling would take
+                the arrow head with it and squash it flat on the way
+            */
+            &:is(.drawDown2) {
+                animation-name: on-faqs-1-line-draw;
+                animation-duration: 900ms;
+                animation-timing-function: cubic-bezier(.62, .05, .01, .99);
+                animation-fill-mode: both;
+            }
+        }
+
+        .author-elm {
+            width: 275px;
+            max-width: 100%;
+            padding: 14px 18px;
+            border-radius: 7px;
+            background-color: rgb(255 255 255 / 10%);
+        }
+
+        .name-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 26px;
+            letter-spacing: -.01em;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .role-elm {
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: -.01em;
+            color: rgb(255 255 255 / 68%);
+            margin-bottom: 0;
+        }
+
+        @media #{$xxxl} {
+            flex-basis: 380px;
+            width: 380px;
+        }
+
+        @media #{$xxl} {
+            flex-basis: 340px;
+            width: 340px;
+            margin-right: 0;
+            margin-top: 60px;
+        }
+
+        @media #{$xl} {
+            flex-basis: 300px;
+            width: 300px;
+            margin-right: 0;
+            margin-top: 50px;
+
+            .text-elm {
+                font-size: 19px;
+                line-height: 29px;
+            }
+        }
+
+        @media #{$lg} {
+            flex: 0 0 38%;
+            width: 38%;
+            margin-right: 0;
+            margin-top: 40px;
+
+            .icon-elm {
+                margin-bottom: 24px;
+            }
+
+            .text-elm {
+                font-size: 18px;
+                line-height: 28px;
+            }
+
+            .line-elm {
+                height: 48px;
+            }
+        }
+
+        /*
+            off the teal panel now, so the block carries its own ground or the
+            white type has nothing to sit on
+        */
+        @media #{$md,$xs} {
+            width: 100%;
+            margin: 40px 0 0;
+            padding: 32px 28px;
+            border-radius: 12px;
+            background-color: var(--on-clr-h-1);
+
+            .icon-elm {
+                margin-bottom: 22px;
+            }
+
+            .text-elm {
+                font-size: 19px;
+                line-height: 30px;
+            }
+
+            .line-elm {
+                height: 44px;
+            }
+
+            .author-elm {
+                background-color: rgb(255 255 255 / 12%);
+            }
+        }
+
+        @media #{$xs} {
+            margin-top: 32px;
+            padding: 24px 20px;
+
+            .text-elm {
+                font-size: 17px;
+                line-height: 28px;
+            }
+
+            .name-elm {
+                font-size: 17px;
+            }
+
+            .role-elm {
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+@keyframes on-faqs-1-line-draw {
+    0% {
+        clip-path: inset(0 0 100% 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes on-faqs-1-title-in {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: .08;
+        transform: translateY(0);
+    }
+}
+
+/*
+    faqs-1-end
+*/

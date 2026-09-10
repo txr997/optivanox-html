@@ -1,0 +1,269 @@
+@use '../abstracts/variables' as *;
+
+/*
+    price-1-start
+*/
+.on-price-1 {
+    &-sec-title {
+        max-width: 706px;
+        margin-left: auto;
+        margin-right: auto;
+
+        .sec-disc {
+            margin-top: 22px;
+        }
+    }
+
+    &-wrap {
+        max-width: 1344px;
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+
+        @media #{$md} {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* the plate is the frame; the white body sits inside its 4px lip */
+    &-card {
+        background-color: #eaf0ee;
+        border-radius: 20px;
+        padding: 4px;
+        transition: var(--on-cube-1);
+
+        .title-x-number {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-between;
+            padding: 20px 28px;
+        }
+
+        .title {
+            font-size: 26px;
+            transition: var(--on-cube-1);
+
+            @media #{$xl,$lg,$md,$xs} {
+                font-size: 22px;
+            }
+        }
+
+        .hr-line {
+            background: #d3ddda;
+            height: 1px;
+            width: 100%;
+            transition: var(--on-cube-1);
+        }
+
+        .number {
+            color: var(--on-clr-h-1);
+            font-style: italic;
+            transition: var(--on-cube-1);
+        }
+
+        .card-bd {
+            border-radius: 18px;
+            background-color: #fff;
+            padding: 24px;
+
+            @media #{$xl,$lg,$md,$xs} {
+                padding: 24px 17px;
+            }
+        }
+
+        .price {
+            font-size: 56px;
+            line-height: 1;
+            margin-bottom: 18px;
+
+            @media #{$xl,$lg,$md,$xs} {
+                font-size: 40px;
+            }
+
+            span {
+                font-size: 18px;
+                opacity: 72%;
+                font-weight: 400;
+            }
+        }
+
+        .disc {
+            margin-bottom: 20px;
+        }
+
+        /*
+            full-width block button — the source project drove this off a ::after
+            wipe that has no counterpart here, so it is a plain color swap
+        */
+        .card-btn {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--on-font-2);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--on-clr-h-1);
+            background-color: #eaf0ee;
+            border-radius: 100px;
+            padding: 16px 10px;
+            margin-bottom: 28px;
+            transition: var(--on-cube-1);
+
+            &:hover {
+                background-color: var(--on-clr-h-1);
+                color: #fff;
+            }
+        }
+
+        .subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            opacity: 32%;
+            margin-bottom: 18px;
+        }
+
+        .price-list {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+
+            li {
+                color: var(--on-clr-h-1);
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+
+                i {
+                    font-size: 20px;
+                    opacity: 52%;
+                }
+            }
+        }
+
+        /* the plate under the pointer — wa_hover_class_toggle moves this along */
+        &:is(.active) {
+            background-color: var(--on-clr-h-1);
+
+            .title {
+                color: #fff;
+            }
+
+            .number {
+                color: var(--on-clr-pr-1);
+            }
+
+            .hr-line {
+                opacity: 50%;
+            }
+
+            .card-btn {
+                background-color: var(--on-clr-h-1);
+                color: #fff;
+            }
+        }
+    }
+
+    &-content {
+        position: relative;
+        border-radius: 20px;
+        padding: 4px;
+        padding-right: 20px;
+        border: 4px solid #eaf0ee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        flex-wrap: wrap;
+        overflow: hidden;
+        max-width: 1344px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 16px;
+
+        @media #{$xs} {
+            padding: 12px;
+            gap: 20px;
+        }
+
+        /* decorative watermark, so it sits under the copy and drops out first */
+        .support-icon {
+            position: absolute;
+            top: 50%;
+            left: 63%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+
+            @media #{$md,$xs} {
+                display: none;
+            }
+        }
+
+        .btn-wrap {
+            position: relative;
+        }
+
+        .on-pr-btn-1 {
+            background: #EBF0F0;
+
+            .icon {
+                background-color: var(--on-clr-h-1);
+                color: #fff;
+            }
+        }
+    }
+
+    &-support {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+
+        @media #{$xs} {
+            gap: 16px;
+        }
+
+        .img-elm {
+            flex: 0 0 auto;
+            width: 76px;
+            height: 76px;
+            border-radius: 15px;
+        }
+
+        .title {
+            font-size: 22px;
+            margin-bottom: 6px;
+
+            @media #{$xs} {
+                font-size: 18px;
+            }
+
+            a {
+                color: #016c6e;
+                font-style: italic;
+                transition: var(--on-cube-1);
+
+                &:hover {
+                    color: var(--on-clr-h-1);
+                }
+            }
+        }
+
+        .disc {
+            font-size: 16px;
+        }
+
+
+    }
+}
+/*
+    price-1-end
+*/
+

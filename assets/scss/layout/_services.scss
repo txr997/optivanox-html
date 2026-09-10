@@ -1,0 +1,626 @@
+@use '../abstracts/variables' as *;
+
+
+/*
+    services-1-start
+*/
+.on-services-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #fff;
+
+    }
+
+    &-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        mix-blend-mode: luminosity;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-sec-title {
+        max-width: 758px;
+        margin: 0 auto 40px;
+        text-align: center;
+
+        @media #{$md} {
+            margin-bottom: 34px;
+        }
+
+        @media #{$xs} {
+            margin-bottom: 28px;
+        }
+    }
+
+    /*
+        the rows share one fixed column, so the open row can take the height the
+        two closed ones give up — a grow tween rather than a height jump
+    */
+    &-list {
+        display: flex;
+        flex-direction: column;
+        max-width: 1132px;
+        height: 796px;
+        margin: 0 auto;
+
+        @media #{$lg} {
+            height: 740px;
+        }
+
+        @media #{$md,$xs} {
+            height: auto;
+        }
+    }
+
+    &-item {
+        position: relative;
+        z-index: 1;
+        flex: 0 0 168px;
+        flex-grow: 0;
+        border-radius: 24px;
+        overflow: hidden;
+        cursor: pointer;
+        background-color: #e6ecec;
+        transition: flex-grow .5s cubic-bezier(.4, 0, .2, 1),
+                    background-color .4s ease;
+
+        /* the closed plates alternate a shade, whichever pair is closed */
+        &:nth-child(even) {
+            background-color: #ccd8d8;
+        }
+
+        /*
+            desaturated behind the closed rows, full colour once the row opens;
+            the mask lets it dissolve into the plate instead of butting up to it
+        */
+        .img-elm {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 44%;
+            height: 100%;
+            mix-blend-mode: luminosity;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        /* tilted gradient plate with the mark riding on it */
+        .icon-elm {
+            position: absolute;
+            left: 29px;
+            top: 50%;
+            z-index: 3;
+            width: 96px;
+            height: 126px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* closed plates lean the other way; opening flips the tilt */
+            transform: translateY(-50%) rotate(-5deg);
+            transition: width .4s ease, height .4s ease;
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 20px;
+                background: linear-gradient(180deg, #beff6b, #023d3f);
+                opacity: .4;
+                transition: opacity .4s ease;
+            }
+
+            i {
+                position: relative;
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                background-color: var(--on-clr-h-1);
+                color: var(--on-clr-pr-1);
+                font-size: 32px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                transition: width .4s ease, height .4s ease, font-size .4s ease;
+            }
+        }
+
+        .title-elm {
+            position: absolute;
+            left: 170px;
+            top: 50%;
+            z-index: 2;
+            transform: translateY(-50%);
+            font-family: var(--on-font-2);
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 36px;
+            color: var(--on-clr-h-1);
+            margin-bottom: 0;
+            transition: color .4s ease;
+        }
+
+        /*
+            the white panel is out of flow, so a closed row never pays for the
+            copy folded up inside it
+        */
+        .body-elm {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 2;
+            width: 65%;
+            height: 314px;
+            padding: 66px 32px 32px;
+            border-radius: 24px;
+            background-color: #fff;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .25s ease, visibility 0s .25s;
+
+            /* the two blurred pools the design floats under the copy */
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                border-radius: 50%;
+                opacity: .4;
+                filter: blur(52px);
+            }
+
+            &::before {
+                left: -97px;
+                top: 45px;
+                width: 199px;
+                height: 482px;
+                background-color: #06595b;
+            }
+
+            &::after {
+                left: 82%;
+                top: 80%;
+                width: 199px;
+                height: 209px;
+                background-color: var(--on-clr-pr-1);
+            }
+        }
+
+        &-text {
+            position: relative;
+            z-index: 1;
+            max-width: 672px;
+            margin-bottom: 24px;
+        }
+
+        &-list {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-family: var(--on-font-1);
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 28px;
+                color: var(--on-clr-h-1);
+            }
+
+            .check-elm {
+                flex: 0 0 auto;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background-color: rgb(255 255 255 / 72%);
+                color: var(--on-clr-h-1);
+                font-size: 12px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .on-pr-btn-2 {
+            position: absolute;
+            right: 32px;
+            bottom: 32px;
+            z-index: 2;
+            transition: background-color .4s ease;
+
+            /* the pill alone lights up — the label and the mark stay put */
+            &:hover {
+                background-color: #fff;
+            }
+        }
+
+        /* open row */
+        &:is(.active) {
+            flex-grow: 1;
+            background-color: var(--on-clr-h-1);
+
+            .img-elm {
+                width: 50%;
+                mix-blend-mode: normal;
+            }
+
+            .icon-elm {
+                top: 25px;
+                width: 120px;
+                height: 158px;
+                transform: rotate(5deg);
+
+                &::before {
+                    opacity: 1;
+                }
+
+                i {
+                    width: 84px;
+                    height: 84px;
+                    font-size: 48px;
+                }
+            }
+
+            .title-elm {
+                left: 195px;
+                top: 54px;
+                transform: none;
+                font-size: 36px;
+                font-weight: 600;
+                line-height: 44px;
+                color: #fff;
+            }
+
+            /* held back until the row has finished opening */
+            .body-elm {
+                opacity: 1;
+                visibility: visible;
+                transition: opacity .3s ease .35s, visibility 0s 0s;
+            }
+        }
+
+        @media #{$xl} {
+            flex-basis: 160px;
+
+            .icon-elm {
+                left: 24px;
+                width: 88px;
+                height: 116px;
+
+                i {
+                    width: 58px;
+                    height: 58px;
+                    font-size: 28px;
+                }
+            }
+
+            .title-elm {
+                left: 148px;
+                font-size: 28px;
+                line-height: 34px;
+            }
+
+            .body-elm {
+                height: 300px;
+                padding: 58px 28px 28px;
+            }
+
+            &:is(.active) {
+                .icon-elm {
+                    width: 108px;
+                    height: 142px;
+
+                    i {
+                        width: 76px;
+                        height: 76px;
+                        font-size: 42px;
+                    }
+                }
+
+                .title-elm {
+                    left: 168px;
+                    top: 48px;
+                    font-size: 32px;
+                    line-height: 40px;
+                }
+            }
+        }
+
+        @media #{$lg} {
+            flex-basis: 150px;
+
+            .icon-elm {
+                left: 20px;
+                width: 78px;
+                height: 102px;
+
+                i {
+                    width: 52px;
+                    height: 52px;
+                    font-size: 26px;
+                }
+            }
+
+            .title-elm {
+                left: 122px;
+                font-size: 26px;
+                line-height: 32px;
+            }
+
+            .body-elm {
+                width: 72%;
+                height: 290px;
+                padding: 52px 24px 24px;
+            }
+
+            &-text {
+                font-size: 17px;
+                margin-bottom: 20px;
+            }
+
+            &-list li {
+                font-size: 17px;
+            }
+
+            .on-pr-btn-2 {
+                right: 24px;
+                bottom: 24px;
+            }
+
+            &:is(.active) {
+                .icon-elm {
+                    top: 20px;
+                    width: 96px;
+                    height: 126px;
+
+                    i {
+                        width: 66px;
+                        height: 66px;
+                        font-size: 36px;
+                    }
+                }
+
+                .title-elm {
+                    left: 140px;
+                    top: 40px;
+                    font-size: 30px;
+                    line-height: 38px;
+                }
+            }
+        }
+
+        /*
+            no room for the photo beside the copy — the open row unstacks into
+            a band, a heading and a full-width panel
+        */
+        @media #{$md,$xs} {
+            flex: none;
+            min-height: 130px;
+
+            .icon-elm {
+                left: 20px;
+                width: 70px;
+                height: 92px;
+
+                i {
+                    width: 48px;
+                    height: 48px;
+                    font-size: 24px;
+                }
+            }
+
+            .title-elm {
+                left: 110px;
+                right: 20px;
+                font-size: 24px;
+                line-height: 30px;
+            }
+
+            .img-elm {
+                width: 40%;
+            }
+
+            &:is(.active) {
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+
+                .img-elm {
+                    position: relative;
+                    right: auto;
+                    width: 100%;
+                    height: 200px;
+                    -webkit-mask-image: none;
+                    mask-image: none;
+                }
+
+                .icon-elm {
+                    position: absolute;
+                    left: 20px;
+                    top: 232px;
+                    width: 84px;
+                    height: 110px;
+
+                    i {
+                        width: 58px;
+                        height: 58px;
+                        font-size: 30px;
+                    }
+                }
+
+                .title-elm {
+                    position: relative;
+                    left: auto;
+                    right: auto;
+                    top: auto;
+                    padding: 32px 24px 28px 120px;
+                    font-size: 26px;
+                    line-height: 34px;
+                }
+
+                .body-elm {
+                    position: relative;
+                    bottom: auto;
+                    width: 100%;
+                    height: auto;
+                    padding: 28px 24px;
+                }
+
+                .on-pr-btn-2 {
+                    position: relative;
+                    right: auto;
+                    bottom: auto;
+                    margin-top: 24px;
+                }
+            }
+        }
+
+        @media #{$xs} {
+            min-height: 110px;
+            border-radius: 16px;
+
+            .icon-elm {
+                left: 14px;
+                width: 56px;
+                height: 74px;
+
+                i {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 20px;
+                }
+            }
+
+            .title-elm {
+                left: 82px;
+                right: 14px;
+                font-size: 20px;
+                line-height: 26px;
+            }
+
+            .img-elm {
+                width: 38%;
+            }
+
+            &-text {
+                font-size: 16px;
+                margin-bottom: 18px;
+            }
+
+            &-list {
+                gap: 10px;
+
+                li {
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+            }
+
+            &:is(.active) {
+                .img-elm {
+                    height: 160px;
+                }
+
+                .icon-elm {
+                    top: 186px;
+                    left: 14px;
+                    width: 68px;
+                    height: 90px;
+
+                    i {
+                        width: 46px;
+                        height: 46px;
+                        font-size: 24px;
+                    }
+                }
+
+                .title-elm {
+                    padding: 26px 20px 22px 96px;
+                    font-size: 22px;
+                    line-height: 30px;
+                }
+
+                .body-elm {
+                    padding: 24px 20px;
+                    border-radius: 16px;
+                }
+            }
+        }
+    }
+
+    /*
+        all-btn
+    */
+    &-all-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+
+        .link-elm {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--on-font-2);
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 28px;
+            color: #024748;
+            text-decoration: underline;
+            transition: var(--on-cube-1);
+
+            i {
+                font-size: 14px;
+                transition: var(--on-cube-1);
+            }
+
+            &:hover {
+                text-decoration: none;
+                i {
+                    transform: rotate(45deg);
+                }
+            }
+        }
+
+        @media #{$md} {
+            margin-top: 28px;
+        }
+
+        @media #{$xs} {
+            gap: 8px;
+            margin-top: 24px;
+            text-align: center;
+
+            .text-elm {
+                font-size: 16px;
+            }
+
+            .link-elm {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+/*
+    services-1-end
+*/

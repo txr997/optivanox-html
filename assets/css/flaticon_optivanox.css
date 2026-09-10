@@ -1,0 +1,115 @@
+
+@font-face {
+    font-family: "flaticon_optivanox";
+    src: url("../fonts/flaticon_optivanox.woff2?ac75d557c630ee041aa75c29799b5617") format("woff2"),
+url("../fonts/flaticon_optivanox.woff?ac75d557c630ee041aa75c29799b5617") format("woff"),
+url("../fonts/flaticon_optivanox.eot?ac75d557c630ee041aa75c29799b5617#iefix") format("embedded-opentype"),
+url("../fonts/flaticon_optivanox.ttf?ac75d557c630ee041aa75c29799b5617") format("truetype"),
+url("../fonts/flaticon_optivanox.svg?ac75d557c630ee041aa75c29799b5617#flaticon_optivanox") format("svg")
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_optivanox !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-medal:before {
+    content: "\f101";
+}
+.flaticon-arrow:before {
+    content: "\f102";
+}
+.flaticon-telephone:before {
+    content: "\f103";
+}
+.flaticon-check-mark:before {
+    content: "\f104";
+}
+.flaticon-infrastructure:before {
+    content: "\f105";
+}
+.flaticon-laptop:before {
+    content: "\f106";
+}
+.flaticon-maintenance:before {
+    content: "\f107";
+}
+.flaticon-customer-service:before {
+    content: "\f108";
+}
+.flaticon-right:before {
+    content: "\f109";
+}
+.flaticon-effectiveness:before {
+    content: "\f10a";
+}
+.flaticon-light-bulb:before {
+    content: "\f10b";
+}
+.flaticon-ideas:before {
+    content: "\f10c";
+}
+.flaticon-add:before {
+    content: "\f10d";
+}
+.flaticon-right-arrow:before {
+    content: "\f10e";
+}
+.flaticon-strategic:before {
+    content: "\f10f";
+}
+.flaticon-hrm:before {
+    content: "\f110";
+}
+.flaticon-human-resource:before {
+    content: "\f111";
+}
+.flaticon-market-insights:before {
+    content: "\f112";
+}
+.flaticon-up-right-arrow:before {
+    content: "\f113";
+}
+.flaticon-arrow-upper-right:before {
+    content: "\f114";
+}
+.flaticon-strategy:before {
+    content: "\f115";
+}
+.flaticon-group:before {
+    content: "\f116";
+}
+.flaticon-growth:before {
+    content: "\f117";
+}
+.flaticon-pin:before {
+    content: "\f118";
+}
+.flaticon-send:before {
+    content: "\f119";
+}
+.flaticon-send-1:before {
+    content: "\f11a";
+}
+.flaticon-money-bag:before {
+    content: "\f11b";
+}
+.flaticon-people:before {
+    content: "\f11c";
+}
+.flaticon-market-research:before {
+    content: "\f11d";
+}
+.flaticon-star:before {
+    content: "\f11e";
+}
+.flaticon-up-arrow:before {
+    content: "\f11f";
+}
+
