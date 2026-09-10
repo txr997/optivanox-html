@@ -332,8 +332,13 @@
             line-height: 28px;
             color: rgb(255 255 255 / 80%);
             margin-bottom: 0;
-            /* sits inside the clipped row, so it grows with it */
-            padding-bottom: 16px;
+            /*
+                a border-box is never shorter than its own padding, so parking
+                the 16px here left every closed row standing 16px tall. It is
+                dealt in with the row instead
+            */
+            padding-bottom: 0;
+            transition: padding-bottom .4s ease;
 
             @media #{$xl,$lg} {
                 font-size: 16px;
@@ -362,6 +367,10 @@
 
             .body-elm {
                 grid-template-rows: 1fr;
+            }
+
+            .text-elm {
+                padding-bottom: 16px;
             }
         }
     }
@@ -411,12 +420,12 @@
             &::after {
                 content: "";
                 position: absolute;
-                left: 50%;
+                left: -4px;
                 bottom: 0;
-                transform: translateX(-50%);
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 6px solid var(--on-clr-pr-1);
+                width: 10px;
+                height: 10px;
+                background-color: var(--on-clr-pr-1);
+                clip-path: polygon(100% 0%, 50% 100%, 0% 0%);
             }
 
             /*

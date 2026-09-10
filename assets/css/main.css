@@ -5909,8 +5909,13 @@ body:has(.on-preloader-1:not(.loaded)) {
   line-height: 28px;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 0;
-  /* sits inside the clipped row, so it grows with it */
-  padding-bottom: 16px;
+  /*
+      a border-box is never shorter than its own padding, so parking
+      the 16px here left every closed row standing 16px tall. It is
+      dealt in with the row instead
+  */
+  padding-bottom: 0;
+  transition: padding-bottom 0.4s ease;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
   .on-faqs-1-item .text-elm {
@@ -5938,6 +5943,9 @@ body:has(.on-preloader-1:not(.loaded)) {
 }
 .on-faqs-1-item:is(.active) .body-elm {
   grid-template-rows: 1fr;
+}
+.on-faqs-1-item:is(.active) .text-elm {
+  padding-bottom: 16px;
 }
 .on-faqs-1 {
   /*
@@ -5983,12 +5991,12 @@ body:has(.on-preloader-1:not(.loaded)) {
 .on-faqs-1-quote .line-elm::after {
   content: "";
   position: absolute;
-  left: 50%;
+  left: -4px;
   bottom: 0;
-  transform: translateX(-50%);
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 6px solid var(--on-clr-pr-1);
+  width: 10px;
+  height: 10px;
+  background-color: var(--on-clr-pr-1);
+  clip-path: polygon(100% 0%, 50% 100%, 0% 0%);
 }
 .on-faqs-1-quote .line-elm {
   /*
