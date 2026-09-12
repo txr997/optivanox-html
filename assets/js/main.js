@@ -405,4 +405,68 @@ if ($(".on-projects-1-area").length) {
 	});
 }
 
+// services-2-scroll-animation
+if ($(".on-services-2-area").length) {
+	gsap.matchMedia().add("(min-width: 1400px)", function () {
+		var on_services2_wrap = document.querySelector(".on-services-2-wrap");
+		var on_services2_cards = gsap.utils.toArray(".on-services-2-card");
+
+
+		var on_services2_fan = [
+			{ rotate: 0, dx: 0, dy: 0 },
+			{ rotate: 11, dx: .100, dy: .100 },
+			{ rotate: 22, dx: .100, dy: .220 },
+			{ rotate: 36, dx: .107, dy: .377 },
+		];
+
+
+		function on_services2_stack() {
+			var midX = on_services2_wrap.offsetWidth / 2;
+			var midY = on_services2_wrap.offsetHeight / 2;
+
+			gsap.set(on_services2_cards, {
+				x: function (index, card) {
+					return midX - (card.offsetLeft + card.offsetWidth / 2) + card.offsetWidth * on_services2_fan[index].dx;
+				},
+				y: function (index, card) {
+					return midY - (card.offsetTop + card.offsetHeight / 2) + card.offsetHeight * on_services2_fan[index].dy;
+				},
+				rotate: function (index) {
+					return on_services2_fan[index].rotate;
+				},
+				zIndex: function (index) {
+					return on_services2_cards.length - index;
+				},
+			});
+		}
+
+		on_services2_stack();
+
+		var on_services2_tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: ".on-services-2-trigger-height",
+				start: "top top",
+				end: "bottom bottom",
+				scrub: 1,
+				invalidateOnRefresh: true,
+				onRefresh: on_services2_stack,
+				markers: false,
+			}
+		});
+
+
+		on_services2_tl.to(on_services2_cards, {
+			x: 0,
+			y: 0,
+			rotate: 0,
+			ease: "none",
+			stagger: .2,
+		});
+
+		return function () {
+			gsap.set(on_services2_cards, { clearProps: "all" });
+		};
+	});
+}
+
 })(jQuery);
