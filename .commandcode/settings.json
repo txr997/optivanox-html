@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(cmdc:*)",
+      "Shell(npx -y figma-ui-mcp)",
+      "mcp__figma__figma_status",
+      "mcp__figma__figma_read",
+      "Shell(agent-browser:*)",
+      "Shell(node -e \"const s=require('fs').readFileSync('assets/scss/layout/_about.scss','utf8');let o=(s.match(/{/g)||[]).length,c=(s.match(/}/g)||[]).length;console.log('open',o,'close',c)\")",
+      "Shell(node -e \"const s=require('fs').readFileSync('assets/scss/layout/_projects.scss','utf8');let o=(s.match(/{/g)||[]).length,c=(s.match(/}/g)||[]).length;console.log('scss open',o,'close',c)\")",
+      "Shell(node -e \"const s=require('fs').readFileSync('assets/js/main.js','utf8');let o=(s.match(/{/g)||[]).length,c=(s.match(/}/g)||[]).length;console.log('js open',o,'close',c)\")"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}

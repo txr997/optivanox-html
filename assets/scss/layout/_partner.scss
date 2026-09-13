@@ -1,0 +1,157 @@
+@use '../abstracts/variables' as *;
+
+/*
+    partner-2-start
+*/
+.on-partner-2 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: var(--on-clr-h-2);
+    }
+
+    /* faint handshake photo, luminosity-blended over the solid navy */
+    &-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            mix-blend-mode: luminosity;
+        }
+    }
+
+    &-wrap {
+        position: relative;
+        z-index: 2;
+    }
+
+    &-sec-title {
+        max-width: 490px;
+        margin-bottom: 60px;
+
+        .on-subtitle-2 {
+            color: #fff;
+        }
+
+        .on-sec-title-2 {
+            color: #fff;
+        }
+
+        @media #{$lg,$md,$xs} {
+            max-width: 100%;
+            margin-bottom: 40px;
+        }
+    }
+
+    /*
+        floats over the marquee below it — the wrap only carries the title's
+        own height, so the card (out of flow) overlaps the sibling marquee
+        without needing negative margins
+    */
+    &-card {
+        position: absolute;
+        top: 43%;
+        right: 0;
+        z-index: 3;
+        width: 354px;
+        min-height: 444px;
+        padding: 40px 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.09);
+        backdrop-filter: blur(94px);
+        border-radius: 20px;
+
+        .text-elm {
+            color: #fff;
+        }
+
+        .on-pr-btn-2 {
+            width: 100%;
+            justify-content: center;
+        }
+
+        @media #{$xl} {
+            width: 320px;
+        }
+
+        @media #{$lg,$md,$xs} {
+            position: static;
+            width: 100%;
+            min-height: unset;
+            margin-top: 40px;
+        }
+
+        @media #{$xs} {
+            padding: 32px 24px;
+        }
+    }
+
+    /* breaks out of the container to span the full section width */
+    &-marquee {
+        position: relative;
+        left: 50%;
+        width: 100vw;
+        margin-left: -50vw;
+        display: flex;
+        flex-direction: column;
+        margin-top: 74px;
+
+        @media #{$lg,$md,$xs} {
+            margin-top: 32px;
+        }
+    }
+
+    &-marquee-row {
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+
+        &:not(:first-child) {
+            margin-top: -1px;
+        }
+    }
+
+    &-logo {
+        &-wrap {
+            display: flex;
+        }
+    }
+    &-logo {
+        width: 264px;
+        height: 108px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: -1px;
+        border: 1px solid #363642;
+        vertical-align: top;
+        border-left: none;
+        img {
+            max-width: 136px;
+            max-height: 54px;
+            width: auto;
+            height: auto;
+            opacity: .5;
+            filter: brightness(0) invert(1);
+        }
+
+        @media #{$lg,$md,$xs} {
+            width: 180px;
+            height: 80px;
+
+            img {
+                max-width: 100px;
+                max-height: 40px;
+            }
+        }
+    }
+}
+/*
+    partner-2-end
+*/

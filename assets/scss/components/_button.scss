@@ -167,6 +167,15 @@
         border-radius: 100%;
         font-size: 14px;
     }
+
+    /* outline pill for use on dark, frosted panels */
+    &:is(.has-v2) {
+        background-color: transparent;
+        color: var(--on-clr-pr-2);
+        border: 1px solid var(--on-clr-pr-2);
+        border-radius: 8px;
+        padding: 14px 24px;
+    }
 }
 
 .on-pr-btn-3 {

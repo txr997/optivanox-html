@@ -1,0 +1,20 @@
+# Taste
+- Wants work delivered in a single pass: no verification loops, no check-in questions, no back-and-forth confirmations before finishing. Confidence: 0.9
+- Take measurements up front (once), then write all breakpoints correctly the first time rather than iterating. Confidence: 0.85
+- At most one render/screenshot per task as a sanity check. Confidence: 0.8
+- Prefers plain prose replies over structured question tools (e.g. AskUserQuestion) — interrupts them and re-asks in words. If something is broken, just report it in prose and retry. Confidence: 0.8
+- Builds pages section by section in page order, giving one Figma/design node plus the asset folder per request ("sob assets choose folder e ache"). Confidence: 0.85
+- Edit source SCSS partials only — never hand-edit the compiled CSS output. Confidence: 0.9
+- Do not run the Sass compiler/build manually; a file watcher compiles `main.scss` → `assets/css/main.css` on save. Confidence: 0.85
+- Match the surrounding code: naming, nesting depth, comment density and indentation. Confidence: 0.85
+- Use theme CSS custom properties (e.g. `var(--on-clr-pr-1)`) instead of hard-coded hex values, even when the literal colour is what currently renders. Confidence: 0.8
+- Prefers design tokens/variables in a shared place so values stay swappable later. Confidence: 0.7
+- Wants repeated UI patterns extracted into reusable shared classes (e.g. subtitle/section-title in `typography.scss`) instead of copy-pasted per section. Confidence: 0.75
+- Marks intent inline in the SCSS with comments and uses doubled-class specificity (`&#{&}:hover`) to beat section recolours rather than `!important`. Confidence: 0.6
+- Writes terse, one-line requests in Bengali/Banglish ("ay section ta koro", "abar try koro to", "var(--on-clr-pr-1) color koro") and expects the intent to be inferred without clarifying questions. Also pastes raw shell commands as messages (e.g. `cmdc mcp add playwright -- npx -y figma-ui-mcp`) expecting them run — and silently corrected if they're slightly wrong. Confidence: 0.9
+- Fixes tooling gaps at the root instead of accepting workarounds: when Figma designs weren't readable, chose to connect a Figma MCP server rather than fall back to screenshots. Confidence: 0.65
+- Uses the `figma-ui-mcp` npm package as the Figma bridge; MCP servers are added via `cmdc mcp add <name> -- npx -y <package>`. Confidence: 0.7
+- Prefers replies in Banglish — Bangla written in Latin/English letters, explicitly NOT Bangla script ("Bangla kotha Latin/English letter e likhbo, Bangla script e noy") — with technical terms, tool names and file paths left in English (e.g. "Figma MCP", `node 600-3479`). Confidence: 0.95
+- Expects short answers — roughly 2–4 lines with clickable file paths. Confidence: 0.85
+- Cares about visual fidelity to the design: reports "design perfect hoyni" / "animation thik ache kintu kaj kore na" and expects it actually fixed, not explained away. Confidence: 0.8
+- When their explicit choice conflicts with a stated trade-off, wants the choice implemented anyway, with the trade-off noted briefly at most. Confidence: 0.7

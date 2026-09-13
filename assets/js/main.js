@@ -469,4 +469,22 @@ if ($(".on-services-2-area").length) {
 	});
 }
 
+// projects-2-swiper — centered wide slides with an info card on the active one
+if ($(".on-projects-2-area").length) {
+	var on_projects2_swiper = new Swiper(".on-projects-2-swiper", {
+		loop: true,
+		speed: 800,
+		spaceBetween: 24,
+		slidesPerView: "auto",
+		centeredSlides: true,
+		// autoplay: {
+		// 	delay: 4000,
+		// },
+		pagination: {
+			el: ".on-projects-2-pagination",
+			clickable: true,
+		},
+	});
+}
+
 })(jQuery);

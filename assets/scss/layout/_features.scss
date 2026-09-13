@@ -354,3 +354,223 @@
 /*
     features-1-end
 */
+
+/*
+    features-2-start
+*/
+.on-features-2 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    &-wrap {
+        display: flex;
+        align-items: stretch;
+
+        @media #{$md,$xs} {
+            flex-direction: column;
+        }
+    }
+
+    /* editorial blue panel — the photo is confined to its left half and
+       fades into the flat brand blue past that, via the ::after gradient */
+    &-left {
+        position: relative;
+        z-index: 1;
+        flex: 0 0 48.65%;
+        overflow: hidden;
+        background-color: var(--on-clr-pr-2);
+        padding: 100px;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            background: linear-gradient(90deg, rgb(42 92 255 / 0%) 0%, var(--on-clr-pr-2) 62%);
+        }
+
+        @media #{$xl,$lg} {
+            padding: 70px;
+        }
+
+        @media #{$md,$xs} {
+            flex-basis: auto;
+            padding: 60px 24px;
+        }
+    }
+
+    &-bg-img {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        opacity: 20%;
+
+        img {
+            width: 60%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-dots {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        width: 36%;
+        pointer-events: none;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-sec-title {
+        position: relative;
+        z-index: 2;
+        max-width: 582px;
+        margin-bottom: 150px;
+
+        .on-subtitle-2 {
+            color: #fff;
+        }
+
+        .on-sec-title-2 {
+            color: #fff;
+        }
+
+        @media #{$lg} {
+            margin-bottom: 100px;
+        }
+
+        @media #{$md,$xs} {
+            margin-bottom: 60px;
+        }
+    }
+
+    &-desc {
+        position: relative;
+        z-index: 2;
+        max-width: 457px;
+        margin-left: 277px;
+
+        .text-elm {
+            color: #fff;
+            margin-bottom: 32px;
+        }
+
+        @media #{$lg} {
+            margin-left: 120px;
+        }
+
+        @media #{$md,$xs} {
+            margin-left: 0;
+        }
+    }
+
+    &-right {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+            grid-template-rows: none;
+        }
+    }
+
+    &-photo-cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        padding: 48px;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    &-card {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        padding: 48px;
+        background-color: #e5ebff;
+
+        &:is(.has-v2) {
+            background-color: #f7f9ff;
+        }
+
+        /* soft concentric glow bleeding off the top-right corner */
+        &::before {
+            content: "";
+            position: absolute;
+            top: -7px;
+            left: 0;
+            z-index: -1;
+            width: 192px;
+            height: 192px;
+            background: url(../img/features/f2-card-bg.png) no-repeat center/contain;
+        }
+
+        .icon-elm {
+            display: block;
+            max-height: 100px;
+            width: auto;
+            margin-bottom: 56px;
+        }
+
+        .title-elm {
+            font-family: var(--on-font-2);
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.272;
+            color: var(--on-clr-h-2);
+            margin-bottom: 12px;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.555;
+            color: var(--on-clr-p-2);
+        }
+
+        @media #{$lg} {
+            padding: 36px;
+
+            .icon-elm {
+                max-height: 80px;
+                margin-bottom: 36px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            padding: 28px;
+
+            .icon-elm {
+                max-height: 70px;
+                margin-bottom: 24px;
+            }
+
+            .title-elm {
+                font-size: 20px;
+            }
+        }
+    }
+}
+/*
+    features-2-end
+*/
