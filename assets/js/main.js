@@ -487,4 +487,20 @@ if ($(".on-projects-2-area").length) {
 	});
 }
 
+// choose-2-slider-img
+if ($(".on_c2_slider").length) {
+	var on_choose2_swiper = new Swiper(".on_c2_slider", {
+		loop: true,
+		speed: 800,
+		slidesPerView: 1,
+		autoplay: {
+			delay: 4000,
+		},
+		navigation: {
+			prevEl: ".on-choose-2-slider-btn.has-left",
+			nextEl: ".on-choose-2-slider-btn.has-right",
+		},
+	});
+}
+
 })(jQuery);

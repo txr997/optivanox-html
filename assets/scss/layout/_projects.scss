@@ -798,6 +798,9 @@
 
     &-card-top {
         margin-bottom: 70px;
+        @media #{$lg,$md,$xs} {
+            margin-bottom: 30px;
+        }
 
         .title-elm {
             font-family: var(--on-font-2);
@@ -909,7 +912,7 @@
         }
 
         &-card {
-            width: 400px;
+            width: 620px;
             top: 30px;
             right: 30px;
         }
@@ -968,7 +971,7 @@
         }
 
         &-card {
-            width: 360px;
+            width: 510px;
             top: 24px;
             right: 24px;
         }
@@ -1025,11 +1028,11 @@
 
         &-swiper .swiper-slide {
             width: 760px;
-            height: 420px;
+            height: 520px;
         }
 
         &-card {
-            width: 320px;
+            width: 520px;
         }
 
         &-card-top .title-elm {
@@ -1059,11 +1062,11 @@
         &-swiper .swiper-slide {
             width: 100%;
             max-width: 720px;
-            height: 380px;
+            height: 480px;
         }
 
         &-card {
-            width: 300px;
+            width: calc(100% - 40px);
             top: 20px;
             right: 20px;
         }
@@ -1147,18 +1150,15 @@
         }
 
         &-swiper .swiper-slide {
-            height: 300px;
+            height: 700px;
+            width: 100%;
         }
 
         /* card drops below the slide on phones */
         &-card {
-            position: relative;
-            top: auto;
-            right: auto;
-            width: auto;
-            margin: -40px 16px 0;
-            opacity: 1;
-            visibility: visible;
+            width: calc(100% - 40px);
+            top: 20px;
+            right: 20px;
         }
     }
 }
