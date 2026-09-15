@@ -462,6 +462,10 @@
         max-width: 457px;
         margin-left: 277px;
 
+        @media #{$xxl,$xl} {
+            margin-left: 0px;
+        }
+
         .text-elm {
             color: #fff;
             margin-bottom: 32px;

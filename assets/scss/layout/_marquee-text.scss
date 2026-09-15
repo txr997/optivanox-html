@@ -1,0 +1,204 @@
+@use '../abstracts/variables' as *;
+
+/*
+    marquee-text-2-start
+*/
+.on-marquee-text-2 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+
+        /* pt-130/pb-130 in the markup is flat at every width — this is the
+           step-down for it, and it wins the cascade since utility loads first */
+        @media #{$xl,$lg} {
+            padding-top: 90px;
+            padding-bottom: 90px;
+        }
+
+        @media #{$md,$xs} {
+            padding-top: 70px;
+            padding-bottom: 70px;
+            gap: 24px;
+        }
+
+        @media #{$xs} {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+    }
+
+    &-row {
+        position: relative;
+        z-index: 1;
+
+        &-wrap {
+            display: flex;
+            gap: 600px;
+            margin-right: 600px;
+
+            /* the gap (and the trailing margin that keeps the wa_marquee
+               clone seam even) scale down with the circles/type themselves */
+            @media #{$xxl} {
+                gap: 450px;
+                margin-right: 450px;
+            }
+
+            @media #{$xl} {
+                gap: 320px;
+                margin-right: 320px;
+            }
+
+            @media #{$lg} {
+                gap: 220px;
+                margin-right: 220px;
+            }
+
+            @media #{$md,$xs} {
+                gap: 140px;
+                margin-right: 140px;
+            }
+
+            @media #{$xs} {
+                gap: 80px;
+                margin-right: 80px;
+            }
+
+            .img-elm {
+                flex: 0 0 auto;
+                width: 224px;
+                height: 224px;
+                border-radius: 50%;
+                animation: on-marquee-text-2-spin 14s linear infinite;
+
+                /* the bottom row's marquee runs right, so its circles spin the other way */
+                [data-direction="right"] & {
+                    animation-direction: reverse;
+                }
+
+                @media #{$xxl} {
+                    width: 190px;
+                    height: 190px;
+                }
+
+                @media #{$xl} {
+                    width: 160px;
+                    height: 160px;
+                }
+
+                @media #{$lg} {
+                    width: 130px;
+                    height: 130px;
+                }
+
+                @media #{$md,$xs} {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                @media #{$xs} {
+                    width: 76px;
+                    height: 76px;
+                }
+            }
+
+            &:is(.has-text) {
+                gap: 240px;
+                margin-right: 240px;
+
+                @media #{$xxl} {
+                    gap: 180px;
+                    margin-right: 180px;
+                }
+
+                @media #{$xl} {
+                    gap: 140px;
+                    margin-right: 140px;
+                }
+
+                @media #{$lg} {
+                    gap: 100px;
+                    margin-right: 100px;
+                }
+
+                @media #{$md,$xs} {
+                    gap: 60px;
+                    margin-right: 60px;
+                }
+
+                @media #{$xs} {
+                    gap: 36px;
+                    margin-right: 36px;
+                }
+
+                .text-elm {
+                    flex: 0 0 auto;
+                    font-family: var(--on-font-2);
+                    font-weight: 400;
+                    font-size: 80px;
+                    line-height: 1;
+                    letter-spacing: -.02em;
+                    color: var(--on-clr-p-2);
+                    white-space: nowrap;
+                    margin: 0 60px 0 0;
+                    text-transform: uppercase;
+    
+                    @media #{$xxl} {
+                        font-size: 64px;
+                    }
+    
+                    @media #{$xl} {
+                        font-size: 52px;
+                    }
+    
+                    @media #{$lg} {
+                        font-size: 42px;
+                    }
+    
+                    @media #{$md,$xs} {
+                        font-size: 32px;
+                        margin-right: 40px;
+                    }
+    
+                    @media #{$xs} {
+                        font-size: 24px;
+                    }
+                }
+            }
+        }
+
+    }
+
+
+    &-line {
+        height: 2px;
+        background: linear-gradient(to bottom, rgb(5 5 25 / 24%) 0 1px, #CED9FF 1px 2px);
+        position: absolute;
+        bottom: 20%;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+
+        &:is(.has-v2) {
+            top: 20%;
+            bottom: unset;
+        }
+    }
+}
+
+@keyframes on-marquee-text-2-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*
+    marquee-text-2-end
+*/

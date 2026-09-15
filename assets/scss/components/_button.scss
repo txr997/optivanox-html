@@ -178,7 +178,17 @@
     }
 }
 
+/*
+    a skewed panel wipes the full fill on a diagonal and the mark spins out
+    with an overshoot — bigger and livelier than a simple colour swap
+*/
 .on-pr-btn-3 {
+    /* re-coloured variants (frosted, dark panels) just flip this one flood */
+    --on-btn-flood: var(--on-clr-h-2);
+
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
     font-family: var(--on-font-2);
     color: #fff;
     font-weight: 500;
@@ -189,19 +199,67 @@
     background-color: var(--on-clr-pr-2);
     border-radius: 8px;
     padding: 14px 27px;
+    transition: transform .45s cubic-bezier(.34, 1.56, .64, 1), box-shadow .4s ease;
+
+    /* wider than the pill and skewed, so the diagonal edge clears both
+       corners as it wipes across instead of leaving a sliver uncovered */
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -25%;
+        z-index: -1;
+        width: 150%;
+        height: 100%;
+        background-color: var(--on-btn-flood);
+        transform: translateX(-100%) skewX(-18deg);
+        transition: transform .5s cubic-bezier(.65, 0, .35, 1);
+        pointer-events: none;
+    }
+
+    .icon,
+    .text {
+        position: relative;
+        z-index: 1;
+    }
+
+    .text {
+        transition: transform .35s ease;
+    }
 
     .icon {
         font-size: 20px;
+        display: inline-flex;
+        transition: transform .5s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    /* doubled class — sections that re-colour this pill land later in the
+       cascade at equal weight and would otherwise win the tie, see §11 */
+    &#{&}:hover {
+        transform: scale(1.03);
+        color: #fff;
+
+        &::before {
+            transform: translateX(0) skewX(-18deg);
+        }
+
+        .text {
+            transform: translateX(-2px);
+        }
+
+        .icon {
+            transform: translate(5px, 0px) rotate(45deg);
+        }
     }
 
     &:is(.has-v2) {
+        --on-btn-flood: var(--on-clr-pr-2);
+
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.16);
         backdrop-filter: blur(6px);
         border-radius: 8px;
     }
-
-
 }
 
 /*

@@ -1,8 +1,24 @@
 @use '../abstracts/variables' as *;
 
-/* 
+/*
     home-page-css-start
 */
+
+/* the preloader markup is shared across every home page — home-2 keeps its
+   own palette here rather than home-1's teal/lime */
+.on-home-2 .on-preloader-1 {
+    &-curtain span {
+        background-color: var(--on-clr-h-2);
+    }
+
+    .bar-elm span {
+        background-color: var(--on-clr-pr-2);
+    }
+
+    .count-elm sup {
+        color: var(--on-clr-pr-2);
+    }
+}
 
 .ot-home-1 {
     background-color: #F4F6FF;

@@ -220,6 +220,193 @@ var waHero1 = (function () {
 	};
 })();
 
+// hero-2-slider — each slide parks its own bg-img/bg-clr/content and plays
+// them in fresh whenever it becomes active, instead of just cutting across.
+// on_hero2_play/on_hero2_swiper are declared here (not just inside the if
+// below) because afterPreloader() calls on_hero2_play too, and a function
+// declared inside a block is block-scoped under "use strict" — invisible
+// outside it
+var on_hero2_swiper, on_hero2_park, on_hero2_play;
+
+if ($(".on-hero-2-slider").length) {
+
+	// a variant of Optitech's ot-hero-1 mosaic-tile clip reveal: instead of a
+	// 3x3 grid opening diagonally from the corners, this slices the photo
+	// into vertical strips that zip together, alternating top/bottom origin
+	function on_hero2_strip_reveal(bgImgEl) {
+		var img = bgImgEl.querySelector("img");
+		if (!img || !img.src) return null;
+
+		Array.prototype.slice.call(bgImgEl.querySelectorAll(".on-hero2-strip")).forEach(function (strip) {
+			strip.remove();
+		});
+
+		var rect = bgImgEl.getBoundingClientRect();
+		if (!rect.width || !rect.height) return null;
+
+		var count = 7;
+		// percentage left/width rounded differently than the px background
+		// math did, leaving hairline gaps between strips — this keeps both
+		// in the same px units and pads a 1px overlap to be sure
+		var stripWidth = rect.width / count;
+		var overlap = 1;
+		var strips = [];
+
+		for (var i = 0; i < count; i++) {
+			var left = i * stripWidth;
+
+			var strip = document.createElement("div");
+			strip.className = "on-hero2-strip";
+			strip.style.position = "absolute";
+			strip.style.top = "0";
+			strip.style.height = "100%";
+			strip.style.left = left + "px";
+			strip.style.width = (stripWidth + (i < count - 1 ? overlap : 0)) + "px";
+			strip.style.backgroundImage = "url(" + img.src + ")";
+			strip.style.backgroundSize = rect.width + "px " + rect.height + "px";
+			strip.style.backgroundPosition = (-left) + "px 0px";
+			bgImgEl.appendChild(strip);
+			strips.push(strip);
+		}
+
+		// the real img stays in the DOM (still the a11y/no-js fallback) but
+		// the strips carry the whole visual once they exist
+		gsap.set(img, { opacity: 0 });
+
+		// even strips are hidden by clipping away their bottom and grow
+		// downward; odd strips are hidden from the top and grow upward
+		gsap.set(strips, {
+			clipPath: function (i) {
+				return i % 2 === 0 ? "inset(0% 0% 100% 0%)" : "inset(100% 0% 0% 0%)";
+			},
+		});
+
+		return gsap.to(strips, {
+			clipPath: "inset(0% 0% 0% 0%)",
+			duration: 1,
+			ease: "power4.out",
+			stagger: .07,
+		});
+	}
+
+	// parked immediately on Swiper init (still behind the preloader curtain)
+	// so the first slide's reveal only starts once on_hero2_play runs it
+	// from afterPreloader() — otherwise it plays out unseen behind the curtain
+	// and has already finished by the time the curtain lifts
+	on_hero2_park = function (slideEl) {
+		var on_hero2_item = slideEl.querySelector(".on-hero-2-item");
+		if (!on_hero2_item) return;
+
+		gsap.set(on_hero2_item.querySelector(".bg-clr"), { opacity: 0, x: -40, y: 60 });
+		gsap.set(on_hero2_item.querySelector(".on-hero-2-title"), { y: 50, opacity: 0 });
+		gsap.set(on_hero2_item.querySelector(".on-hero-2-disc"), { y: 24, opacity: 0 });
+		gsap.set(on_hero2_item.querySelectorAll(".on-hero-2-content-btn > .on-pr-btn-3"), { clipPath: "inset(100% 0% 0% 0%)", y: 12 });
+		gsap.set(on_hero2_item.querySelector(".on-hero-2-content-btn-line"), { scaleX: 0 });
+	};
+
+	on_hero2_play = function (slideEl) {
+		var on_hero2_item = slideEl.querySelector(".on-hero-2-item");
+		if (!on_hero2_item) return;
+
+		var on_hero2_bg_img = on_hero2_item.querySelector(".bg-img");
+		var on_hero2_bg_clr = on_hero2_item.querySelector(".bg-clr");
+		var on_hero2_title = on_hero2_item.querySelector(".on-hero-2-title");
+		var on_hero2_disc = on_hero2_item.querySelector(".on-hero-2-disc");
+		var on_hero2_btns = on_hero2_item.querySelectorAll(".on-hero-2-content-btn > .on-pr-btn-3");
+		var on_hero2_btn_line = on_hero2_item.querySelector(".on-hero-2-content-btn-line");
+
+		gsap.set(on_hero2_bg_img, { scale: 1 });
+
+		var on_hero2_reveal_tween = on_hero2_strip_reveal(on_hero2_bg_img);
+
+		var on_hero2_tl = gsap.timeline();
+
+		// the strips zip the photo together, then it keeps drifting in
+		// slowly for the rest of the slide's dwell (Ken Burns) — only this
+		// second tween ever touches `scale`, so they can't fight
+		if (on_hero2_reveal_tween) on_hero2_tl.add(on_hero2_reveal_tween, 0);
+
+		on_hero2_tl
+			.to(on_hero2_bg_img, {
+				scale: 1.06,
+				duration: 5.5,
+				ease: "sine.out",
+			}, 0)
+			.fromTo(on_hero2_bg_clr, {
+				opacity: 0,
+				x: -40,
+				y: 60,
+			}, {
+				opacity: 1,
+				x: 0,
+				y: 0,
+				duration: 1,
+				ease: "power3.out",
+			}, .5)
+			// plain transform + opacity — smooth on every device, the snap
+			// comes from the expo ease rather than an expensive blur filter
+			.fromTo(on_hero2_title, {
+				y: 50,
+				opacity: 0,
+			}, {
+				y: 0,
+				opacity: 1,
+				duration: 1.5,
+				ease: "expo.out",
+			}, .7)
+			.fromTo(on_hero2_disc, {
+				y: 24,
+				opacity: 0,
+			}, {
+				y: 0,
+				opacity: 1,
+				duration: 1.2,
+				ease: "expo.out",
+			}, 1)
+			// buttons wipe open upward rather than just fading — reads as an
+			// intentional reveal instead of content simply appearing
+			.fromTo(on_hero2_btns, {
+				clipPath: "inset(100% 0% 0% 0%)",
+				y: 12,
+			}, {
+				clipPath: "inset(0% 0% 0% 0%)",
+				y: 0,
+				duration: 1,
+				stagger: .18,
+				ease: "power4.out",
+			}, 1.3)
+			.fromTo(on_hero2_btn_line, {
+				scaleX: 0,
+			}, {
+				scaleX: 1.3,
+				duration: 1,
+				transformOrigin: "center center",
+				ease: "power3.out",
+			}, 1.6);
+	};
+
+	on_hero2_swiper = new Swiper(".on-hero-2-slider", {
+		loop: true,
+		speed: 1100,
+		slidesPerView: 1,
+		effect: "fade",
+		fadeEffect: {
+			crossFade: true,
+		},
+		autoplay: {
+			delay: 5500,
+			disableOnInteraction: false,
+		},
+		on: {
+			init: function () {
+				on_hero2_park(this.slides[this.activeIndex]);
+			},
+			slideChangeTransitionStart: function () {
+				on_hero2_play(this.slides[this.activeIndex]);
+			},
+		},
+	});
+}
 
 window.addEventListener("load", function(){
 
@@ -257,6 +444,12 @@ window.addEventListener("load", function(){
 function afterPreloader() {
 
 	if (waHero1) waHero1.play();
+
+	// the first hero-2 slide was only parked on init — play it now that the
+	// curtain has actually lifted, or the reveal runs its course unseen
+	if (typeof on_hero2_swiper !== "undefined") {
+		on_hero2_play(on_hero2_swiper.slides[on_hero2_swiper.activeIndex]);
+	}
 
 	// only-LTR-direction
 	if (getComputedStyle(document.body).direction !== "rtl") {
@@ -484,6 +677,108 @@ if ($(".on-projects-2-area").length) {
 			el: ".on-projects-2-pagination",
 			clickable: true,
 		},
+	});
+}
+
+// award-2-contact-scroll — each card sits where the design scattered it,
+// then on scroll they all pull into the centre; after that the has-contact
+// card alone grows to fill the screen, and the contact copy fades up over it
+if ($(".on-award-x-contact").length) {
+	gsap.matchMedia().add("(min-width: 1400px)", function () {
+		var on_award2_cards = gsap.utils.toArray(".on-award-2-card");
+		var on_award2_has_contact = document.querySelector(".on-award-2-card.has-contact");
+		var on_award2_other_cards = on_award2_cards.filter(function (card) {
+			return card !== on_award2_has_contact;
+		});
+		var on_award2_title = document.querySelector(".on-award-2-title");
+		var on_award2_wrap = document.querySelector(".on-award-2-wrap");
+		var on_contact2_area = document.querySelector(".on-contact-2-area");
+		var on_contact2_content = gsap.utils.toArray(".on-contact-2-content > *");
+
+		gsap.set(on_contact2_area, { autoAlpha: 0 });
+		gsap.set(on_contact2_content, { y: 40, opacity: 0 });
+
+		var on_award2_tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: ".on-award-x-contact",
+				start: "top top",
+				end: "bottom bottom",
+				scrub: 1,
+				invalidateOnRefresh: true,
+				markers: false,
+			}
+		});
+
+		on_award2_tl
+			// stage 1 — every card (has-contact included) is parked at its own
+			// scattered CSS position until scroll pulls it toward the centre
+			.to(on_award2_cards, {
+				x: function (i, card) {
+					return on_award2_wrap.offsetWidth / 2 - (card.offsetLeft + card.offsetWidth / 2);
+				},
+				y: function (i, card) {
+					return on_award2_wrap.offsetHeight / 2 - (card.offsetTop + card.offsetHeight / 2);
+				},
+				ease: "none",
+				stagger: .05,
+			}, 0)
+			.to(on_award2_title, { autoAlpha: 0, ease: "none" }, 0)
+			// stage 2 — the rest drop away, has-contact grows to fill the wrap;
+			// x/y unwind back to 0 as left/top/width/height take over the box
+			.to(on_award2_other_cards, { autoAlpha: 0, ease: "none" }, 1)
+			.to(on_award2_has_contact, {
+				x: 0,
+				y: 0,
+				left: 0,
+				top: 0,
+				width: "100%",
+				height: "100%",
+				borderRadius: 0,
+				ease: "none",
+			}, 1)
+			// stage 3 — starts well before the photo's grow tween finishes, so
+			// the copy is already on its way in by the time it reads as full width
+			.to(on_contact2_area, { autoAlpha: 1, ease: "none" }, 1.35)
+			.to(on_contact2_content, { y: 0, opacity: 1, ease: "none", stagger: .12 }, 1.45);
+
+		return function () {
+			gsap.set(
+				[on_award2_cards, on_award2_title, on_contact2_area, on_contact2_content],
+				{ clearProps: "all" }
+			);
+		};
+	});
+}
+
+// testimonial-2-animation
+if ($(".on-testimonial-2-area").length) {
+	gsap.matchMedia().add("(min-width: 1400px)", function () {
+		var on_testimonial2_cards = gsap.utils.toArray(".on-testimonial-2-card-single");
+		var on_testimonial2_rotate = [-3, -2, -1];
+
+		gsap.set(on_testimonial2_cards, { rotate: -103, autoAlpha: 0 });
+
+
+		var on_testimonial2_tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: ".on-testimonial-2-area",
+				start: "top top",
+				end: "bottom bottom",
+				scrub: .5,
+				invalidateOnRefresh: true,
+				markers: false,
+			}
+		});
+
+		on_testimonial2_cards.forEach(function (on_testimonial2_card, index) {
+			on_testimonial2_tl
+				.to(on_testimonial2_card, { autoAlpha: 1, duration: .25, ease: "none" }, index)
+				.to(on_testimonial2_card, { rotate: on_testimonial2_rotate[index], duration: 1, ease: "none" }, index);
+		});
+
+		return function () {
+			gsap.set(on_testimonial2_cards, { clearProps: "all" });
+		};
 	});
 }
 

@@ -492,3 +492,314 @@
 /*
     testimonial-1-end
 */
+
+/*
+    testimonial-2-start
+*/
+.on-testimonial-2 {
+
+    /* faint desaturated photo anchoring the lower half of the band */
+    &-bg-img {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        filter: grayscale(1);
+
+        img {
+            width: 100%;
+        }
+
+        /* the stack animation is a ≥1400px effect — no stack, no need for the photo either */
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    /* dotted texture, mirrored (180°) to sit at the foot of the band */
+    &-bg-dot {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        width: 100%;
+
+        img {
+            width: 100%;
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    /* full-width watermark line, pinned behind the card stack it centers on */
+    &-marquee {
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        overflow: hidden;
+        transform: translateY(-50%);
+        pointer-events: none;
+        padding-bottom: 15px;
+        
+
+        .text-elm {
+            display: inline-block;
+            font-family: var(--on-font-1);
+            font-size: 180px;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -1px;
+            color: var(--on-clr-pr-2);
+            opacity: .6;
+            white-space: nowrap;
+            padding-right: 60px;
+            margin-bottom: 0;
+        }
+
+        @media #{$xxl} {
+            .text-elm {
+                font-size: 150px;
+            }
+        }
+
+        /* below 1400 the cards are a plain grid with no stack to run behind — drop the line */
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    /*
+        the fan — three sheets on one stack, each nudged by a hand-set
+        left/top/rotation (from the design) so only the top sheet reads in
+        full; percentages so the whole stack scales as one unit
+    */
+    &-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 606px;
+        aspect-ratio: 606 / 681;
+        margin: 0 auto;
+        margin-bottom: -60px;
+
+        /* below the desktop effect the fan can't stay readable — a plain grid instead */
+        @media #{$xl,$lg,$md,$xs} {
+            aspect-ratio: auto;
+            max-width: 100%;
+            margin-bottom: 0;
+            display: grid;
+            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media #{$md,$xs} {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &-card-single {
+        position: absolute;
+        width: 89.1%;
+        height: 91.63%;
+        padding: 48px 44px;
+        border-radius: 10px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transform-origin: right bottom;
+        filter: drop-shadow(0px 0px 32px rgba(0, 0, 0, 0.05));
+
+        .rating-elm {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 28px;
+            color: #FFA909;
+            font-size: 18px;
+        }
+
+        .text-elm {
+            flex: 1;
+            min-height: 0;
+            font-family: var(--on-font-2);
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 1.45;
+            color: var(--on-clr-h-2);
+            margin-bottom: 0;
+        }
+
+        .author-elm {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 28px;
+        }
+
+        .img-elm {
+            flex: 0 0 auto;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .content-elm {
+            min-width: 0;
+        }
+
+        .name-elm {
+            font-family: var(--on-font-2);
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 1.2;
+            color: var(--on-clr-h-2);
+            margin-bottom: 0;
+        }
+
+        .role-elm {
+            font-family: var(--on-font-1);
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.3;
+            color: var(--on-clr-p-2);
+            opacity: .72;
+            margin: 4px 0 0;
+        }
+
+        /*
+            stack order back to front — left/top/z-index are the design
+            variant; rotation starts at -103deg and is driven to its resting
+            angle (-3/-2/-1deg) by the scroll animation in main.js, one card
+            at a time, so it isn't set here
+        */
+        &:nth-child(1) {
+            left: 0;
+            top: 1%;
+            z-index: 1;
+        }
+
+        &:nth-child(2) {
+            left: 1%;
+            top: -1%;
+            z-index: 2;
+        }
+
+        &:nth-child(3) {
+            left: 2%;
+            top: -3%;
+            z-index: 3;
+        }
+
+        /* below 1400 the scroll effect is off — plain grid cards, static and upright */
+        @media #{$xl,$lg,$md,$xs} {
+            position: static;
+            width: 100%;
+            height: auto;
+            min-height: 320px;
+            transform: none;
+            left: auto;
+            top: auto;
+        }
+
+        @media #{$xl,$lg} {
+            padding: 40px 32px;
+
+            .text-elm {
+                font-size: 22px;
+                line-height: 1.5;
+            }
+
+            .name-elm {
+                font-size: 20px;
+            }
+
+            .img-elm {
+                width: 72px;
+                height: 72px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            padding: 36px 28px;
+
+            .text-elm {
+                font-size: 18px;
+                line-height: 1.6;
+            }
+
+            .name-elm {
+                font-size: 19px;
+            }
+
+            .img-elm {
+                width: 64px;
+                height: 64px;
+            }
+        }
+
+        @media #{$xs} {
+            padding: 30px 22px;
+
+            .text-elm {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+        }
+    }
+
+    &-box {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        @media #{$xl,$lg,$md,$xs} {
+            height: auto;
+            display: block;
+            padding: 100px 0;
+        }
+    }
+
+    &-area {
+        height: 200vh;
+        position: relative;
+        z-index: 1;
+        background-color: #F2F2F3;
+
+        /* the scroll-linked stack is a ≥1400px effect — below it this must
+           collapse back to auto, or the page keeps reserving empty scroll height */
+        @media #{$xl,$lg,$md,$xs} {
+            height: auto;
+        }
+    }
+
+    &-pin {
+        position: sticky;
+        top: 0;
+
+        @media #{$xl,$lg,$md,$xs} {
+            position: static;
+        }
+    }
+}
+
+
+
+/*
+    testimonial-2-end
+*/

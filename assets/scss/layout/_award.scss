@@ -1,0 +1,428 @@
+@use '../abstracts/variables' as *;
+
+/*
+    award-2-start
+*/
+.on-award-2 {
+    &-box {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #fff;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+
+        /* the grid fallback can run taller than one screen — 100vh + hidden
+           overflow was clipping cards out of the visible area below 1400 */
+        @media #{$xl,$lg,$md,$xs} {
+            height: auto;
+            overflow: visible;
+            padding: 100px 0;
+        }
+    }
+
+    /* the pastel blur that sits low behind the scattered photos */
+    &-bg-clr {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* it exists to soften the scatter behind the title — no scatter below 1400 */
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-wrap {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+
+        /*
+            the has-contact card grows to left:0/top:0/100%/100% of this box
+            in the scroll animation, so this has to be the true full-bleed box
+            (not an aspect-ratio letterboxed one) or it lands short of the edges
+        */
+
+        /* the scatter only reads at its own scale — a plain grid below it */
+        @media #{$xl,$lg,$md,$xs} {
+            height: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding: 0 70px;
+        }
+
+        @media #{$md} {
+            grid-template-columns: repeat(2, 1fr);
+            padding: 0 24px;
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+            padding: 0 16px;
+        }
+    }
+
+    /* dead-centre focal headline, "Our" in ink and "Awards" in brand blue */
+    &-title {
+        position: absolute;
+        z-index: -1;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        white-space: nowrap;
+        margin-bottom: 0;
+
+        span {
+            display: block;
+            font-family: var(--on-font-1);
+            font-weight: 700;
+            font-size: 180px;
+            line-height: .89;
+            letter-spacing: -.04em;
+
+            &.has-v1 {
+                color: #A49BB0;
+            }
+
+            &.has-v2 {
+                color: var(--on-clr-pr-2);
+                text-transform: uppercase;
+            }
+        }
+
+        @media #{$xxl} {
+            span {
+                font-size: 150px;
+            }
+        }
+
+        /* the scatter is gone below 1400, so the title just leads the grid */
+        @media #{$xl,$lg,$md,$xs} {
+            position: static;
+            transform: none;
+            grid-column: 1 / -1;
+            order: -1;
+            white-space: normal;
+            margin-bottom: 8px;
+
+            span {
+                display: inline;
+                font-size: 56px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            span {
+                font-size: 44px;
+            }
+        }
+
+        @media #{$xs} {
+            span {
+                font-size: 34px;
+            }
+        }
+    }
+
+    &-card {
+        position: absolute;
+        border-radius: 12px;
+        background-color: #050519;
+
+        .img-elm {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+        }
+
+        .content-elm {
+            position: absolute;
+            z-index: 1;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            height: 104px;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .icon-elm {
+            flex: 0 0 auto;
+            width: 94px;
+            height: 104px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .label-elm {
+            flex: 1;
+            min-width: 0;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding-right: 20px;
+            padding-left: 95px;
+            border-radius: 10px;
+            background-color: rgba(5, 5, 25, 0.32);
+            backdrop-filter: blur(14px);
+        }
+
+        .title-elm {
+            font-family: var(--on-font-1);
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 1.4;
+            letter-spacing: -.02em;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        /*
+            hand-set from the design, as a percentage of the 1920×1035 wrap so
+            the whole scatter scales as one unit — order here is source order,
+            not the visual reading order. Scoped to ≥1400 because :nth-child
+            is more specific than the plain-class reset below it, so left as
+            unconditional it would keep winning the cascade under 1400 too
+            and leave every card pinned to its tiny scattered width/height
+        */
+        @media #{$over,$xxxl,$xxl} {
+            &:nth-child(1) {
+                left: 6.93%;
+                top: 8.51%;
+                width: 27.29%;
+                height: 25.12%;
+            }
+
+            &:nth-child(2) {
+                left: 43.91%;
+                top: 7%;
+                width: 27.29%;
+                height: 25.12%;
+            }
+
+            &:nth-child(3) {
+                left: 74.22%;
+                top: 25.22%;
+                width: 27.29%;
+                height: 25.12%;
+            }
+
+            &:nth-child(4) {
+                left: 19.92%;
+                top: 70.38%;
+                width: 27.29%;
+                height: 25.12%;
+            }
+
+            &:nth-child(5) {
+                left: -2.6%;
+                top: 40.75%;
+                width: 27.29%;
+                height: 25.12%;
+            }
+
+            /* the un-labelled teaser photo — becomes the contact band's
+               full-width image on scroll */
+            &.has-contact {
+                left: 60.36%;
+                top: 67.73%;
+                width: 27.29%;
+                height: 25.12%;
+            }
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            position: relative;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 524 / 260;
+            left: auto;
+            top: auto;
+
+            .content-elm {
+                height: 72px;
+                align-items: center;
+            }
+
+            .icon-elm {
+                width: 56px;
+                height: 56px;
+            }
+        }
+
+        @media #{$xs} {
+            .label-elm {
+                padding: 0 14px;
+            }
+
+            .title-elm {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+
+.on-award-x-contact {
+    position: relative;
+    height: 300vh;
+
+    /* the pinned sequence is a ≥1400px effect — collapse back to auto below it,
+       or the page keeps reserving empty scroll height */
+    @media #{$xl,$lg,$md,$xs} {
+        height: auto;
+    }
+}
+
+.on-award-2-pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    @media #{$xl,$lg,$md,$xs} {
+        position: static;
+        height: auto;
+        overflow: visible;
+    }
+}
+
+/*
+    contact-2-start — the box the teaser photo grows into, and the copy that
+    settles on top of it once it does
+*/
+.on-contact-2 {
+    &-area {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media #{$xl,$lg,$md,$xs} {
+            position: relative;
+            inset: auto;
+            height: 100vh;
+            min-height: 700px;
+        }
+    }
+
+    /*
+        only does anything below 1400 — at and above it, the has-contact card
+        itself (grown full-bleed by the scroll animation) is the real backdrop
+    */
+    &-bg {
+        display: none;
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-color: #050519;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgb(5 5 25 / 55%);
+        }
+
+        .img-elm {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            display: block;
+        }
+    }
+
+    &-content {
+        position: relative;
+        z-index: 1;
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 100px 20px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title-elm {
+            font-family: var(--on-font-2);
+            font-weight: 700;
+            font-size: 92px;
+            line-height: 1;
+            letter-spacing: -.03em;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        .text-elm {
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: auto;
+            max-width: 450px;
+        }
+
+        .on-pr-btn-3 {
+            margin-top: 32px;
+        }
+
+        @media #{$xxl} {
+            .title-elm {
+                font-size: 76px;
+            }
+        }
+
+        @media #{$xl} {
+            .title-elm {
+                font-size: 64px;
+            }
+        }
+
+        @media #{$lg} {
+            .title-elm {
+                font-size: 52px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            .title-elm {
+                font-size: 40px;
+            }
+        }
+
+        @media #{$xs} {
+            .title-elm {
+                font-size: 32px;
+            }
+        }
+    }
+}
+
+/*
+    contact-2-end
+*/
+
+/*
+    award-2-end
+*/
