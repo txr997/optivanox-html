@@ -670,6 +670,73 @@
 */
 
 /* 
+    header-3-start
+*/
+.on-header-3 {
+    &-area {
+        background: linear-gradient(180deg, rgba(12, 179, 81, 0.28) 0%, rgba(20, 28, 20, 0) 100%);
+        border-bottom: 1px solid rgba(20, 28, 20, 0.28);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 3;
+    }
+    &-container {
+        max-width: 1886px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    &-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 50px;
+
+
+    }
+
+    &-menu {
+        .on-main-navigation {
+            .navbar-nav {
+                gap: 48px;
+
+                li {
+                    a {
+                        padding: 24px 0px;
+                        color: #000;
+                    }
+
+
+                    &:is(.dropdown) {
+                        > a {
+                            padding-right: 15px;
+
+                            &::before {
+                                color: var(--on-clr-h-3);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &-action-link {
+        display: flex;
+        align-items: center;
+        gap: 35px;
+        margin-left: auto;
+    }
+}
+
+
+/* 
+    header-3-end
+*/
+
+/* 
     sticky-header-css-start
 */
 
