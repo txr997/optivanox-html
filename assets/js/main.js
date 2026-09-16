@@ -222,13 +222,9 @@ var waHero1 = (function () {
 
 // hero-2-slider — each slide parks its own bg-img/bg-clr/content and plays
 // them in fresh whenever it becomes active, instead of just cutting across.
-// on_hero2_play/on_hero2_swiper are declared here (not just inside the if
-// below) because afterPreloader() calls on_hero2_play too, and a function
-// declared inside a block is block-scoped under "use strict" — invisible
-// outside it
-var on_hero2_swiper, on_hero2_park, on_hero2_play;
-
 if ($(".on-hero-2-slider").length) {
+
+	var on_hero2_swiper, on_hero2_park, on_hero2_play;
 
 	// a variant of Optitech's ot-hero-1 mosaic-tile clip reveal: instead of a
 	// 3x3 grid opening diagonally from the corners, this slices the photo
@@ -289,10 +285,9 @@ if ($(".on-hero-2-slider").length) {
 		});
 	}
 
-	// parked immediately on Swiper init (still behind the preloader curtain)
-	// so the first slide's reveal only starts once on_hero2_play runs it
-	// from afterPreloader() — otherwise it plays out unseen behind the curtain
-	// and has already finished by the time the curtain lifts
+	// sets the pre-reveal state the first on_hero2_play() timeline animates
+	// out of — needed because a fromTo() tween inside a timeline doesn't
+	// render its "from" values until the playhead reaches it
 	on_hero2_park = function (slideEl) {
 		var on_hero2_item = slideEl.querySelector(".on-hero-2-item");
 		if (!on_hero2_item) return;
@@ -398,8 +393,12 @@ if ($(".on-hero-2-slider").length) {
 			disableOnInteraction: false,
 		},
 		on: {
+			// parked and played back-to-back, both still behind the preloader
+			// curtain, so the reveal runs its course before/while the curtain
+			// lifts instead of visibly finishing after it
 			init: function () {
 				on_hero2_park(this.slides[this.activeIndex]);
+				on_hero2_play(this.slides[this.activeIndex]);
 			},
 			slideChangeTransitionStart: function () {
 				on_hero2_play(this.slides[this.activeIndex]);
@@ -444,12 +443,6 @@ window.addEventListener("load", function(){
 function afterPreloader() {
 
 	if (waHero1) waHero1.play();
-
-	// the first hero-2 slide was only parked on init — play it now that the
-	// curtain has actually lifted, or the reveal runs its course unseen
-	if (typeof on_hero2_swiper !== "undefined") {
-		on_hero2_play(on_hero2_swiper.slides[on_hero2_swiper.activeIndex]);
-	}
 
 	// only-LTR-direction
 	if (getComputedStyle(document.body).direction !== "rtl") {
@@ -663,16 +656,16 @@ if ($(".on-services-2-area").length) {
 }
 
 // projects-2-swiper — centered wide slides with an info card on the active one
-if ($(".on-projects-2-area").length) {
+if ($(".on-projects-2-swiper").length) {
 	var on_projects2_swiper = new Swiper(".on-projects-2-swiper", {
 		loop: true,
 		speed: 800,
 		spaceBetween: 24,
 		slidesPerView: "auto",
 		centeredSlides: true,
-		// autoplay: {
-		// 	delay: 4000,
-		// },
+		autoplay: {
+			delay: 4000,
+		},
 		pagination: {
 			el: ".on-projects-2-pagination",
 			clickable: true,
@@ -782,6 +775,76 @@ if ($(".on-testimonial-2-area").length) {
 	});
 }
 
+// step-2-title-wave — the oversized "How It Works" backdrop keeps a slow
+// letter-by-letter ripple going the whole time it's on screen; hidden below
+// 992px along with the rest of the title (see scss/layout/_step.scss)
+if ($(".on-step-2-title").length) {
+	gsap.matchMedia().add("(min-width: 992px)", function () {
+		gsap.registerPlugin(SplitText);
+
+		var on_step2_split = new SplitText(".on-step-2-title h2", { type: "chars" });
+
+		var on_step2_wave = gsap.to(on_step2_split.chars, {
+			y: -16,
+			duration: 1,
+			ease: "sine.inOut",
+			yoyo: true,
+			repeat: -1,
+			stagger: {
+				each: .08,
+				repeat: -1,
+				yoyo: true,
+			},
+		});
+
+		return function () {
+			on_step2_wave.kill();
+			on_step2_split.revert();
+		};
+	});
+}
+
+// step-2-cards-converge — the three cards start stacked together in the
+// middle of their own runway, then move out to their diagonal cascade
+// position (set in scss/layout/_step.scss) once scrolled into view
+if ($(".on-step-2-cards").length) {
+	gsap.matchMedia().add("(min-width: 992px)", function () {
+		var on_step2_wrap = document.querySelector(".on-step-2-cards");
+		var on_step2_cards = gsap.utils.toArray(".on-step-2-card");
+
+		function on_step2_center() {
+			var midX = on_step2_wrap.offsetWidth / 2;
+			var midY = on_step2_wrap.offsetHeight / 2;
+
+			gsap.set(on_step2_cards, {
+				x: function (i, card) {
+					return midX - (card.offsetLeft + card.offsetWidth / 2);
+				},
+				y: function (i, card) {
+					return midY - (card.offsetTop + card.offsetHeight / 2);
+				},
+			});
+		}
+		on_step2_center();
+
+		gsap.to(on_step2_cards, {
+			x: 0,
+			y: 0,
+			duration: 1,
+			ease: "power3.out",
+			stagger: .15,
+			scrollTrigger: {
+				trigger: on_step2_wrap,
+				start: "top 85%",
+			},
+		});
+
+		return function () {
+			gsap.set(on_step2_cards, { clearProps: "all" });
+		};
+	});
+}
+
 // choose-2-slider-img
 if ($(".on_c2_slider").length) {
 	var on_choose2_swiper = new Swiper(".on_c2_slider", {
@@ -795,6 +858,40 @@ if ($(".on_c2_slider").length) {
 			prevEl: ".on-choose-2-slider-btn.has-left",
 			nextEl: ".on-choose-2-slider-btn.has-right",
 		},
+	});
+}
+
+// footer-2-title-ripple — hovering a letter lifts it, with its neighbours
+// following in a shrinking wave on either side; anything past the falloff
+// list just rests at 0
+if ($(".on-footer-2-title").length) {
+	gsap.registerPlugin(SplitText);
+
+	var on_footer2_title = document.querySelector(".on-footer-2-title");
+	var on_footer2_chars = new SplitText(on_footer2_title, { type: "chars" }).chars;
+	var on_footer2_falloff = [20, 16, 14, 12, 10, 8, 6, 4, 0];
+
+	on_footer2_chars.forEach(function (on_footer2_char, on_footer2_index) {
+		on_footer2_char.addEventListener("mouseenter", function () {
+			gsap.to(on_footer2_chars, {
+				y: function (i) {
+					var distance = Math.abs(i - on_footer2_index);
+					return -(on_footer2_falloff[distance] || 0);
+				},
+				duration: .4,
+				ease: "power2.out",
+				overwrite: true,
+			});
+		});
+	});
+
+	on_footer2_title.addEventListener("mouseleave", function () {
+		gsap.to(on_footer2_chars, {
+			y: 0,
+			duration: .4,
+			ease: "power2.out",
+			overwrite: true,
+		});
 	});
 }
 

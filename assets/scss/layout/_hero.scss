@@ -649,6 +649,7 @@
                 line-height: 24px;
                 color: #fff;
                 margin-bottom: 0;
+                opacity: 80%;
             }
 
             @media #{$xxxl} {
@@ -775,7 +776,7 @@
             margin-right: 80px;
 
             img {
-                opacity: .45;
+                opacity: .75;
             }
         }
 

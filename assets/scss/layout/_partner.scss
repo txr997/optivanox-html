@@ -75,6 +75,10 @@
         .on-pr-btn-2 {
             width: 100%;
             justify-content: center;
+            &:hover {
+                background-color: var(--on-clr-pr-2);
+                color: #fff;
+            }
         }
 
         @media #{$xl} {

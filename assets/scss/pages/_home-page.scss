@@ -20,35 +20,14 @@
     }
 }
 
-.ot-home-1 {
-    background-color: #F4F6FF;
-}
-
-.ot-home-2 {
-    background-color: #F4F6FF;
-}
-
-
-
-
-.ag-home-3 {
-    background-color: #F5F5F5;
-
-
-    .wa-back-to-top {
-        background-color: var(--ag-clr-h-1);
-
-        &:hover svg * {
-            fill: var(--ag-clr-h-1);
-        }
-    }
-
+.on-home-2 {
     @media #{$over,$xxxl,$xxl} {
         &::-webkit-scrollbar-thumb {
-            background: var(--ag-clr-gd-3);
+            background: var(--on-clr-pr-2);
         }
     }
 }
+
 
 
 

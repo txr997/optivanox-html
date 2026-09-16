@@ -1248,6 +1248,7 @@
             width: 60px;
             height: 60px;
             margin-bottom: 24px;
+            transition: var(--on-cube-1);
 
             svg {
                 width: 100%;
@@ -1263,6 +1264,12 @@
 
         .text-elm {
             font-size: 16px;
+        }
+
+        &:hover {
+            .icon-elm {
+                transform: translateY(-6px) rotate(-6deg);
+            }
         }
     }
 

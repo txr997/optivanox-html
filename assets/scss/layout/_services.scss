@@ -746,6 +746,13 @@
                 padding: 10px 20px;
                 display: flex;
                 align-items: center;
+                transition: var(--on-cube-1);
+            }
+
+            &:hover {
+                .text {
+                    color: var(--on-clr-pr-2);
+                }
             }
         }
 

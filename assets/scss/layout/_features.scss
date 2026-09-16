@@ -533,6 +533,7 @@
             max-height: 100px;
             width: auto;
             margin-bottom: 56px;
+            transition: var(--on-cube-1);
         }
 
         .title-elm {
@@ -550,6 +551,12 @@
             font-weight: 400;
             line-height: 1.555;
             color: var(--on-clr-p-2);
+        }
+
+        &:hover {
+            .icon-elm {
+                transform: translateY(-6px) rotate(-6deg);
+            }
         }
 
         @media #{$lg} {
