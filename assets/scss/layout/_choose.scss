@@ -1381,7 +1381,9 @@
         .on-pr-btn-3 {
             width: 100%;
             justify-content: center;
-            background-color: #fff;
+            /* the wipe layer reads this too, so it blends with the white
+               rest state instead of covering it in the component's blue */
+            --on-btn-bg: #fff;
             color: var(--on-clr-pr-2);
         }
 

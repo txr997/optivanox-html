@@ -655,7 +655,7 @@
 
     &-trigger-pin {
         position: sticky;
-        top: 100px;
+        top: 40px;
         /* the runway has collapsed, so there is nothing left to hold against */
         @media #{$xl,$lg,$md,$xs} {
             position: static;
@@ -663,6 +663,12 @@
     }
 
     &-wrap {
+        /* the fan-out math in main.js reads each card's offsetTop/offsetLeft,
+           which are measured against the nearest positioned ancestor — without
+           this, that's trigger-pin (sticky), so the title sitting above the
+           wrap in there inflates every card's offsetTop by the title's own
+           height and the whole stack launches that far too high */
+        position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 20px;

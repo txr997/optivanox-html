@@ -1001,6 +1001,12 @@
 
     &-content {
         &-btn {
+            /* z-index:auto here wouldn't open its own stacking context, so
+               the line's negative z-index would escape past this wrap and
+               compare against unrelated ancestors instead of just the
+               buttons sitting next to it */
+            position: relative;
+            z-index: 0;
             display: flex;
             align-items: center;
             justify-content: end;

@@ -183,7 +183,10 @@
     with an overshoot — bigger and livelier than a simple colour swap
 */
 .on-pr-btn-3 {
-    /* re-coloured variants (frosted, dark panels) just flip this one flood */
+    /* re-coloured variants (frosted, dark panels) just flip these two —
+       --on-btn-bg is the rest colour (also what the wipe layer blends into
+       so it's invisible until hover), --on-btn-flood is what hover reveals */
+    --on-btn-bg: var(--on-clr-pr-2);
     --on-btn-flood: var(--on-clr-h-2);
 
     position: relative;
@@ -196,25 +199,26 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background-color: var(--on-clr-pr-2);
+    background-color: var(--on-btn-bg);
     border-radius: 8px;
     padding: 14px 27px;
     transition: transform .45s cubic-bezier(.34, 1.56, .64, 1), box-shadow .4s ease;
 
-    /* wider than the pill and skewed, so the diagonal edge clears both
-       corners as it wipes across instead of leaving a sliver uncovered */
-    &::before {
-        content: "";
+    .btn-bg-clr {
         position: absolute;
-        top: 0;
-        left: -25%;
-        z-index: -1;
-        width: 150%;
+        inset: 0;
+        width: 100%;
         height: 100%;
-        background-color: var(--on-btn-flood);
-        transform: translateX(-100%) skewX(-18deg);
-        transition: transform .5s cubic-bezier(.65, 0, .35, 1);
-        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+
+        span {
+            background-color: var(--on-btn-bg);
+            height: 100%;
+            width: 100%;
+            transition: var(--on-cube-1);
+            transform-origin: bottom center;
+        }
     }
 
     .icon,
@@ -236,13 +240,13 @@
     /* doubled class — sections that re-colour this pill land later in the
        cascade at equal weight and would otherwise win the tie, see §11 */
     &#{&}:hover {
-        transform: scale(1.03);
         color: #fff;
-
-        &::before {
-            transform: translateX(0) skewX(-18deg);
+        background-color: var(--on-btn-flood);
+        .btn-bg-clr {
+            span {
+                transform: scaleY(0);
+            }
         }
-
         .text {
             transform: translateX(-2px);
         }
@@ -253,11 +257,13 @@
     }
 
     &:is(.has-v2) {
+        /* the wipe layer would otherwise sit opaque over the frosted panel */
+        --on-btn-bg: transparent;
         --on-btn-flood: var(--on-clr-pr-2);
 
-        background: rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.14);
         border: 1px solid rgba(255, 255, 255, 0.16);
-        backdrop-filter: blur(6px);
+        backdrop-filter: blur(14px);
         border-radius: 8px;
     }
 }

@@ -295,7 +295,7 @@ if ($(".on-hero-2-slider").length) {
 		gsap.set(on_hero2_item.querySelector(".bg-clr"), { opacity: 0, x: -40, y: 60 });
 		gsap.set(on_hero2_item.querySelector(".on-hero-2-title"), { y: 50, opacity: 0 });
 		gsap.set(on_hero2_item.querySelector(".on-hero-2-disc"), { y: 24, opacity: 0 });
-		gsap.set(on_hero2_item.querySelectorAll(".on-hero-2-content-btn > .on-pr-btn-3"), { clipPath: "inset(100% 0% 0% 0%)", y: 12 });
+		gsap.set(on_hero2_item.querySelectorAll(".on-hero-2-content-btn .on-pr-btn-3"), { clipPath: "inset(100% 0% 0% 0%)", y: 12 });
 		gsap.set(on_hero2_item.querySelector(".on-hero-2-content-btn-line"), { scaleX: 0 });
 	};
 
@@ -307,7 +307,7 @@ if ($(".on-hero-2-slider").length) {
 		var on_hero2_bg_clr = on_hero2_item.querySelector(".bg-clr");
 		var on_hero2_title = on_hero2_item.querySelector(".on-hero-2-title");
 		var on_hero2_disc = on_hero2_item.querySelector(".on-hero-2-disc");
-		var on_hero2_btns = on_hero2_item.querySelectorAll(".on-hero-2-content-btn > .on-pr-btn-3");
+		var on_hero2_btns = on_hero2_item.querySelectorAll(".on-hero-2-content-btn .on-pr-btn-3");
 		var on_hero2_btn_line = on_hero2_item.querySelector(".on-hero-2-content-btn-line");
 
 		gsap.set(on_hero2_bg_img, { scale: 1 });
@@ -747,7 +747,7 @@ if ($(".on-award-x-contact").length) {
 if ($(".on-testimonial-2-area").length) {
 	gsap.matchMedia().add("(min-width: 1400px)", function () {
 		var on_testimonial2_cards = gsap.utils.toArray(".on-testimonial-2-card-single");
-		var on_testimonial2_rotate = [-3, -2, -1];
+		var on_testimonial2_rotate = [-3, -2, 0];
 
 		gsap.set(on_testimonial2_cards, { rotate: -103, autoAlpha: 0 });
 
@@ -756,7 +756,7 @@ if ($(".on-testimonial-2-area").length) {
 			scrollTrigger: {
 				trigger: ".on-testimonial-2-area",
 				start: "top top",
-				end: "bottom bottom",
+				end: "bottom 120%",
 				scrub: .5,
 				invalidateOnRefresh: true,
 				markers: false,

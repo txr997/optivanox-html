@@ -713,7 +713,9 @@
 
         .on-pr-btn-3 {
             border: 2px solid rgb(5 5 25 / 16%);
-            background: transparent;
+            /* the wipe layer reads this too, so it stays invisible against
+               the outline instead of covering it in the component's blue */
+            --on-btn-bg: transparent;
             color: var(--on-clr-pr-2);
         }
     }

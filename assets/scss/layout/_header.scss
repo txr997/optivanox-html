@@ -649,7 +649,9 @@
 
         .on-pr-btn-3 {
             padding: 8px 16px;
-            background-color: #366177;
+            /* the wipe layer reads this too, so the rest state stays flat
+               instead of flashing the component's default blue underneath */
+            --on-btn-bg: #366177;
 
             @media #{$xs} {
                 display: none;
