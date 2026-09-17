@@ -585,3 +585,257 @@
 /*
     features-2-end
 */
+
+/*
+    core-features-start
+*/
+.on-core-features-3 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        padding: 8px 0;
+    }
+
+    &-container {
+        max-width: 1904px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1.85fr 1fr;
+        gap: 8px;
+
+        @media #{$lg} {
+            gap: 16px;
+        }
+
+        @media #{$md,$xs} {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
+
+    &-item {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        min-height: 360px;
+
+        .content-elm {
+            position: relative;
+            z-index: 2;
+            padding: 32px 28px 0;
+        }
+
+        .title-elm {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        /* bordered card shared by v1 (photo) and v3 (graph) */
+        &:is(.has-v1, .has-v3) {
+            border: 2px solid rgba(20, 28, 20, 0.08);
+        }
+
+        &:is(.has-v2) {
+            background-color: #F1F6EF;
+            overflow: visible;
+        }
+
+        &:is(.has-v2) .title-elm {
+            font-size: 26px;
+            max-width: 360px;
+        }
+
+        /* the desc sits low, next to the photo/rate-card rather than under the title */
+        &:is(.has-v2) .text-elm {
+            margin-top: 97px;
+            max-width: 380px;
+        }
+
+        /* v1 — photo pinned to the bottom edge */
+        &:is(.has-v1) .img-elm {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            height: 160px;
+            border-radius: 8px;
+            background-color: var(--on-clr-h-3);
+
+            img {
+                mix-blend-mode: luminosity;
+            }
+        }
+
+        /* v2 — photo pinned to the right edge, full height */
+        &:is(.has-v2) .img-elm {
+            position: absolute;
+            right: 14px;
+            top: 14px;
+            bottom: 14px;
+            width: 42%;
+            border-radius: 8px;
+        }
+        &:is(.has-v3) {
+            background-color: #fff;
+            .text-elm {
+                max-width: 280px;
+            }
+        }
+
+        /* the success-rate widget is a single pre-built graphic, floated over
+           the seam between the copy and the photo */
+        .rate-elm {
+            position: absolute;
+            left: 47%;
+            top: 24%;
+            z-index: 1;
+            width: 28%;
+            filter: drop-shadow(7px 10px 44px rgba(0, 0, 0, 0.16));
+
+            img {
+                width: 100%;
+                display: block;
+            }
+        }
+
+        /* v3 — the line-chart graphic plus the real axis numbers and callout,
+           kept as text so they stay in the buyer's markup, not baked into the PNG */
+        .graph-elm {
+            position: absolute;
+            left: 5%;
+            right: 5%;
+            bottom: 19px;
+
+            img {
+                width: 100%;
+                display: block;
+            }
+
+        }
+
+        @media #{$xxl} {
+            min-height: 320px;
+
+            &:is(.has-v2) .text-elm {
+                margin-top: 90px;
+            }
+        }
+
+        @media #{$xl} {
+            min-height: 300px;
+
+            &:is(.has-v1) .img-elm {
+                height: 140px;
+            }
+
+            &:is(.has-v2) .text-elm {
+                margin-top: 75px;
+            }
+
+            .rate-elm {
+                top: 20%;
+            }
+        }
+
+        @media #{$lg} {
+            min-height: 280px;
+
+            .content-elm {
+                padding: 22px 22px 0;
+            }
+
+            .title-elm {
+                font-size: 19px;
+            }
+
+            &:is(.has-v1) .img-elm {
+                left: 8px;
+                right: 8px;
+                bottom: 8px;
+                height: 110px;
+            }
+
+            &:is(.has-v2) .title-elm {
+                font-size: 22px;
+            }
+
+            &:is(.has-v2) .text-elm {
+                margin-top: 30px;
+            }
+
+            .rate-elm {
+                width: 36%;
+                min-width: 0;
+            }
+        }
+
+        /* stacked layout — every element drops back into normal flow so
+           nothing needs a fixed card height to sit against */
+        @media #{$md,$xs} {
+            min-height: auto;
+            padding-bottom: 24px;
+
+            .content-elm {
+                padding: 24px 24px 0;
+            }
+
+            &:is(.has-v2) .title-elm,
+            &:is(.has-v2) .text-elm {
+                max-width: 100%;
+            }
+
+            &:is(.has-v2) .text-elm {
+                margin-top: 16px;
+            }
+
+            &:is(.has-v1) .img-elm {
+                position: relative;
+                inset: auto;
+                width: auto;
+                height: 200px;
+                margin: 20px 20px 0;
+            }
+
+            &:is(.has-v2) .img-elm {
+                position: relative;
+                inset: auto;
+                width: auto;
+                height: 260px;
+                margin: 20px 20px 0;
+            }
+
+            .rate-elm {
+                position: relative;
+                left: auto;
+                top: auto;
+                width: 220px;
+                max-width: 60%;
+                margin: -60px 0 0 20px;
+            }
+
+            .graph-elm {
+                position: relative;
+                left: auto;
+                right: auto;
+                top: auto;
+                margin: 20px 20px 0;
+            }
+        }
+
+        @media #{$xs} {
+            .rate-elm {
+                max-width: 70%;
+                margin-top: -40px;
+            }
+        }
+    }
+}
+/*
+    core-features-end
+*/

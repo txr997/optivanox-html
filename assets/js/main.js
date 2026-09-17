@@ -895,4 +895,70 @@ if ($(".on-footer-2-title").length) {
 	});
 }
 
+// core-features-3-card-scroll-settle — the rate widget starts thrown off to
+// the side, then settles into its authored position once scrolled into view
+if ($(".has-scroll-ani-card-1").length) {
+	gsap.matchMedia().add("(min-width: 1800px)", function () {
+		var on_core_features3_settle_rate = gsap.utils.toArray(".has-scroll-ani-card-1");
+
+		gsap.set(on_core_features3_settle_rate, {
+			x: 640,
+			y: -710,
+		});
+
+		gsap.to(on_core_features3_settle_rate, {
+			x: 0,
+			y: 0,
+			duration: 1.2,
+			ease: "power3.out",
+			scrollTrigger: {
+				trigger: ".on-core-features-3-area",
+				start: "top 80%",
+				end: "bottom 50%",
+				scrub: true,
+			},
+		});
+
+		return function () {
+			gsap.set(on_core_features3_settle_rate, { clearProps: "all" });
+		};
+	});
+}
+
+// core-features-3-card-scroll-settle — the card starts thrown up-left, scaled
+// down and skewed, then settles into its authored position once scrolled into view
+if ($(".has-scroll-ani-card-2").length) {
+	gsap.matchMedia().add("(min-width: 1800px)", function () {
+		var on_core_features3_settle_cards = gsap.utils.toArray(".has-scroll-ani-card-2");
+
+		gsap.set(on_core_features3_settle_cards, {
+			x: -596,
+			y: -483,
+			scaleX: .7,
+			scaleY: .7,
+			skewX: -18,
+		});
+
+		gsap.to(on_core_features3_settle_cards, {
+			x: 0,
+			y: 0,
+			scaleX: 1,
+			scaleY: 1,
+			skewX: 0,
+			duration: 1.2,
+			ease: "power3.out",
+			scrollTrigger: {
+				trigger: ".on-core-features-3-area",
+				start: "top 80%",
+				end: "bottom 50%",
+				scrub: true,
+			},
+		});
+
+		return function () {
+			gsap.set(on_core_features3_settle_cards, { clearProps: "all" });
+		};
+	});
+}
+
 })(jQuery);

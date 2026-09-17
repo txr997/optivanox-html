@@ -268,6 +268,109 @@
     }
 }
 
+.on-pr-btn-4 {
+    font-family: var(--on-font-2);
+    display: inline-flex;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+    color: var(--on-clr-h-3);
+    position: relative;
+    z-index: 1;
+    transition: var(--on-cube-1);
+    align-items: center;
+
+    .text {
+        padding: 18px 20px;
+        transition: var(--on-cube-1);
+    }
+    
+    .icon {
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        position: relative;
+        z-index: 1;
+        transition: var(--on-cube-1);
+
+        i {
+            transition: var(--on-cube-1);
+        }
+    }
+
+    &::after {
+        content: "";
+        width: calc(100% - 56px);
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: linear-gradient(270deg, rgba(69, 252, 145, 0) 0%, rgba(41, 150, 86, 0.5) 100%), #45FC91;
+        border: 2px solid #45FC91;
+        border-radius: 12px;
+        z-index: -1;
+        transition: var(--on-cube-1);
+    }
+
+    &::before {
+        content: "";
+        width: 56px;
+        height: 56px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: linear-gradient(270deg, rgba(41, 150, 86, 0.5) 0%, rgba(69, 252, 145, 0) 100%), #45FC91;
+        border: 2px solid #45FC91;
+        border-radius: 12px;
+        z-index: -1;
+        transition: var(--on-cube-1);
+    }
+
+
+    .bg-shape-1 {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 23px;
+        background: #45fc91;
+        border-radius: 0 12px 12px 0;
+        z-index: -4;
+    }
+
+    .bg-shape-2 {
+        position: absolute;
+        right: 10px;
+        top: 0;
+        height: 100%;
+        width: 25px;
+        background: #39d077;
+        border-radius: 0 12px 12px 0;
+        z-index: -3;
+    }
+
+    &:hover {
+        &::after {
+            width: calc(100% - 20px);
+        }
+
+        &::before {
+            transform: translateX(-20px);
+            opacity: 0;
+        }
+        .icon {
+            transform: translateX(-20px);
+
+            i {
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+}
 /*
     button-end
 */

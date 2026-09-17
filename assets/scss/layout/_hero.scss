@@ -1102,3 +1102,135 @@
 /*
     hero-2-end
 */
+
+/*
+    hero-3-start
+*/
+.on-hero-3 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #F4F7F3;
+        padding-top: 250px;
+        padding-bottom: 290px;
+
+        @media #{$lg,$md,$xs} {
+            padding-top: 180px;
+            padding-bottom: 180px;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            left: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(69, 252, 145, 0) 0%, #45FC91 53.85%, rgba(69, 252, 145, 0) 100%);
+        }
+    }
+
+    &-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(270deg, rgba(244, 247, 243, 0%) 30%, #F4F7F3 75%);
+            bottom: 0;
+            left: 0;
+            z-index: -2;
+        }
+
+        .img-elm {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 88%;
+            height: 100%;
+            z-index: -3;
+        }
+
+        /* pre-blurred glow assets, cheaper than a live CSS blur filter */
+        .glow-elm {
+            position: absolute;
+            pointer-events: none;
+            z-index: -1;
+            &:is(.has-v1) {
+                left: 0;
+                top: 0%;
+                width: 29%;
+            }
+
+            &:is(.has-v2) {
+                right: 0;
+                bottom: 0;
+                width: 38%;
+                text-align: right;
+            }
+
+            @media #{$lg,$md,$xs} {
+                display: none;
+            }
+        }
+    }
+
+
+
+    &-content {
+        position: relative;
+        z-index: 1;
+        max-width: 652px;
+    }
+
+    &-title {
+        font-size: 64px;
+        line-height: 1.125;
+        margin-bottom: 20px;
+
+        @media #{$xxxl} {
+            font-size: 58px;
+        }
+
+        @media #{$xxl} {
+            font-size: 52px;
+        }
+
+        @media #{$xl} {
+            font-size: 46px;
+        }
+
+        @media #{$lg} {
+            font-size: 40px;
+        }
+
+        @media #{$md} {
+            font-size: 38px;
+        }
+
+        @media #{$xs} {
+            font-size: 36px;
+        }
+
+        @media #{$sm} {
+            font-size: 32px;
+        }
+    }
+
+    &-disc {
+        max-width: 670px;
+        margin-bottom: 30px;
+
+        @media #{$md,$xs} {
+            margin-bottom: 24px;
+        }
+    }
+}
+/*
+    hero-3-end
+*/
