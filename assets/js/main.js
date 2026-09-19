@@ -961,4 +961,77 @@ if ($(".has-scroll-ani-card-2").length) {
 	});
 }
 
+// services-3-scroll-stack — the rail sits pinned while scroll drives the
+// timeline directly: each image/box climbs over the one before it in step
+// with the scrub, and the fill rail grows the same way, not in jumps
+if ($(".on-services-3-area").length) {
+	gsap.matchMedia().add("(min-width: 1400px)", function () {
+		var on_services3_items = gsap.utils.toArray(".on-services-3-item-single");
+		var on_services3_imgs = gsap.utils.toArray(".on-services-3-item-img .single-img");
+		var on_services3_boxes = gsap.utils.toArray(".on-services-3-item-disc .single-box");
+		var on_services3_bar = document.querySelector(".on-services-3-scroll .scroll-bar");
+		var on_services3_steps = on_services3_items.length - 1;
+
+		function on_services3_mark(index) {
+			on_services3_items.forEach(function (item, i) {
+				item.classList.toggle("active", i === index);
+			});
+		}
+
+		// the first image/box is already in place; the rest wait below the frame
+		gsap.set(on_services3_imgs.slice(1), { yPercent: 100 });
+		gsap.set(on_services3_boxes.slice(1), { yPercent: 100 });
+		gsap.set(on_services3_bar, { height: "0%" });
+
+		var on_services3_tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: ".on-services-3-height",
+				start: "top top",
+				end: "bottom bottom",
+				scrub: true,
+				invalidateOnRefresh: true,
+				onUpdate: function (self) {
+					on_services3_mark(Math.round(self.progress * on_services3_steps));
+				},
+			},
+		});
+
+		on_services3_tl.fromTo(on_services3_bar, {
+			height: "0%",
+		}, {
+			height: "100%",
+			duration: on_services3_steps,
+			ease: "none",
+		}, 0);
+
+		on_services3_imgs.slice(1).forEach(function (img, index) {
+			on_services3_tl.to(img, { yPercent: 0, duration: 1, ease: "none" }, index);
+		});
+
+		on_services3_boxes.slice(1).forEach(function (box, index) {
+			on_services3_tl.to(box, { yPercent: 0, duration: 1, ease: "none" }, index);
+		});
+
+		return function () {
+			on_services3_mark(0);
+			gsap.set([on_services3_imgs, on_services3_boxes, on_services3_bar], { clearProps: "all" });
+		};
+	});
+}
+
+// team-3-swiper — a plain row of member cards, drag/peek only, no arrows or
+// dots in the design
+if ($(".on-team-3-swiper").length) {
+	var on_team3_swiper = new Swiper(".on-team-3-swiper", {
+		loop: true,
+		speed: 800,
+		spaceBetween: 20,
+		slidesPerView: "auto",
+		// autoplay: {
+		// 	delay: 5000,
+		// 	disableOnInteraction: false,
+		// },
+	});
+}
+
 })(jQuery);

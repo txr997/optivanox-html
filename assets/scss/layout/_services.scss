@@ -811,17 +811,42 @@
 .on-services-3 {
     &-area {
         background-color: var(--on-clr-h-3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+
+        /* the pin is off down here, so this goes back to an ordinary padded section */
+        @media #{$xl,$lg,$md,$xs} {
+            height: auto;
+            padding: 100px 0;
+        }
+
+        @media #{$md,$xs} {
+            padding: 70px 0;
+        }
     }
     &-sec-title {
         .on-sec-title-3 {
             color: #fff;
         }
-        
+
     }
     &-wrap {
         display: grid;
         grid-template-columns: auto 1fr 1.18fr;
         gap: 20px;
+
+        /* the rail is dropped, so the two remaining columns share the row */
+        @media #{$xl,$lg,$md,$xs} {
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media #{$md,$xs} {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
     }
 
     &-scroll {
@@ -833,8 +858,27 @@
 
         .scroll-bar {
             width: 3px;
-            height: 160px;
+            height: 20%;
             background: var(--on-clr-pr-3);
+            border-radius: 20px;
+            transition: var(--on-cube-1);
+        }
+
+        &::after {
+            content: "";
+            width: 1px;
+            height: 100%;
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 1px;
+            opacity: 24%;
+            z-index: -1;
+        }
+
+        /* the fill only ever means something while the scrub is running */
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
         }
     }
 
@@ -852,20 +896,255 @@
             align-items: center;
             gap: 12px;
             padding: 35px 36px;
-
+            backdrop-filter: blur(6px);
+            font-weight: 500;
+            transition: var(--on-cube-1);
             .number {
                 font-size: 18px;
                 color: var(--on-clr-pr-3);
-
+                transition: var(--on-cube-1);
             }
 
             span {
                 color: var(--on-clr-pr-3);
             }
+
+            &:is(.active) {
+                background: #141C14;
+                box-shadow: inset 0px 0px 10px #45FC91;
+                backdrop-filter: blur(6px);
+                color: #fff;
+            }
+
+            @media #{$xxl} {
+                font-size: 22px;
+                padding: 28px 30px;
+            }
+
+            @media #{$xl,$lg} {
+                font-size: 20px;
+                padding: 24px 22px;
+                gap: 10px;
+            }
+
+            @media #{$md,$xs} {
+                font-size: 18px;
+                padding: 20px 22px;
+                gap: 8px;
+
+                .number {
+                    font-size: 15px;
+                }
+            }
+        }
+
+        &-img {
+            height: 324px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+
+            .single-img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 20px;
+                &:is(.active) {
+                    transform: translateY(0%);
+                }
+            }
+
+            @media #{$xxl} {
+                height: 290px;
+            }
+
+            /* every service's image shows as its own stacked card once the scrub is off */
+            @media #{$xl,$lg,$md,$xs} {
+                height: auto;
+                overflow: visible;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                .single-img {
+                    position: relative;
+                    inset: auto;
+                    width: 100%;
+                    height: 260px;
+                    transform: none;
+                }
+            }
+
+            @media #{$md} {
+                .single-img {
+                    height: 320px;
+                }
+            }
+
+            @media #{$xs} {
+                .single-img {
+                    height: 220px;
+                }
+            }
+        }
+
+        &-disc {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            min-height: 194px;
+            border-radius: 20px;
+
+            .single-box {
+                background: #313831;
+                border-radius: 20px;
+                text-align: center;
+                padding: 26px 50px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                &:is(.active) {
+                    transform: translateY(0%);
+                }
+
+                @media #{$xl,$lg} {
+                    padding: 22px 28px;
+                }
+
+                @media #{$md,$xs} {
+                    padding: 20px 22px;
+                }
+            }
+
+            /* every service's description shows as its own card once the scrub is off */
+            @media #{$xl,$lg,$md,$xs} {
+                min-height: auto;
+                overflow: visible;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                .single-box {
+                    position: relative;
+                    top: auto;
+                    left: auto;
+                    width: 100%;
+                    transform: none;
+                }
+            }
+
+            .disc {
+                color: #fff;
+                opacity: 100%;
+                margin-bottom: 20px;
+            }
+
+            .item-btn {
+                font-family: var(--on-font-2);
+                font-weight: 500;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 4px;
+                padding-left: 12px;
+                border: 1px solid rgb(255 255 255 / 32%);
+                border-radius: 8px;
+                color: #fff;
+                font-size: 15px;
+
+                .icon {
+                    width: 28px;
+                    height: 28px;
+                    background: #45FC91;
+                    background: linear-gradient(130deg,rgba(69, 252, 145, 1) 0%, rgba(20, 28, 20, 1) 30%, rgba(0, 0, 0, 1) 70%, rgba(69, 252, 145, 1) 100%);
+                    border-radius: 6px;
+                    color: var(--on-clr-pr-3);
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+        
+    }
+
+
+    &-all-btn {
+        text-align: center;
+        color: rgb(255 255 255 / 80%);
+
+        .btn-elm {
+            color: var(--on-clr-pr-3);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        @media #{$xs} {
+            font-size: 15px;
+        }
+    }
+
+
+    &-bg {
+        &-glow-1 {
+            width: 47%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        &-glow-2 {
+            text-align: right;
+            width: 38%;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        /* decorative only — not worth the bandwidth or the layout risk on phones */
+        &-glow-1,
+        &-glow-2 {
+            @media #{$lg,$md,$xs} {
+                display: none;
+            }
+        }
+    }
+    
+    
+}
+
+
+.on-services-3 {
+    /*
+        main — the wrap holds still while the height div under it scrolls past,
+        which is what lets the rail, image and description step through
+    */
+    &-height {
+        height: 400vh;
+        position: relative;
+        z-index: 1;
+
+        /* the effect is off down here, so it must not reserve scroll height */
+        @media #{$xl,$lg,$md,$xs} {
+            height: auto;
+        }
+    }
+
+    &-pin {
+        position: sticky;
+        top: 0;
+
+        /* the height div has collapsed, so there is nothing left to hold against */
+        @media #{$xl,$lg,$md,$xs} {
+            position: static;
         }
     }
 }
-
 /*
     services-3-end
 */

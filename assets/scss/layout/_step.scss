@@ -204,3 +204,100 @@
 /*
     step-2-end
 */
+
+/*
+    step-3-start
+*/
+.on-step-3 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        background-color: #F4F7F3;
+
+
+    }
+
+    &-sec-title {
+        max-width: 894px;
+        margin: 0 auto 60px;
+        text-align: center;
+
+        .on-subtitle-3 {
+            justify-content: center;
+        }
+
+        @media #{$md,$xs} {
+            margin-bottom: 44px;
+        }
+    }
+
+    &-cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+
+        @media #{$lg,$md} {
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 48px;
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+            row-gap: 40px;
+        }
+    }
+
+    &-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        /* connector to the next step — sized to exactly span the grid gap,
+           so one card only ever needs to know about the card after it */
+        &:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 34px;
+            left: 69%;
+            width: 74%;
+            height: 1px;
+            background-color: #141C14;
+            opacity: 60%;
+        }
+
+        @media #{$lg,$md,$xs} {
+            &:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        .icon-elm {
+            width: 68px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(0deg, var(--on-clr-h-3) 0%, #0CB351 100%);
+            margin-bottom: 28px;
+
+            img {
+                width: 26px;
+            }
+        }
+
+        .title-elm {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .text-elm {
+            margin-bottom: 0;
+        }
+    }
+}
+/*
+    step-3-end
+*/

@@ -1,0 +1,231 @@
+@use '../abstracts/variables' as *;
+
+/*
+    cta-3-start
+*/
+.on-cta-3 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        height: 998px;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 100px;
+
+        @media #{$xxl} {
+            height: 820px;
+        }
+
+        @media #{$xl} {
+            height: 680px;
+        }
+
+        @media #{$lg} {
+            height: auto;
+            padding: 260px 0 70px;
+        }
+
+        @media #{$md,$xs} {
+            display: block;
+            height: auto;
+        }
+
+        @media #{$md} {
+            padding: 200px 0 60px;
+        }
+
+        @media #{$xs} {
+            padding: 150px 0 50px;
+        }
+    }
+
+    /* the office photo, tinted and faded to black where the copy sits */
+    &-bg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -3;
+        height: 732px;
+        background: linear-gradient(0deg, rgba(202, 210, 198, 0) 0%, rgba(202, 210, 198, 0.3) 34.62%, #CAD2C6 100%);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        @media #{$xxl} {
+            height: 620px;
+        }
+
+        @media #{$xl} {
+            height: 520px;
+        }
+
+        @media #{$lg,$md,$xs} {
+            height: 100%;
+        }
+
+
+    }
+
+    /* giant name run, sitting behind the photo on the plain black band */
+    &-marquee {
+        position: absolute;
+        left: 0;
+        top: 130px;
+        z-index: -2;
+        width: 100%;
+        pointer-events: none;
+
+        .text-elm {
+            font-family: var(--on-font-2);
+            font-weight: 700;
+            font-size: 200px;
+            line-height: 1;
+            color: #cad2c6;
+            white-space: nowrap;
+            margin: 0 40px 0 0;
+            text-transform: uppercase;
+        }
+
+        @media #{$xxl} {
+            top: 100px;
+
+            .text-elm {
+                font-size: 160px;
+            }
+        }
+
+        @media #{$xl} {
+            top: 76px;
+
+            .text-elm {
+                font-size: 120px;
+            }
+        }
+
+        @media #{$lg} {
+            top: 56px;
+
+            .text-elm {
+                font-size: 90px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-photo {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+        pointer-events: none;
+        text-align: center;
+        width: 100%;
+
+        img {
+            display: inline-block;
+            width: 78%;
+        }
+
+        &::after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            height: 428px;
+            background: linear-gradient(180deg, rgba(202, 210, 198, 0) 0%, #141C14 100%);
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+        }
+    }
+
+    &-sec-title {
+        position: relative;
+        z-index: 1;
+        max-width: 660px;
+
+        .on-sec-title-3 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 36px;
+        }
+    }
+
+    /* pill + angled offcut tab, pinned to the section's own corner */
+    &-contact {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        display: flex;
+        align-items: stretch;
+
+        .box-elm {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 24px 30px;
+            background-color: #10ECB0;
+        }
+
+        .icon {
+            flex: 0 0 auto;
+            color: #000;
+            font-size: 18px;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-1);
+            font-size: 18px;
+            color: var(--on-clr-h-3);
+            margin-bottom: 0;
+            white-space: nowrap;
+
+            .num-elm {
+                font-weight: 600;
+            }
+        }
+
+        .tab-elm {
+            flex: 0 0 60px;
+            width: 60px;
+            background-color: #097759;
+            clip-path: polygon(0 0, 100% 100%, 0% 100%);
+        }
+
+        @media #{$lg} {
+            .box-elm {
+                padding: 20px 24px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            position: static;
+            margin-top: 40px;
+
+            .box-elm {
+                padding: 18px 22px;
+            }
+
+            .text-elm {
+                font-size: 15px;
+                white-space: normal;
+            }
+
+            .tab-elm {
+                display: none;
+            }
+        }
+    }
+}
+/*
+    cta-3-end
+*/
