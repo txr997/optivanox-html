@@ -426,3 +426,183 @@
 /*
     award-2-end
 */
+
+/*
+    award-3-start
+*/
+.on-award-3 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: var(--on-clr-h-3);
+    }
+
+    /* diamond-texture wash at the true left edge — the portrait's own
+       transparent margin is what lets it show through */
+    &-bg-pattern {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 0;
+        width: 20%;
+        max-width: 371px;
+        height: 100%;
+        opacity: .6;
+        mix-blend-mode: luminosity;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media #{$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    /* the same two-colleagues photo used at 15% opacity, purely as a right-edge texture */
+    &-bg-img {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 0;
+        width: 28%;
+        max-width: 420px;
+        height: 100%;
+        mix-blend-mode: luminosity;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media #{$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-glow {
+        position: absolute;
+        z-index: 0;
+        width: 302px;
+        height: 302px;
+        border-radius: 50%;
+        filter: blur(152px);
+        pointer-events: none;
+
+        &:is(.has-v1) {
+            right: 4%;
+            top: -20%;
+            background-color: #0cb351;
+        }
+
+        &:is(.has-v2) {
+            left: 26%;
+            bottom: -30%;
+            background-color: var(--on-clr-pr-3);
+        }
+
+        @media #{$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    
+
+    /* the portrait bleeds past the row's own top/bottom edge — that's the look */
+    &-photo {
+        position: absolute;
+        bottom: -190px;
+        left: 0;
+        mix-blend-mode: luminosity;
+    }
+
+    &-content {
+        position: relative;
+        z-index: 1;
+        margin-left: auto;
+        max-width: 1060px;
+
+        @media #{$over} {
+            margin-right: -100px;
+        }
+    }
+
+    &-sec-title {
+        max-width: 570px;
+        margin-bottom: 68px;
+
+        .on-sec-title-3 {
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .on-p-3 {
+            color: rgb(255 255 255 / 80%);
+        }
+
+        @media #{$lg,$md,$xs} {
+            margin-bottom: 44px;
+        }
+
+        @media #{$md,$xs} {
+            margin-bottom: 36px;
+        }
+    }
+
+    &-slider {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-left: 80px;
+
+        @media #{$xl,$lg,$md,$xs} {
+            margin-left: 0;
+        }
+
+        .nav-elm {
+            flex: none;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgb(255 255 255 / 10%);
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--on-cube-1);
+
+            &:hover {
+                background-color: var(--on-clr-pr-3);
+                color: var(--on-clr-h-3);
+            }
+
+            /* swiper adds this once the track runs out at either end */
+            &:is(.swiper-button-disabled) {
+                opacity: .35;
+                cursor: default;
+            }
+        }
+    }
+
+    /* free-width badge row — the icons already carry their own wreath art */
+    &-swiper {
+
+        &-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+    }
+
+}
+/*
+    award-3-end
+*/

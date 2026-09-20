@@ -1168,3 +1168,322 @@
 /*
     projects-2-end
 */
+
+/*
+    projects-3-start
+*/
+.on-projects-3 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        max-width: 1920px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 16px;
+    }
+
+    /* filmstrip row — sharp edges, no radius, flush to the viewport edge */
+    &-wrap {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        height: 752px;
+
+        @media #{$xxxl} {
+            height: 640px;
+        }
+
+        @media #{$xxl} {
+            height: 560px;
+        }
+
+        /* the hover-driven width swap only reads at full desktop width — a
+           plain grid below it, so nothing depends on a hover that can't happen */
+        @media #{$xl,$lg,$md,$xs} {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            height: auto;
+            gap: 16px;
+            padding: 100px 24px;
+        }
+
+        @media #{$md,$xs} {
+            padding: 70px 20px;
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /*
+        compact by default, same as an unhovered card — holds the "active"
+        (expanded) state until a project card takes it over
+    */
+    &-intro {
+        position: relative;
+        z-index: 1;
+        flex: 1 1 0%;
+        min-width: 0;
+        height: 50%;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--on-clr-h-3);
+        transition: flex .6s ease, height .6s ease;
+
+        .on-p-3,
+        .on-projects-3-bg-img {
+            display: none;
+        }
+
+        &:is(.active) {
+            flex: 2 1 0%;
+            height: 100%;
+
+            .on-p-3,
+            .on-projects-3-bg-img {
+                display: block;
+            }
+        }
+
+        @media #{$xxl} {
+            padding: 48px;
+        }
+
+        /* no hover to hand the active state off to below desktop — always
+           shows its full content */
+        @media #{$xl,$lg,$md,$xs} {
+            grid-column: 1 / -1;
+            height: auto;
+            padding: 0 0 40px;
+
+            .on-p-3,
+            .on-projects-3-bg-img {
+                display: block;
+            }
+        }
+    }
+
+    &-sec-title {
+        position: relative;
+        z-index: 1;
+        padding: 40px;
+        transition: var(--on-cube-1);
+
+        .on-sec-title-3 {
+            color: #fff;
+            margin-bottom: 16px;
+            transition: var(--on-cube-1);
+        }
+
+        .on-p-3 {
+            color: rgb(255 255 255 / 80%);
+        }
+    }
+
+    /* the collapsed intro only has room for a headline-sized title, not
+       the full section-title scale */
+    &-intro:not(.active) &-sec-title {
+        padding: 20px;
+
+        .on-sec-title-3 {
+            font-size: 20px;
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            padding: 40px;
+
+            .on-sec-title-3 {
+                font-size: 48px;
+            }
+        }
+    }
+
+    /* the faint skyline watermark, anchored low behind the button */
+    &-bg-img {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 96px;
+        pointer-events: none;
+        mix-blend-mode: luminosity;
+        z-index: -1;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-btn {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: auto;
+        padding: 18px;
+        width: 100%;
+        background-color: rgb(255 255 255 / 10%);
+        font-family: var(--on-font-2);
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        color: var(--on-clr-pr-3);
+        text-align: center;
+        transition: var(--on-cube-1);
+
+        &:hover {
+            background-color: var(--on-clr-pr-3);
+            color: var(--on-clr-h-3);
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            margin-top: 32px;
+        }
+    }
+
+    /* compact by default — only image, top-anchored at half height; the
+       overlay shows once main.js marks it .active */
+    &-card {
+        position: relative;
+        flex: 1 1 0%;
+        min-width: 0;
+        height: 50%;
+        overflow: hidden;
+        transition: flex .6s ease, height .6s ease;
+
+        .img-elm {
+            position: absolute;
+            inset: 0;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+        }
+
+        &:is(.active) {
+            flex: 2 1 0%;
+            height: 100%;
+
+            .on-projects-3-overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            height: auto;
+            aspect-ratio: 302 / 378;
+
+            .on-projects-3-overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    &-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--on-cube-1);
+
+        @media #{$xl,$lg,$md,$xs} {
+            justify-content: flex-end;
+        }
+    }
+
+    &-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 24px 24px 0;
+
+        li {
+            padding: 8px 16px;
+            border-radius: 4px;
+            background-color: rgb(255 255 255 / 16%);
+            backdrop-filter: blur(12px);
+            font-family: var(--on-font-2);
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 22px;
+            color: #fff;
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-info {
+        padding: 24px;
+        background-color: #F4F7F3;
+        margin: 24px;
+
+        .title-elm {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            padding: 18px 20px;
+
+            .title-elm {
+                font-size: 20px;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &-meta {
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgb(20 28 20 / 16%);
+
+        }
+
+        .label {
+            font-family: var(--on-font-1);
+            font-size: 14px;
+            color: var(--on-clr-h-3);
+            opacity: .8;
+        }
+
+        .value {
+            font-family: var(--on-font-1);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--on-clr-h-3);
+            text-align: right;
+        }
+
+        /* the meta table is a hover-reveal luxury — the compact mobile
+           grid card only has room for the title */
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
+        }
+    }
+}
+/*
+    projects-3-end
+*/

@@ -1034,4 +1034,96 @@ if ($(".on-team-3-swiper").length) {
 	});
 }
 
+// award-3-swiper — plain row of badge icons, arrow-driven, no dots in the design
+if ($(".on-award-3-swiper").length) {
+	var on_award3_swiper = new Swiper(".on-award-3-swiper", {
+		loop: true,
+		speed: 700,
+		spaceBetween: 32,
+		slidesPerView: 1,
+		navigation: {
+			prevEl: ".on-award-3-prev",
+			nextEl: ".on-award-3-next",
+		},
+		breakpoints: {
+			768: {
+				slidesPerView: 2,
+			},
+			992: {
+				slidesPerView: 3,
+			},
+			1200: {
+				slidesPerView: 4,
+			},
+		},
+	});
+}
+
+// projects-3-active — the intro panel holds the expanded "active" state
+// until a card is hovered, then hands it off; leaving the whole row hands
+// it back. Handled as a class (not plain :hover) so the intro panel can
+// collapse to its own compact state, not just sit at rest.
+if ($(".on-projects-3-wrap").length) {
+	var on_projects3_wrap = $(".on-projects-3-wrap");
+	var on_projects3_intro = $(".on-projects-3-intro");
+	var on_projects3_cards = $(".on-projects-3-card");
+
+	on_projects3_cards.on("mouseenter", function () {
+		on_projects3_intro.add(on_projects3_cards).removeClass("active");
+		$(this).addClass("active");
+	});
+
+	on_projects3_wrap.on("mouseleave", function () {
+		on_projects3_cards.removeClass("active");
+		on_projects3_intro.addClass("active");
+	});
+}
+
+// testimonial-3-swiper — one quote per slide, driven by the stacked
+// Next/Previous bars beside the photo; the rating/quote/author fade up
+// together each time the active slide changes
+if ($(".on-testimonial-3-swiper").length) {
+
+	var on_testimonial3_park = function (slideEl) {
+		var content = slideEl.querySelector(".on-testimonial-3-content");
+		if (!content) return;
+
+		gsap.set(content.children, { y: 24, opacity: 0 });
+	};
+
+	var on_testimonial3_play = function (slideEl) {
+		var content = slideEl.querySelector(".on-testimonial-3-content");
+		if (!content) return;
+
+		gsap.to(content.children, {
+			y: 0,
+			opacity: 1,
+			duration: .8,
+			ease: "power3.out",
+			stagger: .12,
+		});
+	};
+
+	var on_testimonial3_swiper = new Swiper(".on-testimonial-3-swiper", {
+		loop: true,
+		speed: 700,
+		effect: "fade",
+		fadeEffect: { crossFade: true },
+		navigation: {
+			prevEl: ".on-testimonial-3-prev",
+			nextEl: ".on-testimonial-3-next",
+		},
+		on: {
+			init: function () {
+				on_testimonial3_park(this.slides[this.activeIndex]);
+				on_testimonial3_play(this.slides[this.activeIndex]);
+			},
+			slideChangeTransitionStart: function () {
+				on_testimonial3_park(this.slides[this.activeIndex]);
+				on_testimonial3_play(this.slides[this.activeIndex]);
+			},
+		},
+	});
+}
+
 })(jQuery);

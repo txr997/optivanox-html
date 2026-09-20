@@ -803,3 +803,353 @@
 /*
     testimonial-2-end
 */
+
+/*
+    testimonial-3-start
+*/
+.on-testimonial-3 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #E9EFE6;
+    }
+
+    /* the section's own watermark texture, barely-there at 9% */
+    &-sec-bg {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: -1;
+        mix-blend-mode: multiply;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &-sec-title {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 60px;
+        margin-bottom: 60px;
+
+        .left {
+            max-width: 660px;
+        }
+
+        .right {
+            max-width: 460px;
+            padding-top: 8px;
+        }
+
+
+        .on-p-3 {
+            margin-bottom: 24px;
+        }
+
+        @media #{$xl,$lg} {
+            gap: 32px;
+        }
+
+        @media #{$lg,$md,$xs} {
+            flex-direction: column;
+            margin-bottom: 44px;
+
+            .left,
+            .right {
+                max-width: 100%;
+            }
+
+            .right {
+                padding-top: 0;
+                margin-top: 24px;
+            }
+        }
+    }
+
+    &-wrap {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: stretch;
+
+        @media #{$xl,$lg,$md,$xs} {
+            flex-direction: column;
+        }
+    }
+
+    &-left {
+        flex: 0 0 66.57%;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+
+        @media #{$xl,$lg,$md,$xs} {
+            flex-basis: auto;
+            width: 100%;
+        }
+    }
+
+    /* dark quote card — its own faint vignette photo sits under the copy */
+    &-card {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        height: 298px;
+        background-color: var(--on-clr-h-3);
+
+        @media #{$xl,$lg} {
+            height: 280px;
+        }
+
+        @media #{$md,$xs} {
+            height: auto;
+        }
+    }
+
+    &-card-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-swiper {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+
+        .swiper-wrapper {
+            height: 100%;
+        }
+
+        .swiper-slide {
+            height: auto;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &-content {
+        padding: 48px;
+
+        .rating-elm {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 12px;
+            color: #FF8D28;
+            font-size: 14px;
+        }
+
+        .text-elm {
+            font-family: var(--on-font-2);
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 32px;
+            letter-spacing: .01em;
+            color: #fff;
+            margin-bottom: 38px;
+        }
+
+        .author-elm {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .img-elm {
+            flex: 0 0 auto;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 2px solid rgb(255 255 255 / 10%);
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .name-elm {
+            color: #fff;
+            margin-bottom: 2px;
+            font-weight: 500;
+            font-size: 22px;
+        }
+
+        .role-elm {
+            display: block;
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            line-height: 24px;
+            color: rgb(255 255 255 / 72%);
+        }
+
+        @media #{$xl,$lg} {
+            padding: 36px;
+
+            .text-elm {
+                font-size: 20px;
+                line-height: 28px;
+                margin-bottom: 24px;
+            }
+        }
+
+        @media #{$md,$xs} {
+            padding: 32px 24px;
+
+            .text-elm {
+                font-size: 18px;
+                line-height: 27px;
+                margin-bottom: 24px;
+            }
+        }
+    }
+
+    /* client strip — a muted, greyscale marquee under the quote card */
+    &-marquee {
+        overflow: hidden;
+        background-color: #CAD2C6;
+        padding: 28px 0;
+    }
+
+    &-logo {
+        &-wrap {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &-logo {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 64px;
+        vertical-align: top;
+
+        img {
+            max-width: 100px;
+            max-height: 32px;
+            width: auto;
+            height: auto;
+            opacity: .6;
+            filter: brightness(0);
+        }
+
+        @media #{$md,$xs} {
+            margin-right: 40px;
+
+            img {
+                max-width: 84px;
+                max-height: 26px;
+            }
+        }
+    }
+
+    &-right {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+
+        @media #{$xl,$lg,$md,$xs} {
+            margin-top: 24px;
+        }
+    }
+
+    &-photo {
+        position: relative;
+        flex: none;
+        min-width: 0;
+        height: 298px;
+        padding: 20px;
+        background-color: #CAD2C6;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media #{$xl,$lg} {
+            height: 280px;
+        }
+
+        @media #{$md,$xs} {
+            height: 240px;
+        }
+    }
+
+    &-nav {
+        flex: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-next,
+    &-prev {
+        flex: none;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 24px;
+        background-color: var(--on-clr-h-3);
+        font-family: var(--on-font-2);
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 28px;
+        color: #fff;
+        cursor: pointer;
+        transition: var(--on-cube-1);
+
+        .flaticon {
+            opacity: .8;
+        }
+
+        &:hover {
+            background-color: var(--on-clr-pr-3);
+            color: var(--on-clr-h-3);
+
+            .flaticon {
+                opacity: 1;
+            }
+        }
+
+        &:is(.swiper-button-disabled) {
+            opacity: .4;
+            cursor: default;
+        }
+    }
+
+    &-next {
+        justify-content: flex-start;
+    }
+
+    &-prev {
+        justify-content: flex-end;
+        border-top: 1px solid rgb(255 255 255 / 10%);
+
+        .flaticon {
+            transform: rotate(180deg);
+        }
+    }
+}
+/*
+    testimonial-3-end
+*/
