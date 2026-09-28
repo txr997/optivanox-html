@@ -1180,7 +1180,7 @@
         max-width: 1920px;
         margin-left: auto;
         margin-right: auto;
-        padding: 0 16px;
+        padding: 0 16px 120px;
     }
 
     /* filmstrip row — sharp edges, no radius, flush to the viewport edge */
@@ -1439,6 +1439,11 @@
         .title-elm {
             font-size: 24px;
             margin-bottom: 12px;
+            transition: var(--on-cube-1);
+            
+            &:hover {
+                color: var(--on-clr-pr-3);
+            }
         }
 
         @media #{$xl,$lg,$md,$xs} {

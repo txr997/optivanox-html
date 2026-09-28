@@ -220,6 +220,33 @@ var waHero1 = (function () {
 	};
 })();
 
+// hero-3-animation — the bg photo comes into focus while the two glows slide
+// in from off their own edge; on-hero-3-area's overflow:hidden is what keeps
+// the parked glows out of sight before play() pulls them in
+var waHero3 = (function () {
+	var area = document.querySelector(".on-hero-3-area");
+	if (!area) return null;
+
+	var img = area.querySelector(".on-hero-3-bg .img-elm");
+	var glowV1 = area.querySelector(".on-hero-3-bg .glow-elm.has-v1");
+	var glowV2 = area.querySelector(".on-hero-3-bg .glow-elm.has-v2");
+
+	return {
+		park: function () {
+			gsap.set(img, { filter: "blur(20px)" });
+			gsap.set(glowV1, { xPercent: -100 });
+			gsap.set(glowV2, { xPercent: 100 });
+		},
+
+		play: function () {
+			gsap.timeline({ defaults: { duration: 1.4, ease: "power3.out" } })
+				.to(img, { filter: "blur(0px)" }, 0)
+				.to(glowV1, { xPercent: 0 }, 0)
+				.to(glowV2, { xPercent: 0 }, 0);
+		}
+	};
+})();
+
 // hero-2-slider — each slide parks its own bg-img/bg-clr/content and plays
 // them in fresh whenever it becomes active, instead of just cutting across.
 if ($(".on-hero-2-slider").length) {
@@ -416,6 +443,7 @@ window.addEventListener("load", function(){
 	// park the headline lines and the hero while the curtain is still up
 	waTitleSplit();
 	if (waHero1) waHero1.park();
+	if (waHero3) waHero3.park();
 
 	if (waPreloader) {
 		waPreloader.ready(function () {
@@ -443,6 +471,7 @@ window.addEventListener("load", function(){
 function afterPreloader() {
 
 	if (waHero1) waHero1.play();
+	if (waHero3) waHero3.play();
 
 	// only-LTR-direction
 	if (getComputedStyle(document.body).direction !== "rtl") {
@@ -895,6 +924,31 @@ if ($(".on-footer-2-title").length) {
 	});
 }
 
+// about-3-right-reveal — photo, spinning badge and stat card each ease up on
+// their own entry, not off the tall container's top — the container is taller
+// than the viewport gap, so a single shared trigger fired while the badge and
+// author card were still off-screen and the reveal was over before either
+// scrolled into view. The badge's own spin keeps running on .circle-text
+// underneath, untouched since this only tweens the outer elements
+if ($(".on-about-3-right").length) {
+	var on_about3_right_items = gsap.utils.toArray(".on-about-3-right > *");
+
+	gsap.set(on_about3_right_items, { y: 40, opacity: 0 });
+
+	on_about3_right_items.forEach(function (item) {
+		gsap.to(item, {
+			scrollTrigger: {
+				trigger: item,
+				start: "top 85%",
+			},
+			y: 0,
+			opacity: 1,
+			duration: .9,
+			ease: "power3.out",
+		});
+	});
+}
+
 // core-features-3-card-scroll-settle — the rate widget starts thrown off to
 // the side, then settles into its authored position once scrolled into view
 if ($(".has-scroll-ani-card-1").length) {
@@ -1027,10 +1081,81 @@ if ($(".on-team-3-swiper").length) {
 		speed: 800,
 		spaceBetween: 20,
 		slidesPerView: "auto",
-		// autoplay: {
-		// 	delay: 5000,
-		// 	disableOnInteraction: false,
-		// },
+		autoplay: {
+			delay: 5000,
+			disableOnInteraction: false,
+		},
+	});
+}
+
+// industry-3-graph-reveal — the two back arcs sweep out from the corner they
+// all share, the front one settles last, then the line chart draws itself
+// across the stat card once it's already in place. Desktop-only, matching the
+// $lg,$md,$xs display:none on .on-industry-3-graph itself
+if ($(".on-industry-3-graph").length) {
+	gsap.matchMedia().add("(min-width: 992px)", function () {
+		var on_industry3_arc_v3 = document.querySelector(".on-industry-3-arcs .has-v3");
+		var on_industry3_arc_v2 = document.querySelector(".on-industry-3-arcs .has-v2");
+		var on_industry3_arc_v1 = document.querySelector(".on-industry-3-arcs .has-v1");
+		var on_industry3_cart_photo = document.querySelector(".on-industry-3-cart img:first-child");
+		var on_industry3_cart_line = document.querySelector(".on-industry-3-cart-line");
+
+		gsap.set([on_industry3_arc_v3, on_industry3_arc_v2, on_industry3_arc_v1], {
+			scale: 0,
+			transformOrigin: "0% 100%",
+		});
+		gsap.set(on_industry3_cart_photo, { scale: .85, opacity: 0 });
+		gsap.set(on_industry3_cart_line, { clipPath: "inset(0% 100% 0% 0%)" });
+
+		// .on-industry-3-graph itself spans the section's full height
+		// (top:0/bottom:0) so its own top sits above the fold before any of
+		// this is actually visible — anchor on the arcs instead, which are
+		// pinned near the bottom of that tall span, close to where the
+		// composition really renders
+		var on_industry3_tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: ".on-industry-3-arcs",
+				start: "top 85%",
+			},
+		});
+
+		on_industry3_tl
+			.to(on_industry3_arc_v3, { scale: 1, duration: 1, ease: "power3.out" }, 0)
+			.to(on_industry3_arc_v2, { scale: 1, duration: 1, ease: "power3.out" }, .15)
+			.to(on_industry3_arc_v1, { scale: 1, duration: 1, ease: "power3.out" }, .3)
+			.to(on_industry3_cart_photo, { scale: 1, opacity: 1, duration: .8, ease: "power3.out" }, .35)
+			.to(on_industry3_cart_line, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "power2.inOut" }, .75);
+
+		return function () {
+			gsap.set([
+				on_industry3_arc_v3, on_industry3_arc_v2, on_industry3_arc_v1,
+				on_industry3_cart_photo, on_industry3_cart_line,
+			], { clearProps: "all" });
+		};
+	});
+}
+
+// choose-3-reveal — each photo and feature card eases up on its own entry,
+// same per-element trigger approach as about-3/industry-3 above, since these
+// sit across two separate grid rows rather than one shared wrapper
+if ($(".on-choose-3-area").length) {
+	var on_choose3_items = gsap.utils.toArray(
+		".on-choose-3-photo, .on-choose-3-card, .on-choose-3-photo-sm, .on-choose-3-content"
+	);
+
+	gsap.set(on_choose3_items, { y: 40, opacity: 0 });
+
+	on_choose3_items.forEach(function (item) {
+		gsap.to(item, {
+			scrollTrigger: {
+				trigger: item,
+				start: "top 88%",
+			},
+			y: 0,
+			opacity: 1,
+			duration: .9,
+			ease: "power3.out",
+		});
 	});
 }
 
@@ -1041,10 +1166,16 @@ if ($(".on-award-3-swiper").length) {
 		speed: 700,
 		spaceBetween: 32,
 		slidesPerView: 1,
+		autoplay: {
+			delay: 5500,
+			disableOnInteraction: false,
+		},
+
 		navigation: {
 			prevEl: ".on-award-3-prev",
 			nextEl: ".on-award-3-next",
 		},
+		
 		breakpoints: {
 			768: {
 				slidesPerView: 2,
@@ -1123,6 +1254,14 @@ if ($(".on-testimonial-3-swiper").length) {
 				on_testimonial3_play(this.slides[this.activeIndex]);
 			},
 		},
+	});
+}
+
+// mask-image-webkit-prefix — main-common.js sets the unprefixed mask-image
+// from data-mask-image; Safari still needs the -webkit- one too
+if ($("[data-mask-image]").length) {
+	$("[data-mask-image]").each(function () {
+		this.style.webkitMaskImage = "url(" + $(this).attr("data-mask-image") + ")";
 	});
 }
 

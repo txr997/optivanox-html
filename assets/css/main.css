@@ -6369,6 +6369,98 @@ body:has(.on-preloader-1:not(.loaded)) {
     partner-2-end
 */
 /*
+    partner-3-start
+*/
+.on-partner-3-area {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.on-partner-3-sec-title {
+  max-width: 939px;
+  margin: 0 auto 40px;
+}
+.on-partner-3-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 7px;
+  row-gap: 24px;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .on-partner-3-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .on-partner-3-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .on-partner-3-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 16px;
+  }
+}
+.on-partner-3 {
+  /*
+      the four crosshair ticks sit on the cell's own corners, so a
+      neighbouring cell's tick meets this one and reads as a single "+" at
+      every shared intersection, an "L" wherever there's no neighbour
+  */
+}
+.on-partner-3-cell {
+  position: relative;
+  padding: 7px;
+  aspect-ratio: 274/122;
+  /* each leg is a stub of the box's own edge, poked out past its corner
+     into the gutter — the vertex sits on the box, not on the cell edge */
+}
+.on-partner-3-cell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(#0cb351, #0cb351) left 0 top 7px/7px 1px no-repeat, linear-gradient(#0cb351, #0cb351) left 7px top 0/1px 7px no-repeat, linear-gradient(#0cb351, #0cb351) right 0 top 7px/7px 1px no-repeat, linear-gradient(#0cb351, #0cb351) right 7px top 0/1px 7px no-repeat, linear-gradient(#0cb351, #0cb351) left 0 bottom 7px/7px 1px no-repeat, linear-gradient(#0cb351, #0cb351) left 7px bottom 0/1px 7px no-repeat, linear-gradient(#0cb351, #0cb351) right 0 bottom 7px/7px 1px no-repeat, linear-gradient(#0cb351, #0cb351) right 7px bottom 0/1px 7px no-repeat;
+}
+.on-partner-3-cell .box-elm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(20, 28, 20, 0.16);
+  background-color: #fff;
+}
+.on-partner-3-cell {
+  /* the logo art is a flat #646769 mark on a transparent PNG, painted
+     here as a mask so its colour can move on hover instead of being
+     baked into the file */
+}
+.on-partner-3-cell .logo-elm {
+  display: block;
+  width: 100px;
+  height: 100%;
+  background-color: #646769;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  transition: background-color 0.3s ease;
+}
+.on-partner-3-cell:hover .box-elm {
+  background: radial-gradient(circle, #45fc91 0%, #299656 100%);
+}
+.on-partner-3-cell:hover .logo-elm {
+  background-color: var(--on-clr-h-3);
+}
+
+/*
+    partner-3-end
+*/
+/*
     services-1-start
 */
 .on-services-1-area {
@@ -7349,6 +7441,7 @@ body:has(.on-preloader-1:not(.loaded)) {
   border-radius: 8px;
   color: #fff;
   font-size: 15px;
+  transition: var(--on-cube-1);
 }
 .on-services-3-item-disc .item-btn .icon {
   width: 28px;
@@ -7360,6 +7453,10 @@ body:has(.on-preloader-1:not(.loaded)) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+.on-services-3-item-disc .item-btn:hover {
+  background: var(--on-clr-pr-3);
+  color: var(--on-clr-h-3);
 }
 .on-services-3-all-btn {
   text-align: center;
@@ -12042,6 +12139,7 @@ body:has(.on-preloader-1:not(.loaded)) {
   color: #0CB351;
   font-size: 50px;
   margin-bottom: 16px;
+  transition: var(--on-cube-1);
 }
 .on-choose-3-card .text-elm {
   margin-bottom: 0;
@@ -12058,6 +12156,9 @@ body:has(.on-preloader-1:not(.loaded)) {
   .on-choose-3-card .img-elm {
     height: 200px;
   }
+}
+.on-choose-3-card:hover .icon-elm {
+  transform: translateY(-6px) rotate(-6deg);
 }
 
 /*
@@ -13131,7 +13232,7 @@ body:has(.on-preloader-1:not(.loaded)) {
   max-width: 1920px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 16px;
+  padding: 0 16px 120px;
 }
 .on-projects-3 {
   /* filmstrip row — sharp edges, no radius, flush to the viewport edge */
@@ -13391,6 +13492,10 @@ body:has(.on-preloader-1:not(.loaded)) {
 .on-projects-3-info .title-elm {
   font-size: 24px;
   margin-bottom: 12px;
+  transition: var(--on-cube-1);
+}
+.on-projects-3-info .title-elm:hover {
+  color: var(--on-clr-pr-3);
 }
 @media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .on-projects-3-info {
@@ -15867,6 +15972,196 @@ body:has(.on-preloader-1:not(.loaded)) {
     blog-2-end
 */
 /*
+    blog-3-start
+*/
+.on-blog-3-area {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.on-blog-3-sec-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.on-blog-3-sec-title .left {
+  max-width: 656px;
+}
+.on-blog-3-sec-title .right {
+  max-width: 501px;
+  padding-top: 8px;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .on-blog-3-sec-title {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .on-blog-3-sec-title .left,
+  .on-blog-3-sec-title .right {
+    max-width: 100%;
+    padding-top: 0;
+  }
+}
+.on-blog-3-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .on-blog-3-grid {
+    gap: 20px;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px) {
+  .on-blog-3-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .on-blog-3-grid .on-blog-3-card:last-child {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 767px) {
+  .on-blog-3-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+.on-blog-3-card .img-elm {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 452/360;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+.on-blog-3-card .img-elm > img {
+  transition: transform 0.5s ease;
+}
+.on-blog-3-card:hover .img-elm > img {
+  transform: scale(1.06);
+}
+.on-blog-3-card {
+  /* the two chips share size/shape, only the fill differs */
+}
+.on-blog-3-card .meta-elm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.on-blog-3-card .meta-elm span {
+  border-radius: 4px;
+  padding: 9px 12px;
+  font-family: var(--on-font-1);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--on-clr-h-3);
+}
+.on-blog-3-card .cat-elm {
+  background-color: rgba(16, 236, 176, 0.52);
+}
+.on-blog-3-card .date-elm {
+  background-color: #f4f7f3;
+}
+.on-blog-3-card .title-elm {
+  font-size: 22px;
+  line-height: 28px;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.on-blog-3-card .title-elm a {
+  transition: var(--on-cube-1);
+}
+.on-blog-3-card:hover .title-elm a {
+  text-decoration: underline;
+}
+.on-blog-3-card {
+  /* rest state is a muted dark line + grey disc; hover swaps both to the
+     primary mint so the whole row reads as one live control */
+}
+.on-blog-3-card .link-elm {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.on-blog-3-card .link-elm .text-elm {
+  flex: none;
+  font-family: var(--on-font-1);
+  font-size: 16px;
+  color: rgba(20, 28, 20, 0.64);
+}
+.on-blog-3-card .link-elm .line-elm {
+  flex: 1;
+  height: 1px;
+  background-color: rgba(20, 28, 20, 0.2);
+  transition: background-color 0.4s ease;
+}
+.on-blog-3-card .link-elm .icon-elm {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #f4f7f3;
+  color: var(--on-clr-h-3);
+  font-size: 16px;
+  transition: background-color 0.4s ease, transform 0.4s ease;
+}
+.on-blog-3-card:hover .link-elm .line-elm,
+.on-blog-3-card:hover .link-elm .icon-elm {
+  background-color: var(--on-clr-pr-3);
+}
+.on-blog-3-card:hover .link-elm .icon-elm {
+  transform: rotate(45deg);
+}
+.on-blog-3-card:hover .link-elm .text-elm {
+  color: #000;
+  opacity: 1;
+}
+@media (max-width: 767px) {
+  .on-blog-3-card .title-elm {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+.on-blog-3 {
+  /* full-bleed dot-pattern tile behind the CTA, repeated edge to edge */
+}
+.on-blog-3-bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 52px;
+  padding: 16px 0;
+  background-image: url(../../img/blog/b3-bg-dot-shape.png);
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 88px;
+}
+@media (max-width: 767px) {
+  .on-blog-3-bottom {
+    margin-top: 40px;
+    padding: 14px 0;
+  }
+}
+
+/*
+    blog-3-end
+*/
+/*
     contact-1-start
 */
 .on-contact-1-area {
@@ -17306,6 +17601,160 @@ body:has(.on-preloader-1:not(.loaded)) {
 
 /*
     footer-2-end
+*/
+/*
+    footer-3-start — the widgets (about/nav/contact) are the on-footer-2-wrap
+    markup reused as-is; only the bg treatment, social strip and bottom bar
+    are new here
+*/
+.on-footer-3-top {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background-color: var(--on-clr-h-3);
+}
+.on-footer-3-top .on-footer-2-about {
+  max-width: 480px;
+}
+.on-footer-3-top .on-footer-2-nav .title-elm::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 28px;
+  height: 2px;
+  background-color: var(--on-clr-pr-3);
+}
+.on-footer-3-top .on-footer-2-nav a:hover {
+  color: var(--on-clr-pr-3);
+}
+.on-footer-3-top .on-footer-2-contact .text-elm a:hover {
+  color: var(--on-clr-pr-3);
+}
+.on-footer-3-bg-img {
+  position: absolute;
+  z-index: -2;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  mix-blend-mode: luminosity;
+}
+.on-footer-3-bg-img img {
+  width: 100%;
+}
+.on-footer-3 {
+  /* soft mint pool sitting under the social strip */
+}
+.on-footer-3-bg-glow {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.on-footer-3-social-box {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.on-footer-3-social {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.on-footer-3-social li {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+.on-footer-3-social li:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.on-footer-3-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 80px;
+  font-family: var(--on-font-1);
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+  transition: var(--on-cube-1);
+}
+.on-footer-3-social a i {
+  font-size: 18px;
+  color: #fff;
+}
+.on-footer-3-social a:hover {
+  color: #fff;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .on-footer-3-social {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .on-footer-3-social li {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .on-footer-3-social li:nth-child(2n+1) {
+    border-left: none;
+  }
+  .on-footer-3-social a {
+    height: 56px;
+    font-size: 14px;
+  }
+}
+.on-footer-3-bottom {
+  position: relative;
+  background-color: var(--on-clr-pr-3);
+  margin-top: 8px;
+}
+.on-footer-3-bottom .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.on-footer-3-bottom .copy-elm {
+  font-family: var(--on-font-1);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--on-clr-h-3);
+  margin-bottom: 0;
+}
+.on-footer-3-bottom .copy-elm a {
+  font-weight: 600;
+  text-decoration: underline;
+}
+.on-footer-3-bottom .link-elm {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.on-footer-3-bottom .link-elm a {
+  font-family: var(--on-font-1);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--on-clr-h-3);
+  transition: var(--on-cube-1);
+}
+.on-footer-3-bottom .link-elm a:hover {
+  opacity: 0.7;
+}
+@media (max-width: 767px) {
+  .on-footer-3-bottom .container {
+    justify-content: center;
+    text-align: center;
+  }
+  .on-footer-3-bottom .link-elm {
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/*
+    footer-3-end
 */
 /* 
     pages

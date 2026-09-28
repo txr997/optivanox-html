@@ -1631,6 +1631,7 @@
             color: #0CB351;
             font-size: 50px;
             margin-bottom: 16px;
+            transition: var(--on-cube-1);
         }
 
         .text-elm {
@@ -1646,6 +1647,12 @@
 
             .img-elm {
                 height: 200px;
+            }
+        }
+
+        &:hover {
+            .icon-elm {
+                transform: translateY(-6px) rotate(-6deg);
             }
         }
     }

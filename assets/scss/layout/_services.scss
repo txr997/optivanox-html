@@ -1053,6 +1053,7 @@
                 border-radius: 8px;
                 color: #fff;
                 font-size: 15px;
+                transition: var(--on-cube-1);
 
                 .icon {
                     width: 28px;
@@ -1064,6 +1065,12 @@
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
+                }
+
+
+                &:hover {
+                    background: var(--on-clr-pr-3);
+                    color: var(--on-clr-h-3);
                 }
             }
         }

@@ -159,3 +159,109 @@
 /*
     partner-2-end
 */
+
+/*
+    partner-3-start
+*/
+.on-partner-3 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    &-sec-title {
+        max-width: 939px;
+        margin: 0 auto 40px;
+    }
+
+    &-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        column-gap: 7px;
+        row-gap: 24px;
+
+        @media #{$lg} {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media #{$md} {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media #{$xs} {
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 16px;
+        }
+    }
+
+    /*
+        the four crosshair ticks sit on the cell's own corners, so a
+        neighbouring cell's tick meets this one and reads as a single "+" at
+        every shared intersection, an "L" wherever there's no neighbour
+    */
+    &-cell {
+        position: relative;
+        padding: 7px;
+        aspect-ratio: 274 / 122;
+
+        /* each leg is a stub of the box's own edge, poked out past its corner
+           into the gutter — the vertex sits on the box, not on the cell edge */
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(#0cb351, #0cb351) left 0 top 7px / 7px 1px no-repeat,
+                linear-gradient(#0cb351, #0cb351) left 7px top 0 / 1px 7px no-repeat,
+                linear-gradient(#0cb351, #0cb351) right 0 top 7px / 7px 1px no-repeat,
+                linear-gradient(#0cb351, #0cb351) right 7px top 0 / 1px 7px no-repeat,
+                linear-gradient(#0cb351, #0cb351) left 0 bottom 7px / 7px 1px no-repeat,
+                linear-gradient(#0cb351, #0cb351) left 7px bottom 0 / 1px 7px no-repeat,
+                linear-gradient(#0cb351, #0cb351) right 0 bottom 7px / 7px 1px no-repeat,
+                linear-gradient(#0cb351, #0cb351) right 7px bottom 0 / 1px 7px no-repeat;
+        }
+
+        .box-elm {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgb(20 28 20 / 16%);
+            background-color: #fff;
+        }
+
+        /* the logo art is a flat #646769 mark on a transparent PNG, painted
+           here as a mask so its colour can move on hover instead of being
+           baked into the file */
+        .logo-elm {
+            display: block;
+            width: 100px;
+            height: 100%;
+            background-color: #646769;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            transition: background-color .3s ease;
+        }
+
+        &:hover {
+            .box-elm {
+                background: radial-gradient(circle, #45fc91 0%, #299656 100%);
+            }
+            .logo-elm {
+                background-color: var(--on-clr-h-3);
+            }
+        }
+
+
+    }
+}
+/*
+    partner-3-end
+*/
