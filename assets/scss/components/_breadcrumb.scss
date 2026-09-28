@@ -1,0 +1,113 @@
+@use '../abstracts/variables' as *;
+
+/*
+    breadcrumb-1-start — shared top banner for every inner page: a short
+    eyebrow, the page's own <h1>, and a Home / current trail
+*/
+.on-breadcrumb-1 {
+    &-area {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        background-color: #ecf8f1;
+        padding: 200px 0 90px;
+
+        @media #{$lg} {
+            padding: 170px 0 76px;
+        }
+
+        @media #{$md} {
+            padding: 150px 0 60px;
+        }
+
+        @media #{$xs} {
+            padding: 130px 0 44px;
+        }
+    }
+
+    /* soft lime pool behind the title — the same accent footer-1 sits on */
+    &-glow {
+        position: absolute;
+        z-index: -1;
+        width: 460px;
+        height: 460px;
+        right: -8%;
+        top: -35%;
+        border-radius: 50%;
+        background-color: var(--on-clr-pr-1);
+        opacity: .3;
+        filter: blur(120px);
+        pointer-events: none;
+
+        @media #{$lg,$md,$xs} {
+            width: 300px;
+            height: 300px;
+        }
+    }
+
+    &-content {
+        text-align: center;
+    }
+
+    &-title {
+        font-size: 52px;
+
+        @media #{$lg} {
+            font-size: 44px;
+        }
+
+        @media #{$md} {
+            font-size: 36px;
+        }
+
+        @media #{$xs} {
+            font-size: 28px;
+        }
+    }
+
+    &-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 16px;
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--on-font-1);
+            font-size: 16px;
+            font-weight: 400;
+            color: rgb(2 61 63 / 64%);
+
+            i {
+                font-size: 10px;
+                color: rgb(2 61 63 / 40%);
+            }
+        }
+
+        a {
+            color: inherit;
+            transition: var(--on-cube-1);
+
+            &:hover {
+                color: var(--on-clr-h-1);
+            }
+        }
+
+        li:is(.active) {
+            color: var(--on-clr-h-1);
+            font-weight: 500;
+        }
+
+        @media #{$xs} {
+            li {
+                font-size: 14px;
+            }
+        }
+    }
+}
+/*
+    breadcrumb-1-end
+*/

@@ -1,0 +1,63 @@
+@use '../abstracts/variables' as *;
+
+/*
+    error-page-start
+*/
+.on-error-page {
+    &-area {
+        position: relative;
+        overflow: hidden;
+    }
+
+    &-content {
+        max-width: 620px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* the numerals sit low in opacity so the message on top stays the focus */
+    &-number {
+        font-family: var(--on-font-2);
+        font-weight: 700;
+        font-size: 220px;
+        line-height: 1;
+        color: var(--on-clr-h-1);
+        opacity: .08;
+
+        @media #{$xxl} {
+            font-size: 190px;
+        }
+
+        @media #{$xl} {
+            font-size: 160px;
+        }
+
+        @media #{$lg} {
+            font-size: 130px;
+        }
+
+        @media #{$md} {
+            font-size: 100px;
+        }
+
+        @media #{$xs} {
+            font-size: 70px;
+        }
+    }
+
+    &-title {
+        font-size: 36px;
+        margin-bottom: 16px;
+
+        @media #{$xs} {
+            font-size: 26px;
+        }
+    }
+
+    &-text {
+        margin-bottom: 32px;
+    }
+}
+/*
+    error-page-end
+*/

@@ -7,6 +7,7 @@
 @use './components/container';
 @use './components/typography';
 @use './components/button';
+@use './components/breadcrumb';
 @use './components/offcanvas';
 @use './components/search';
 @use './components/preloader';
@@ -35,6 +36,7 @@
 @use './layout/testimonial';
 @use './layout/blog';
 @use './layout/contact';
+@use './layout/error-page';
 @use './layout/footer';
 /* 
     pages
