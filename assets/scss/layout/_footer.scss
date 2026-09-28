@@ -974,6 +974,69 @@
     are new here
 */
 .on-footer-3 {
+    
+    &-big-title {
+        overflow: hidden;
+        margin-bottom: -50px;
+
+        .text-elm {
+            font-size: 200px;
+            line-height: 1;
+            letter-spacing: -.02em;
+
+            /*
+                wow hands this the reveal on scroll — fill-mode holds the
+                settled state (opacity 1, no offset) once it lands
+            */
+            &:is(.riseIn2) {
+                animation-name: on-footer-3-title-in;
+                animation-duration: 1200ms;
+                animation-timing-function: cubic-bezier(.62, .05, .01, .99);
+                animation-fill-mode: both;
+            }
+        }
+
+        @media #{$xxl} {
+            margin-bottom: -38px;
+
+            .text-elm {
+                font-size: 150px;
+            }
+        }
+
+        @media #{$xl} {
+            margin-bottom: -28px;
+
+            .text-elm {
+                font-size: 110px;
+            }
+        }
+
+        @media #{$lg} {
+            margin-bottom: -20px;
+
+            .text-elm {
+                font-size: 84px;
+            }
+        }
+
+        @media #{$md} {
+            margin-bottom: -14px;
+
+            .text-elm {
+                font-size: 60px;
+            }
+        }
+
+        @media #{$xs} {
+            margin-bottom: -10px;
+
+            .text-elm {
+                font-size: 38px;
+            }
+        }
+    }
+    
     &-top {
         position: relative;
         z-index: 1;
@@ -1147,6 +1210,18 @@
                 justify-content: center;
             }
         }
+    }
+}
+
+@keyframes on-footer-3-title-in {
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 /*

@@ -618,13 +618,15 @@
             justify-content: center;
             border-radius: 50%;
 
-            /* two faint rings behind the solid disc */
+            /* two faint rings behind the solid disc, pulsing outward like a
+               call signal — staggered so the second wave trails the first */
             &::before,
             &::after {
                 content: "";
                 position: absolute;
                 border-radius: 50%;
                 border: 1px solid #ddd;
+                animation: on-industry-3-badge-pulse 2s ease-out infinite;
             }
 
             &::before {
@@ -633,6 +635,7 @@
 
             &::after {
                 inset: 10px;
+                animation-delay: .6s;
             }
 
             i {
@@ -661,6 +664,11 @@
                 text-decoration: underline;
                 color: #000;
                 font-weight: 600;
+                transition: var(--on-cube-1);
+
+                &:hover {
+                    color: var(--on-clr-pr-3);
+                }
             }
         }
     }
@@ -759,6 +767,19 @@
         }
     }
 }
+
+@keyframes on-industry-3-badge-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
 /*
     industry-3-end
 */

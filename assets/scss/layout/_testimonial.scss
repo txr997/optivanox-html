@@ -1117,6 +1117,8 @@
         color: #fff;
         cursor: pointer;
         transition: var(--on-cube-1);
+        justify-content: space-between;
+        
 
         .flaticon {
             opacity: .8;
@@ -1138,11 +1140,11 @@
     }
 
     &-next {
-        justify-content: flex-start;
+
     }
 
     &-prev {
-        justify-content: flex-end;
+      
         border-top: 1px solid rgb(255 255 255 / 10%);
 
         .flaticon {

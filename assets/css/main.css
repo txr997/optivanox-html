@@ -8330,8 +8330,8 @@ body:has(.on-preloader-1:not(.loaded)) {
 }
 .on-core-features-3-container {
   max-width: 1904px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -10241,19 +10241,22 @@ body:has(.on-preloader-1:not(.loaded)) {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  /* two faint rings behind the solid disc */
+  /* two faint rings behind the solid disc, pulsing outward like a
+     call signal — staggered so the second wave trails the first */
 }
 .on-industry-3-contact .badge-elm::before, .on-industry-3-contact .badge-elm::after {
   content: "";
   position: absolute;
   border-radius: 50%;
   border: 1px solid #ddd;
+  animation: on-industry-3-badge-pulse 2s ease-out infinite;
 }
 .on-industry-3-contact .badge-elm::before {
   inset: 0;
 }
 .on-industry-3-contact .badge-elm::after {
   inset: 10px;
+  animation-delay: 0.6s;
 }
 .on-industry-3-contact .badge-elm i {
   position: relative;
@@ -10279,6 +10282,10 @@ body:has(.on-preloader-1:not(.loaded)) {
   text-decoration: underline;
   color: #000;
   font-weight: 600;
+  transition: var(--on-cube-1);
+}
+.on-industry-3-contact .text-elm a:hover {
+  color: var(--on-clr-pr-3);
 }
 .on-industry-3 {
   /*
@@ -10371,6 +10378,16 @@ body:has(.on-preloader-1:not(.loaded)) {
   top: 40%;
 }
 
+@keyframes on-industry-3-badge-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
 /*
     industry-3-end
 */
@@ -10555,6 +10572,9 @@ body:has(.on-preloader-1:not(.loaded)) {
   flex: 0 0 auto;
   color: #000;
   font-size: 18px;
+}
+.on-cta-3-contact .icon i {
+  margin-top: 5px;
 }
 .on-cta-3-contact .text-elm {
   font-family: var(--on-font-1);
@@ -15375,6 +15395,7 @@ body:has(.on-preloader-1:not(.loaded)) {
   color: #fff;
   cursor: pointer;
   transition: var(--on-cube-1);
+  justify-content: space-between;
 }
 .on-testimonial-3-next .flaticon, .on-testimonial-3-prev .flaticon {
   opacity: 0.8;
@@ -15390,11 +15411,7 @@ body:has(.on-preloader-1:not(.loaded)) {
   opacity: 0.4;
   cursor: default;
 }
-.on-testimonial-3-next {
-  justify-content: flex-start;
-}
 .on-testimonial-3-prev {
-  justify-content: flex-end;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 .on-testimonial-3-prev .flaticon {
@@ -17607,6 +17624,65 @@ body:has(.on-preloader-1:not(.loaded)) {
     markup reused as-is; only the bg treatment, social strip and bottom bar
     are new here
 */
+.on-footer-3-big-title {
+  overflow: hidden;
+  margin-bottom: -50px;
+}
+.on-footer-3-big-title .text-elm {
+  font-size: 200px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  /*
+      wow hands this the reveal on scroll — fill-mode holds the
+      settled state (opacity 1, no offset) once it lands
+  */
+}
+.on-footer-3-big-title .text-elm:is(.riseIn2) {
+  animation-name: on-footer-3-title-in;
+  animation-duration: 1200ms;
+  animation-timing-function: cubic-bezier(0.62, 0.05, 0.01, 0.99);
+  animation-fill-mode: both;
+}
+@media only screen and (min-width: 1400px) and (max-width: 1599px) {
+  .on-footer-3-big-title {
+    margin-bottom: -38px;
+  }
+  .on-footer-3-big-title .text-elm {
+    font-size: 150px;
+  }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .on-footer-3-big-title {
+    margin-bottom: -28px;
+  }
+  .on-footer-3-big-title .text-elm {
+    font-size: 110px;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .on-footer-3-big-title {
+    margin-bottom: -20px;
+  }
+  .on-footer-3-big-title .text-elm {
+    font-size: 84px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .on-footer-3-big-title {
+    margin-bottom: -14px;
+  }
+  .on-footer-3-big-title .text-elm {
+    font-size: 60px;
+  }
+}
+@media (max-width: 767px) {
+  .on-footer-3-big-title {
+    margin-bottom: -10px;
+  }
+  .on-footer-3-big-title .text-elm {
+    font-size: 38px;
+  }
+}
 .on-footer-3-top {
   position: relative;
   z-index: 1;
@@ -17753,6 +17829,16 @@ body:has(.on-preloader-1:not(.loaded)) {
   }
 }
 
+@keyframes on-footer-3-title-in {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /*
     footer-3-end
 */
