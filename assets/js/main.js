@@ -247,15 +247,12 @@ var waHero3 = (function () {
 	};
 })();
 
-// hero-2-slider — each slide parks its own bg-img/bg-clr/content and plays
-// them in fresh whenever it becomes active, instead of just cutting across.
+// hero-2-slider
 if ($(".on-hero-2-slider").length) {
 
 	var on_hero2_swiper, on_hero2_park, on_hero2_play;
 
-	// a variant of Optitech's ot-hero-1 mosaic-tile clip reveal: instead of a
-	// 3x3 grid opening diagonally from the corners, this slices the photo
-	// into vertical strips that zip together, alternating top/bottom origin
+
 	function on_hero2_strip_reveal(bgImgEl) {
 		var img = bgImgEl.querySelector("img");
 		if (!img || !img.src) return null;
@@ -268,12 +265,19 @@ if ($(".on-hero-2-slider").length) {
 		if (!rect.width || !rect.height) return null;
 
 		var count = 7;
-		// percentage left/width rounded differently than the px background
-		// math did, leaving hairline gaps between strips — this keeps both
-		// in the same px units and pads a 1px overlap to be sure
+
 		var stripWidth = rect.width / count;
 		var overlap = 1;
 		var strips = [];
+
+
+		var natW = img.naturalWidth || rect.width;
+		var natH = img.naturalHeight || rect.height;
+		var coverScale = Math.max(rect.width / natW, rect.height / natH);
+		var coverW = natW * coverScale;
+		var coverH = natH * coverScale;
+		var coverX = (rect.width - coverW) / 2;
+		var coverY = (rect.height - coverH) / 2;
 
 		for (var i = 0; i < count; i++) {
 			var left = i * stripWidth;
@@ -286,18 +290,16 @@ if ($(".on-hero-2-slider").length) {
 			strip.style.left = left + "px";
 			strip.style.width = (stripWidth + (i < count - 1 ? overlap : 0)) + "px";
 			strip.style.backgroundImage = "url(" + img.src + ")";
-			strip.style.backgroundSize = rect.width + "px " + rect.height + "px";
-			strip.style.backgroundPosition = (-left) + "px 0px";
+			strip.style.backgroundSize = coverW + "px " + coverH + "px";
+			strip.style.backgroundPosition = (coverX - left) + "px " + coverY + "px";
 			bgImgEl.appendChild(strip);
 			strips.push(strip);
 		}
 
-		// the real img stays in the DOM (still the a11y/no-js fallback) but
-		// the strips carry the whole visual once they exist
+
 		gsap.set(img, { opacity: 0 });
 
-		// even strips are hidden by clipping away their bottom and grow
-		// downward; odd strips are hidden from the top and grow upward
+
 		gsap.set(strips, {
 			clipPath: function (i) {
 				return i % 2 === 0 ? "inset(0% 0% 100% 0%)" : "inset(100% 0% 0% 0%)";
@@ -312,9 +314,7 @@ if ($(".on-hero-2-slider").length) {
 		});
 	}
 
-	// sets the pre-reveal state the first on_hero2_play() timeline animates
-	// out of — needed because a fromTo() tween inside a timeline doesn't
-	// render its "from" values until the playhead reaches it
+
 	on_hero2_park = function (slideEl) {
 		var on_hero2_item = slideEl.querySelector(".on-hero-2-item");
 		if (!on_hero2_item) return;
@@ -343,9 +343,7 @@ if ($(".on-hero-2-slider").length) {
 
 		var on_hero2_tl = gsap.timeline();
 
-		// the strips zip the photo together, then it keeps drifting in
-		// slowly for the rest of the slide's dwell (Ken Burns) — only this
-		// second tween ever touches `scale`, so they can't fight
+
 		if (on_hero2_reveal_tween) on_hero2_tl.add(on_hero2_reveal_tween, 0);
 
 		on_hero2_tl
@@ -365,8 +363,7 @@ if ($(".on-hero-2-slider").length) {
 				duration: 1,
 				ease: "power3.out",
 			}, .5)
-			// plain transform + opacity — smooth on every device, the snap
-			// comes from the expo ease rather than an expensive blur filter
+
 			.fromTo(on_hero2_title, {
 				y: 50,
 				opacity: 0,
@@ -385,8 +382,7 @@ if ($(".on-hero-2-slider").length) {
 				duration: 1.2,
 				ease: "expo.out",
 			}, 1)
-			// buttons wipe open upward rather than just fading — reads as an
-			// intentional reveal instead of content simply appearing
+
 			.fromTo(on_hero2_btns, {
 				clipPath: "inset(100% 0% 0% 0%)",
 				y: 12,
@@ -420,9 +416,7 @@ if ($(".on-hero-2-slider").length) {
 			disableOnInteraction: false,
 		},
 		on: {
-			// parked and played back-to-back, both still behind the preloader
-			// curtain, so the reveal runs its course before/while the curtain
-			// lifts instead of visibly finishing after it
+
 			init: function () {
 				on_hero2_park(this.slides[this.activeIndex]);
 				on_hero2_play(this.slides[this.activeIndex]);
